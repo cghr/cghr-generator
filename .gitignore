@@ -1,0 +1,10 @@
+/build
+/bin
+.project
+.classpath
+.settings
+.gradle
+.idea/
+cghr-generator.iml
+out/
+
