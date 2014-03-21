@@ -1,4 +1,4 @@
-CGHR-Generator  [![Build Status](https://travis-ci.org/ravitez/cghr-generator.png?branch=master)](https://travis-ci.org/ravitez/cghr-generator)
+CGHR-Generator  [![Build Status](https://travis-ci.org/cghr/cghr-generator.png?branch=master)](https://travis-ci.org/cghr/cghr-generator)
 =============
 
 
