@@ -1,0 +1,57 @@
+package org.cghr.hc.service;
+
+import org.cghr.datamodel.DataModelUtil;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+@RequestMapping("/GridService")
+class GridService{
+
+	String sql = "";
+	String filters = "";
+	String sortings = "";
+
+
+
+	// Areas
+    	@RequestMapping(value = "/area", method = RequestMethod.GET, produces = "application/json")
+    	@ResponseBody
+    	String getAreas ( ) {
+
+    		sql = "select * from area";
+    		filters = "#text_filter,#text_filter";
+    		sortings = "int,str";
+
+    		return constructJsonResponse(sql, filters, sortings, new Object[]{   });
+
+    	}
+
+
+	// Houses
+    	@RequestMapping(value = "/area/{areaId}/house", method = RequestMethod.GET, produces = "application/json")
+    	@ResponseBody
+    	String getHouses (   @PathVariable Integer areaId  ) {
+
+    		sql = "select * from house where areaId=?";
+    		filters = "#text_filter,#text_filter";
+    		sortings = "int,str";
+
+    		return constructJsonResponse(sql, filters, sortings, new Object[]{    areaId   });
+
+    	}
+
+
+    // Creating a Json from sql Query
+        SuppressWarnings("unchecked")
+        String constructJsonResponse(String sql, String filters,String sortings, Object[] params) {
+
+        		return new DataModelUtil().constructJsonResponse(sql, filters,sortings, params);
+        }
+
+
+
+}

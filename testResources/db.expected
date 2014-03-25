@@ -1,0 +1,6 @@
+#Table:country
+DROP TABLE IF EXISTS `country`;
+CREATE TABLE `country`(id int,name varchar(100),continent varchar(100));
+#Table:user
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user`(id int,username varchar(100),password varchar(100));

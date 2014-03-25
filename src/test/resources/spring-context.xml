@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="serverBaseUrl" class="java.lang.String">
+        <constructor-arg
+                value="http://barshi.vm-host.net:8080/hc-services/api/security/Authenticate"/>
+    </bean>
+
+    <bean id="dataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.h2.Driver"/>
+        <property name="url" value="jdbc:h2:mem:specs;database_to_upper=false"/>
+        <property name="username" value="sa"/>
+        <property name="password" value=""/>
+    </bean>
+
+    <bean id="gSql" class="groovy.sql.Sql">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
+    <bean id="dbAccess" class="org.cghr.commons.db.DbAccess">
+        <constructor-arg ref="gSql"/>
+    </bean>
+
+    <bean id="dbStore" class="org.cghr.commons.db.DbStore">
+        <constructor-arg name="gSql" ref="gSql"/>
+        <constructor-arg name="dataStoreFactory" ref="dataStoreFactory"/>
+    </bean>
+
+
+    <bean id="dataStoreFactory" class="java.util.HashMap">
+        <constructor-arg>
+            <map>
+                <entry key="country" value="id"></entry>
+            </map>
+        </constructor-arg>
+    </bean>
+
+    <bean id="dt" class="org.cghr.test.db.DbTester">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
+    <!--Integration Testing Beans -->
+    <bean id="transformer" class="org.cghr.dataViewModel.DhtmlxGridModelTransformer">
+    <constructor-arg ref="gSql"/>
+    </bean>
+
+    <bean id="dataModelUtil" class="org.cghr.dataViewModel.DataModelUtil">
+    <constructor-arg name="dataModelTransformer" ref="transformer"/>
+    <constructor-arg name="dbAccess" ref="dbAccess"/>
+    </bean>
+
+
+    <bean id="userService" class="org.cghr.security.service.UserService">
+        <constructor-arg name="dbAccess" ref="dbAccess"/>
+        <constructor-arg name="dbStore" ref="dbStore"/>
+        <constructor-arg name="onlineAuthService" ref="onlineAuthService"/>
+    </bean>
+
+    <bean id="auth" class="org.cghr.security.controller.Auth">
+    </bean>
+
+
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+    </bean>
+
+    <bean id="onlineAuthService" class="org.cghr.security.service.OnlineAuthService">
+        <constructor-arg name="serverAuthUrl" value="http://localhost:8089/app/api/security/auth"/>
+        <constructor-arg name="restTemplate" ref="restTemplate"/>
+    </bean>
+    <!--Integration Testing Beans Ends-->
+
+</beans>

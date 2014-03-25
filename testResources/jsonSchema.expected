@@ -1,0 +1,63 @@
+{
+"onSuccess":"newState",
+"elements":[
+   
+   
+    {
+    "name":"datastore",
+    "type":"hidden",
+    "valdn":"",
+    "items":[
+        
+            ]
+    },
+    
+    
+   
+    {
+    "name":"member_id",
+    "type":"hidden",
+    "valdn":"",
+    "items":[
+        
+            ]
+    },
+    
+    
+   
+    {
+    "name":"firstname",
+    "type":"text",
+    "valdn":"required",
+    "items":[
+        
+            ]
+    },
+    
+    
+   
+    {
+        "name":"gender",
+        "type":"radio",
+        "valdn":"required",
+        "items":[
+            
+                
+                {"text":"Male","value":"male"},
+                
+            
+                
+                {"text":"Female","value":"female"},
+                
+            
+                
+                {"text":"Others","value":"others"}
+                
+            
+                ]
+        }
+    
+    
+
+    ]
+}

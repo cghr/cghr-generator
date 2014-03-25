@@ -1,0 +1,13 @@
+{{~#each tables ~}}
+#Table:{{name}}
+DROP TABLE IF EXISTS `{{name}}`;
+CREATE TABLE `{{name}}`(
+{{~#each cols ~}}
+    {{~#unless @last ~}}
+        {{label}} {{type}},
+    {{~else ~}}
+        {{label}} {{type}}
+    {{~/unless ~}}
+{{~/each~}}
+);
+{{~/each ~}}

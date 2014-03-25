@@ -1,0 +1,39 @@
+{
+"onSuccess":"{{onSuccess}}",
+"elements":[
+   {{#each elements}}
+   {{#unless @last}}
+    {
+    "name":"{{name}}",
+    "type":"{{type}}",
+    "valdn":"{{valdn}}",
+    "items":[
+        {{#each items}}
+            {{#unless @last}}
+            {"text":"{{text}}","value":"{{value}}"},
+            {{else}}
+            {"text":"{{text}}","value":"{{value}}"}
+            {{/unless}}
+        {{/each}}
+            ]
+    },
+    {{else}}
+    {
+        "name":"{{name}}",
+        "type":"{{type}}",
+        "valdn":"{{valdn}}",
+        "items":[
+            {{#each items}}
+                {{#unless @last}}
+                {"text":"{{text}}","value":"{{value}}"},
+                {{else}}
+                {"text":"{{text}}","value":"{{value}}"}
+                {{/unless}}
+            {{/each}}
+                ]
+        }
+    {{/unless}}
+    {{/each}}
+
+    ]
+}

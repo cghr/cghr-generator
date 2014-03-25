@@ -1,0 +1,43 @@
+package {{package}};
+
+import org.cghr.datamodel.DataModelUtil;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+@RequestMapping("/GridService")
+class GridService{
+
+	String sql = "";
+	String filters = "";
+	String sortings = "";
+
+	{{#each reports}}
+
+	// {{title}}
+    	@RequestMapping(value = "{{mapping}}", method = RequestMethod.GET, produces = "application/json")
+    	@ResponseBody
+    	String get{{title}} ( {{#each pathVariables}} {{#unless @last}} @PathVariable Integer {{this}}, {{else}} @PathVariable Integer {{this}} {{/unless}} {{/each}}) {
+
+    		sql = "{{sql}}";
+    		filters = "{{filters}}";
+    		sortings = "{{sortings}}";
+
+    		return constructJsonResponse(sql, filters, sortings, new Object[]{  {{#each pathVariables}} {{#unless @last}} {{this}},{{else}} {{this}} {{/unless}} {{/each}} });
+
+    	}
+    {{/each}}
+
+    // Creating a Json from sql Query
+        SuppressWarnings("unchecked")
+        String constructJsonResponse(String sql, String filters,String sortings, Object[] params) {
+
+        		return new DataModelUtil().constructJsonResponse(sql, filters,sortings, params);
+        }
+
+
+
+}
