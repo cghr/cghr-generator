@@ -1,39 +1,45 @@
 {
 "onSuccess":"{{onSuccess}}",
-"elements":[
-   {{#each elements}}
-   {{#unless @last}}
-    {
-    "name":"{{name}}",
-    "type":"{{type}}",
-    "valdn":"{{valdn}}",
-    "items":[
-        {{#each items}}
-            {{#unless @last}}
-            {"text":"{{text}}","value":"{{value}}"},
-            {{else}}
-            {"text":"{{text}}","value":"{{value}}"}
-            {{/unless}}
-        {{/each}}
-            ]
-    },
-    {{else}}
-    {
+"properties":[
+{{#each properties}}
+    {{#unless @last}}
+        {
         "name":"{{name}}",
         "type":"{{type}}",
         "valdn":"{{valdn}}",
+        "label":"{{label}}",
+        "flow":"{{flow}}",
+        "value":"{{value}}",
         "items":[
-            {{#each items}}
-                {{#unless @last}}
+        {{#each items}}
+            {{#unless @last}}
                 {"text":"{{text}}","value":"{{value}}"},
-                {{else}}
+            {{else}}
                 {"text":"{{text}}","value":"{{value}}"}
-                {{/unless}}
-            {{/each}}
-                ]
+            {{/unless}}
+        {{/each}}
+        ]
+        },
+    {{else}}
+        {
+        "name":"{{name}}",
+        "type":"{{type}}",
+        "valdn":"{{valdn}}",
+        "label":"{{label}}",
+        "flow":"{{flow}}",
+        "value":"{{value}}",
+        "items":[
+        {{#each items}}
+            {{#unless @last}}
+                {"text":"{{text}}","value":"{{value}}"},
+            {{else}}
+                {"text":"{{text}}","value":"{{value}}"}
+            {{/unless}}
+        {{/each}}
+        ]
         }
     {{/unless}}
-    {{/each}}
+{{/each}}
 
-    ]
+]
 }

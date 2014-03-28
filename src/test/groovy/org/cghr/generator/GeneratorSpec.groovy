@@ -1,15 +1,21 @@
 package org.cghr.generator
+
 import com.github.jknack.handlebars.Handlebars
+import org.cghr.generator.test.db.MockData
 import spock.lang.Shared
 import spock.lang.Specification
+
 /**
  * Created by ravitej on 25/3/14.
  */
+
 class GeneratorSpec extends Specification {
+
 
     Generator generator
     @Shared
     String templateBasePath = 'templates/'
+
     @Shared
     String expectedBasePath = 'testResources/'
 
@@ -22,42 +28,34 @@ class GeneratorSpec extends Specification {
 
     def setupSpec() {
 
-        dbTemplateData = [tables: [
-                [
-                        name: 'country',
-                        cols: [
-                                [label: 'id', type: 'int'],
-                                [label: 'name', type: 'varchar(100)'],
-                                [label: 'continent', type: 'varchar(100)']
-                        ]
-                ],
-                [
-                        name: 'user',
-                        cols: [
-                                [label: 'id', type: 'int'],
-                                [label: 'username', type: 'varchar(100)'],
-                                [label: 'password', type: 'varchar(100)']
-                        ]
-                ]
+
+        MockData mockData = new MockData()
+        Map transformedEntitySampleData = mockData.transformedEntitySampleData
+        dbTemplateData = [entities: [
+                transformedEntitySampleData.user,
+                transformedEntitySampleData.userlog,
+                transformedEntitySampleData.country,
+                transformedEntitySampleData.state
         ]];
         jsonSchemaTemplateData = [
                 onSuccess: "newState",
-                elements: [
-                        [name: 'datastore', type: 'hidden', value: 'member'],
-                        [name: 'member_id', type: 'hidden', value: '$stateParams.memberId'],
-                        [name: 'firstname', type: 'text', label: 'First Name', valdn: 'required'],
-                        [name: 'gender', type: 'radio', label: 'Gender', valdn: 'required', items: [
-                                [text: 'Male', value: 'male'],
-                                [text: 'Female', value: 'female'],
-                                [text: 'Others', value: 'others']
+                properties: [
+                        [name: 'datastore', type: 'hidden', value: 'country'],
+                        [name: 'country_id', type: 'hidden', value: '$stateParams.countryId'],
+                        [name: 'name', type: 'text', label: 'Name', valdn: 'required',flow:"data.prop1 == 'yes' && data.prop2=='No'"],
+                        [name: 'continent', type: 'radio', label: 'Continent', valdn: 'required', items: [
+                                [text: 'Asia', value: 'asia'],
+                                [text: 'Europe', value: 'europe'],
+                                [text: 'Africa', value: 'africa']
                         ]]
 
                 ]
         ];
-        webserviceTemplateData = [package:'org.cghr.hc.service',reports:
+
+        webserviceTemplateData = [package: 'org.cghr.hc.service', reports:
                 [
-                        [title:'Areas',mapping:'/area',sql:'select * from area',filters:'#text_filter,#text_filter',sortings:'int,str',pathVariables:[]],
-                        [title:'Houses',mapping:'/area/{areaId}/house',sql:'select * from house where areaId=?',filters:'#text_filter,#text_filter',sortings:'int,str',pathVariables: ['areaId']]
+                        [title: 'Areas', mapping: '/area', sql: 'select * from area', filters: '#text_filter,#text_filter', sortings: 'int,str', pathVariables: []],
+                        [title: 'Houses', mapping: '/area/{areaId}/house', sql: 'select * from house where areaId=?', filters: '#text_filter,#text_filter', sortings: 'int,str', pathVariables: ['areaId']]
 
                 ]
         ];
@@ -85,33 +83,31 @@ class GeneratorSpec extends Specification {
         File dbStruct = new File(expectedDbStructure)
 
         expect:
-        generator.generate(dbTemplateLocation, dbTemplateData).replaceAll("\\n","") == dbStruct.text.replaceAll("\\n","");
+        generator.generate(dbTemplateLocation, dbTemplateData).replaceAll("\\n", "") == dbStruct.text.replaceAll("\\n", "");
 
 
     }
 
 
     def "should generate json schema structure from a given dataset"() {
+
         given:
         File jsonStruct = new File(expectedJsonSchemaStructure)
 
 
         expect:
-        generator.generate(jsonSchemaTemplateLocation, jsonSchemaTemplateData).replaceAll("\\s+","")== jsonStruct.text.replaceAll("\\s+","")
+        generator.generate(jsonSchemaTemplateLocation, jsonSchemaTemplateData).replaceAll("\\s+", "") == jsonStruct.text.replaceAll("\\s+", "")
 
 
     }
 
-    def "should generate web service structure from a given dataset"(){
+    def "should generate web service structure from a given dataset"() {
         given:
-        File webServiceStruct=new File(expectedWebserviceStructure)
+        File webServiceStruct = new File(expectedWebserviceStructure)
 
         expect:
         //Ignoring all white Spaces
-        generator.generate(webserviceTemplateLocation,webserviceTemplateData).replaceAll("\\s+","")==webServiceStruct.text.replaceAll("\\s+","")
-
+        generator.generate(webserviceTemplateLocation, webserviceTemplateData).replaceAll("\\s+", "") == webServiceStruct.text.replaceAll("\\s+", "")
 
     }
-
-
 }

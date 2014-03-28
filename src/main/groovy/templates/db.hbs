@@ -1,12 +1,12 @@
-{{~#each tables ~}}
+{{~#each entities ~}}
 #Table:{{name}}
 DROP TABLE IF EXISTS `{{name}}`;
 CREATE TABLE `{{name}}`(
-{{~#each cols ~}}
+{{~#each properties ~}}
     {{~#unless @last ~}}
-        {{label}} {{type}},
+        {{name}} {{type}},
     {{~else ~}}
-        {{label}} {{type}}
+        {{name}} {{type}}
     {{~/unless ~}}
 {{~/each~}}
 );

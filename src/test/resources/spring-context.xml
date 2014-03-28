@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-
-    <bean id="serverBaseUrl" class="java.lang.String">
-        <constructor-arg
-                value="http://barshi.vm-host.net:8080/hc-services/api/security/Authenticate"/>
-    </bean>
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="org.h2.Driver"/>
-        <property name="url" value="jdbc:h2:mem:specs;database_to_upper=false"/>
+        <!--<property name="driverClassName" value="org.h2.Driver"/>-->
+        <property name="driverClassName" value="org.relique.jdbc.csv.CsvDriver"/>
+        <!--<property name="url" value="jdbc:h2:mem:specs;database_to_upper=false"/>-->
+        <property name="url" value="jdbc:relique:csv:csvDatabase"/>
         <property name="username" value="sa"/>
         <property name="password" value=""/>
     </bean>
@@ -21,56 +20,105 @@
         <constructor-arg ref="dataSource"/>
     </bean>
 
-    <bean id="dbAccess" class="org.cghr.commons.db.DbAccess">
-        <constructor-arg ref="gSql"/>
-    </bean>
+    <!-- db Type Mapping -->
+    <util:map id="dbTypeMapping">
+        <entry key="int" value="int(11)"></entry>
+        <entry key="text" value="varchar(100)"></entry>
+        <entry key="longtext" value="clob"></entry>
+        <entry key="timestamp" value="timestamp"></entry>
+        <entry key="select" value="varchar(100)"></entry>
+        <entry key="multiselect" value="varchar(100)"></entry>
+        <entry key="lookup" value="varchar(100)"></entry>
+        <entry key="auto" value="int(11)"></entry>
+        <entry key="gps" value-ref="gps"></entry>
+        <entry key="duration" value-ref="duration"></entry>
 
-    <bean id="dbStore" class="org.cghr.commons.db.DbStore">
-        <constructor-arg name="gSql" ref="gSql"/>
-        <constructor-arg name="dataStoreFactory" ref="dataStoreFactory"/>
-    </bean>
+    </util:map>
 
 
-    <bean id="dataStoreFactory" class="java.util.HashMap">
-        <constructor-arg>
-            <map>
-                <entry key="country" value="id"></entry>
-            </map>
-        </constructor-arg>
-    </bean>
+    <util:list id="gps">
+        <ref bean="latitude"></ref>
+        <ref bean="longitude"></ref>
+    </util:list>
 
-    <bean id="dt" class="org.cghr.test.db.DbTester">
-        <constructor-arg ref="dataSource"/>
-    </bean>
+    <util:map id="latitude">
+        <entry key="name" value="{name}_latitude"></entry>
+        <entry key="type" value="varchar(100)"></entry>
+    </util:map>
+
+    <util:map id="longitude">
+        <entry key="name" value="{name}_longitude"></entry>
+        <entry key="type" value="varchar(100)"></entry>
+    </util:map>
+
+    <util:list id="duration">
+        <ref bean="duration_value"></ref>
+        <ref bean="duration_unit"></ref>
+    </util:list>
+
+    <util:map id="duration_value">
+        <entry key="name" value="{name}_value"></entry>
+        <entry key="type" value="varchar(100)"></entry>
+    </util:map>
+
+    <util:map id="duration_unit">
+        <entry key="name" value="{name}_unit"></entry>
+        <entry key="type" value="varchar(100)"></entry>
+    </util:map>
+
+
+    <!-- db Type Mapping Ends-->
+
+
+    <!-- Schema Type Mapping -->
+    <util:map id="schemaTypeMapping">
+        <entry key="text" value="text"></entry>
+        <entry key="select" value="radio"></entry>
+        <entry key="multiselect" value="checkbox"></entry>
+        <entry key="auto" value="hidden"></entry>
+        <entry key="textarea" value="textarea"></entry>
+        <entry key="heading" value="heading"></entry>
+        <entry key="lookup" value="lookup"></entry>
+        <entry key="gps" value="gps"></entry>
+    </util:map>
+
+    <!-- db Type Mapping Ends-->
 
     <!--Integration Testing Beans -->
-    <bean id="transformer" class="org.cghr.dataViewModel.DhtmlxGridModelTransformer">
-    <constructor-arg ref="gSql"/>
+
+    <bean class="org.cghr.generator.transformer.EntityTransformer" id="dbEntityTransformer">
+        <constructor-arg index="0" ref="dbTypeMapping"></constructor-arg>
+
     </bean>
 
-    <bean id="dataModelUtil" class="org.cghr.dataViewModel.DataModelUtil">
-    <constructor-arg name="dataModelTransformer" ref="transformer"/>
-    <constructor-arg name="dbAccess" ref="dbAccess"/>
+    <bean class="org.cghr.generator.transformer.EntityTransformer" id="schemaEntityTransformer">
+        <constructor-arg index="0" ref="schemaTypeMapping"></constructor-arg>
     </bean>
 
-
-    <bean id="userService" class="org.cghr.security.service.UserService">
-        <constructor-arg name="dbAccess" ref="dbAccess"/>
-        <constructor-arg name="dbStore" ref="dbStore"/>
-        <constructor-arg name="onlineAuthService" ref="onlineAuthService"/>
+    <bean class="com.github.jknack.handlebars.Handlebars" id="handlebars">
     </bean>
 
-    <bean id="auth" class="org.cghr.security.controller.Auth">
+    <bean class="org.cghr.generator.Generator" id="generator">
+        <constructor-arg index="0" ref="handlebars"></constructor-arg>
     </bean>
 
+    <bean class="java.lang.String" id="dbTemplate">
+        <constructor-arg>
+            <value>templates/db</value>
+        </constructor-arg>
 
-    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
     </bean>
 
-    <bean id="onlineAuthService" class="org.cghr.security.service.OnlineAuthService">
-        <constructor-arg name="serverAuthUrl" value="http://localhost:8089/app/api/security/auth"/>
-        <constructor-arg name="restTemplate" ref="restTemplate"/>
+    <!--db Generator-->
+    <bean class="org.cghr.generator.db.DbGenerator">
+        <constructor-arg index="0" ref="gSql"></constructor-arg>
+        <constructor-arg index="1" ref="dbEntityTransformer"></constructor-arg>
+        <constructor-arg index="2" ref="generator"></constructor-arg>
+        <constructor-arg index="3" ref="dbTemplate"></constructor-arg>
     </bean>
+    <!--db Generator-->
+
+
     <!--Integration Testing Beans Ends-->
 
 </beans>

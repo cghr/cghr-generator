@@ -8,6 +8,7 @@ import com.github.jknack.handlebars.Template
  */
 class Generator {
 
+
     Handlebars handlebars
 
     Generator(Handlebars handlebars) {
@@ -16,7 +17,7 @@ class Generator {
 
     String generate(String templateLocation, Map context) {
 
-        Template template = handlebars.compile(templateLocation);
+        Template template = handlebars.compile(templateLocation)
         return template.apply(context)
     }
 
