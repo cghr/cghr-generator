@@ -34,12 +34,25 @@ repositories {
 test {
     systemProperties 'property': 'value'
     include 'testResources'
+    include 'src/integrationTest'
+}
+sourceSets {
+    integrationTest
+}
+
+task intTest(type:Test) {
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath = sourceSets.integrationTest.runtimeClasspath
 
 }
 
-
 String springVersion = '3.2.5.RELEASE'
 // In this section you declare the dependencies for your production and test code
+
+
+assemble.dependsOn clean
+check.dependsOn intTest
+
 dependencies {
 
     // We use the latest groovy 2.x version for building this library
@@ -63,6 +76,9 @@ dependencies {
     testCompile 'org.objenesis:objenesis:2.1'
     testCompile 'com.github.tomakehurst:wiremock:1.36'
     testCompile 'org.slf4j:slf4j-api:1.7.5'
+
+    integrationTestCompile configurations.testCompile+sourceSets.main.output+sourceSets.test.output
+    integrationTestRuntime configurations.testRuntime
 
 
 }

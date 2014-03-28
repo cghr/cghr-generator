@@ -19,6 +19,8 @@ class Generator {
 
         Template template = handlebars.compile(templateLocation)
         return template.apply(context)
+
+
     }
 
 }
