@@ -23,12 +23,11 @@ class DbGeneratorIntegrationSpec extends Specification {
     def "should generate dbStructure from a given list of entities"() {
 
         given:
-        //String expectedDbStruct = new File('testResources/db.expected').text.replaceAll("\\n","")
-        println dbGenerator.generate(tablesWithEntities)
+        String expectedDbStruct = new File('testResources/db.expected').text.replaceAll("\\n","")
 
 
-        //expect:
-        //dbGenerator.generate(tablesWithEntities).replaceAll("\\n","")==expectedDbStruct
+        expect:
+        dbGenerator.generate(tablesWithEntities).replaceAll("\\n","")==expectedDbStruct
 
 
 
