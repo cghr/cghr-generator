@@ -27,44 +27,57 @@ class SchemaGenerator {
         this.templateLocation = templateLocation
     }
 
-    String generate(List tablesWithEntitiesInfo,String tableWithPropertyItemInfo) {
+    String generate(List tablesWithEntitiesInfo, String tableWithPropertyItemInfo) {
 
         tablesWithEntitiesInfo.each {
             tableWithEntityInfo ->
-                collectEntities(tableWithEntityInfo, entityList)
+                collectEntities(tableWithEntityInfo, entityList, tableWithPropertyItemInfo)
         }
+
+
 
         entityList.each {
             entity ->
                 transformedEntityList.add(entityTransformer.transform(entity))
         }
 
-        return generator.generate(templateLocation, [entities: transformedEntityList])
+        return generator.generate(templateLocation, transformedEntityList[0])
     }
 
-    List collectEntities(String tableWithEntityInfo, List listToCollect,String tableWithPropertyItemInfo) {
+    List collectEntities(String tableWithEntityInfo, List listToCollect, String tableWithPropertyItemInfo) {
 
 
-        List rows = gSql.rows("select distinct entity from $tableWithEntityInfo")
-        List multipleItemTypes=['select','multiselect','lookup']
+        String sql = "select distinct entity from $tableWithEntityInfo".toString()
+        List rows = gSql.rows(sql)
+
+        List multipleItemTypes = ['select', 'multiselect', 'lookup', 'radio-inline']
 
         rows.each {
             row ->
 
-                List entityProperties = gSql.rows("select name,type,valdn,label,flow from $tableWithEntityInfo where entity=?", [row.entity])
-                entityProperties.each {
-                    property ->
-                        List propertyItems=[]
-                        if (multipleItemTypes.contains(property.type)){
+                String entityPropertiesQuery = "select name,type,valdn,label,flow from $tableWithEntityInfo where entity=?".toString()
+                List entityProperties = gSql.rows(entityPropertiesQuery, [row.entity])
 
-                            String clabel=gSql.rows("select clabel from $tableWithEntityInfo where name=?",[property.name])
-                            propertyItems=gSql.rows("select text,value from  $tableWithPropertyItemInfo where name=?",[clabel])
-                            property.items=propertyItems
+
+                entityProperties = entityProperties.collect {
+                    property ->
+                        List propertyItems = []
+                        if (multipleItemTypes.contains(property.type)) {
+
+                            String clabelSql = "select clabel from $tableWithEntityInfo where name=?".toString()
+                            String clabel = gSql.rows(clabelSql, [property.name])[0].clabel
+
+                            String propertyItemSql = "select text,value from  $tableWithPropertyItemInfo where name=?"
+                            propertyItems = gSql.rows(propertyItemSql, [clabel])
+                            property.items = propertyItems
+
 
                         }
+                        return property
 
                 }
-                listToCollect.add([name: row.entity, properties: entityProperties])
+
+                listToCollect.add([name: row.entity, onSuccess:'newState', properties: entityProperties])
         }
 
 

@@ -3,7 +3,6 @@ import groovy.sql.Sql
 import org.cghr.generator.Generator
 import org.cghr.generator.test.db.MockData
 import org.cghr.generator.transformer.EntityTransformer
-import spock.lang.Ignore
 import spock.lang.Shared
 import spock.lang.Specification
 /**
@@ -33,22 +32,23 @@ class SchemaGeneratorSpec extends Specification {
 
         Sql gSql = Stub() {
 
-            rows('select distinct entity from dataDict') >> [[entity: 'country']]
 
-            rows("select name,type,value,valdn,flow,clabel from dataDict where entity=?", ['country']) >> mockData.schemaSampleData.country.properties
-            //rows("select name,type from dataDict where entity=?", ['state']) >> mockData.entitySampleData.state.properties
+            rows('select distinct entity from dataDict') >> [[entity: 'country']]
+            rows("select name,type,valdn,label,flow from dataDict where entity=?", ['country']) >> mockData.dataDictSchema.country.properties
+            rows("select clabel from dataDict where name=?",['continent']) >> [[clabel:'continent']]
+            rows("select text,value from  clabel where name=?",['continent']) >> mockData.transformedDataDictSchema.country.properties[3].items
+
+
         }
         EntityTransformer entityTransformer = Stub() {
 
-            transform(mockData.entitySampleData.country) >> mockData.transformedEntitySampleData.country
-            //transform(mockData.entitySampleData.state) >> mockData.transformedEntitySampleData.state
+
+            transform(mockData.dataDictSchema.country) >> mockData.transformedDataDictSchema.country
+
 
         }
         Generator generator = Stub() {
-            generate(templateLocation, [entities: [
-                    mockData.transformedEntitySampleData.country
-                    //mockData.transformedEntitySampleData.state
-            ]]) >> new File(expectedJsonStruct).text
+            generate(templateLocation, mockData.transformedDataDictSchema.country) >> new File(expectedJsonStruct).text
 
         }
 
@@ -57,14 +57,14 @@ class SchemaGeneratorSpec extends Specification {
 
 
 
-    @Ignore
     def "should generate dbStructure from a given list of entities"() {
 
         given:
         String expectedSchemaStruct = new File(expectedJsonStruct).text.replaceAll("\\s", "")
 
         expect:
-        schemaGenerator.generate(tablesWithEntities, tableWithPropertyItemInfo).replaceAll("\\s", "") == expectedJsonStruct
+        schemaGenerator.generate(tablesWithEntities, tableWithPropertyItemInfo).replaceAll("\\s", "") == expectedSchemaStruct
+
 
 
     }

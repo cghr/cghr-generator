@@ -27,47 +27,47 @@ class DbGenerator {
         this.templateLocation = templateLocation
     }
 
-    String generate(List tablesWithEntitiesInfo) {
+    String generate(String entityDesignTable, String dataDictTable) {
 
-        tablesWithEntitiesInfo.each {
-            tableWithEntityInfo ->
-                collectEntities(tableWithEntityInfo, entityList)
+        String sql1 = "SELECT DISTINCT entity FROM $entityDesignTable  WHERE  entity!=''".toString()
+
+        List rows = gSql.rows(sql1)
+
+        entityList = rows.collect {
+
+            row ->
+
+                List entityProperties = []
+                String sql2 = "SELECT name,type,key,strategy FROM $entityDesignTable WHERE entity=?".toString()
+                gSql.rows(sql2, [row.entity]).each {
+                    entityProperties.add(it)
+                }
+                String sql3 = "SELECT name,type FROM $dataDictTable WHERE entity=?  and type!='heading'".toString()
+                gSql.rows(sql3, [row.entity]).each {
+                    entityProperties.add(it)
+                }
+                entityProperties = entityProperties.collect {
+                    sqlRow ->
+                        sqlRow.collectEntries {
+                            k, v ->
+                                [k.toLowerCase(), v]
+                        }
+                }
+
+
+                [name: row.entity, properties: entityProperties]
         }
 
-
+       // println entityList
         entityList.each {
             entity ->
                 transformedEntityList.add(entityTransformer.transform(entity))
         }
 
+
         return generator.generate(templateLocation, [entities: transformedEntityList])
     }
 
-    List collectEntities(String tableWithEntityInfo, List listToCollect) {
-
-
-        String allEntities = "select distinct entity from $tableWithEntityInfo".toString()
-        List rows = gSql.rows(allEntities)
-
-        rows.each {
-            row ->
-
-                String sql = "select name,type from $tableWithEntityInfo where entity=? and type!='heading'".toString()
-                List entityProperties = gSql.rows(sql, [row.entity])
-                entityProperties=entityProperties.collect{
-                    sqlRow->
-                        sqlRow.collectEntries{
-                            k,v->
-                                [k.toLowerCase(),v]
-                        }
-                }
-
-
-                listToCollect.add([name: row.entity, properties: entityProperties])
-        }
-
-
-    }
 
     def generateToAFile(List tablesWithEntitiesInfo, File file) {
 

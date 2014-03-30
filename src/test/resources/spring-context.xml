@@ -27,11 +27,15 @@
         <entry key="longtext" value="clob"></entry>
         <entry key="timestamp" value="timestamp"></entry>
         <entry key="select" value="varchar(100)"></entry>
+        <entry key="select-inline" value="varchar(100)"></entry>
         <entry key="multiselect" value="varchar(100)"></entry>
         <entry key="lookup" value="varchar(100)"></entry>
         <entry key="auto" value="int(11)"></entry>
         <entry key="gps" value-ref="gps"></entry>
         <entry key="duration" value-ref="duration"></entry>
+        <entry key="dropdown" value="varchar(100)"></entry>
+        <entry key="suggest" value="varchar(100)"></entry>
+        <entry key="ffq" value-ref="ffq"></entry>
 
     </util:map>
 
@@ -66,6 +70,26 @@
         <entry key="type" value="varchar(100)"></entry>
     </util:map>
 
+    <util:list id="ffq">
+        <ref bean="ffq_frequency"></ref>
+        <ref bean="ffq_measure"></ref>
+        <ref bean="ffq_unit"></ref>
+    </util:list>
+
+    <util:map id="ffq_frequency">
+        <entry key="name" value="{name}_frequency"></entry>
+        <entry key="type" value="varchar(100)"></entry>
+    </util:map>
+
+    <util:map id="ffq_measure">
+        <entry key="name" value="{name}_measure"></entry>
+        <entry key="type" value="varchar(100)"></entry>
+    </util:map>
+
+    <util:map id="ffq_unit">
+        <entry key="name" value="{name}_unit"></entry>
+        <entry key="type" value="varchar(100)"></entry>
+    </util:map>
 
     <!-- db Type Mapping Ends-->
 
@@ -74,15 +98,22 @@
     <util:map id="schemaTypeMapping">
         <entry key="text" value="text"></entry>
         <entry key="select" value="radio"></entry>
+        <entry key="select-inline" value="radio"></entry>
         <entry key="multiselect" value="checkbox"></entry>
         <entry key="auto" value="hidden"></entry>
         <entry key="textarea" value="textarea"></entry>
         <entry key="heading" value="heading"></entry>
         <entry key="lookup" value="lookup"></entry>
         <entry key="gps" value="gps"></entry>
+        <entry key="duration" value="duration"></entry>
+        <entry key="dropdown" value="dropdown"></entry>
+        <entry key="suggest" value="suggest"></entry>
+        <entry key="hidden" value="hidden"></entry>
+
+
     </util:map>
 
-    <!-- db Type Mapping Ends-->
+    <!-- Schema Type Mapping Ends-->
 
     <!--Integration Testing Beans -->
 

@@ -1,7 +1,0 @@
-entity,name,type
-user,id,int
-user,username,text
-user,password,text
-userlog,id,int
-userlog,username,text
-userlog,status,text

@@ -25,7 +25,7 @@ class EntityTransformerSpec extends Specification {
         entityTransformer = new EntityTransformer(dbTypeMapping)
 
 
-        Map givenEntity = [name: 'myentity', properties: [
+        Map givenEntity = [name: 'myentity',onSave:'doSomething',properties: [
                 [name: 'prop1', type: 'int'],
                 [name: 'prop2', type: 'int'],
                 [name: 'prop3', type: 'text'],
@@ -35,10 +35,11 @@ class EntityTransformerSpec extends Specification {
                 [name: 'prop7', type: 'lookup'],
                 [name: 'prop8', type: 'gps'],
                 [name: 'prop9', type: 'multiselect'],
-                [name: 'prop10', type: 'duration']
+                [name: 'prop10', type: 'duration'],
+                [name: 'prop11', type: 'ffq']
         ]];
 
-        Map expectedTransformedEntity = [name: 'myentity', properties: [
+        Map expectedTransformedEntity = [name: 'myentity',onSave: 'doSomething', properties: [
                 [name: 'prop1', type: 'int(11)'],
                 [name: 'prop2', type: 'int(11)'],
                 [name: 'prop3', type: 'varchar(100)'],
@@ -50,7 +51,10 @@ class EntityTransformerSpec extends Specification {
                 [name: 'prop8_latitude', type: 'varchar(100)'],
                 [name: 'prop8_longitude', type: 'varchar(100)'],
                 [name: 'prop10_value', type: 'varchar(100)'],
-                [name: 'prop10_unit', type: 'varchar(100)']
+                [name: 'prop10_unit', type: 'varchar(100)'],
+                [name: 'prop11_frequency', type: 'varchar(100)'],
+                [name: 'prop11_measure', type: 'varchar(100)'],
+                [name: 'prop11_unit', type: 'varchar(100)']
 
         ]];
 

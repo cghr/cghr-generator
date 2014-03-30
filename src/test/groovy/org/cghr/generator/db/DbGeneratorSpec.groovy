@@ -14,7 +14,9 @@ class DbGeneratorSpec extends Specification {
 
     DbGenerator dbGenerator
     @Shared
-    List tablesWithEntities = ['primaryDbStruct', 'dataDict']
+    String entityDesignTable = 'entityDesign'
+    @Shared
+    String dataDictTable = 'dataDict'
 
 
     def setupSpec() {
@@ -27,20 +29,23 @@ class DbGeneratorSpec extends Specification {
 
         String templateLocation = 'templates/db.hbs'
         Sql gSql = Stub() {
-            rows('select distinct entity from primaryDbStruct') >> [[entity: 'user'], [entity: 'userlog']]
-            rows('select distinct entity from dataDict') >> [[entity: 'country'], [entity: 'state']]
 
-            rows("select name,type from primaryDbStruct where entity=? and type!='heading'", ['user']) >> mockData.entitySampleData.user.properties
-            rows("select name,type from primaryDbStruct where entity=? and type!='heading'", ['userlog']) >> mockData.entitySampleData.userlog.properties
+            rows("SELECT DISTINCT entity FROM entityDesign  WHERE  entity!=''") >> [[entity: 'user'], [entity: 'userlog'], [entity: 'country'], [entity: 'state']]
 
-            rows("select name,type from dataDict where entity=? and type!='heading'", ['country']) >> mockData.entitySampleData.country.properties
-            rows("select name,type from dataDict where entity=? and type!='heading'", ['state']) >> mockData.entitySampleData.state.properties
+            rows("SELECT name,type,key,strategy FROM entityDesign WHERE entity=?", ['user']) >> mockData.entityDesign.user.properties
+            rows("SELECT name,type,key,strategy FROM entityDesign WHERE entity=?", ['userlog']) >> mockData.entityDesign.userlog.properties
+            rows("SELECT name,type,key,strategy FROM entityDesign WHERE entity=?", ['country']) >> mockData.entityDesign.country.properties
+            rows("SELECT name,type,key,strategy FROM entityDesign WHERE entity=?", ['state']) >> mockData.entityDesign.state.properties
+
+            rows("SELECT name,type FROM dataDict WHERE entity=?  and type!='heading'", ['country']) >> mockData.dataDict.country.properties
+            rows("SELECT name,type FROM dataDict WHERE entity=?  and type!='heading'", ['state']) >> mockData.dataDict.state.properties
         }
         EntityTransformer entityTransformer = Stub() {
-            transform(mockData.entitySampleData.user) >> mockData.transformedEntitySampleData.user
-            transform(mockData.entitySampleData.userlog) >> mockData.transformedEntitySampleData.userlog
-            transform(mockData.entitySampleData.country) >> mockData.transformedEntitySampleData.country
-            transform(mockData.entitySampleData.state) >> mockData.transformedEntitySampleData.state
+
+            transform(mockData.entityDesignRawData.user) >> mockData.transformedEntitySampleData.user
+            transform(mockData.entityDesignRawData.userlog) >> mockData.transformedEntitySampleData.userlog
+            transform(mockData.entityDesignRawData.country) >> mockData.transformedEntitySampleData.country
+            transform(mockData.entityDesignRawData.state) >> mockData.transformedEntitySampleData.state
 
         }
         Generator generator = Stub() {
@@ -62,10 +67,9 @@ class DbGeneratorSpec extends Specification {
         given:
         String expectedDbStruct = new File('testResources/db.expected').text.replaceAll("\\n", "")
 
+
         expect:
-        dbGenerator.generate(tablesWithEntities).replaceAll("\\n", "") == expectedDbStruct
-
-
+        dbGenerator.generate(entityDesignTable, dataDictTable).replaceAll("\\n", "") == expectedDbStruct
 
 
     }

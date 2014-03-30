@@ -82,11 +82,12 @@ class GeneratorSpec extends Specification {
         given:
         File dbStruct = new File(expectedDbStructure)
 
+
         expect:
         generator.generate(dbTemplateLocation, dbTemplateData).replaceAll("\\n", "") == dbStruct.text.replaceAll("\\n", "");
 
-
     }
+
 
 
     def "should generate json schema structure from a given dataset"() {

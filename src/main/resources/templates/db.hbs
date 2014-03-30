@@ -4,10 +4,10 @@ DROP TABLE IF EXISTS `{{name}}`;
 CREATE TABLE `{{name}}`(
 {{~#each properties ~}}
     {{~#unless @last ~}}
-        {{name}} {{type}},
+        {{name}} {{type}} {{key}} {{strategy}},
     {{~else ~}}
-        {{name}} {{type}}
+        {{name}} {{type}} {{key}} {{strategy}}
     {{~/unless ~}}
-{{~/each~}}
+{{~/each ~}}
 );
 {{~/each ~}}

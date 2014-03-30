@@ -14,9 +14,11 @@ class EntityTransformer {
 
     Map transform(Map givenEntity) {
 
+
         transformedEntity=givenEntity //Copy all properties initially
 
         List multipleProperties=[]
+
 
         transformedEntity.properties = givenEntity.properties.collect {
 

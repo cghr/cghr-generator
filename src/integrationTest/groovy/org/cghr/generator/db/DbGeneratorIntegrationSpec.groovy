@@ -11,23 +11,21 @@ class DbGeneratorIntegrationSpec extends Specification {
 
 
     @Shared
-    List tablesWithEntities = ['dbStructure', 'dataDict']
+    String entityDesignTable = 'entityDesign'
+    @Shared
+    String dataDictTable = 'dataDict'
+
 
     @Autowired
     DbGenerator dbGenerator
-
-
-
-
 
     def "should generate dbStructure from a given list of entities"() {
 
         given:
         String expectedDbStruct = new File('testResources/db.expected').text.replaceAll("\\n","")
 
-
         expect:
-        dbGenerator.generate(tablesWithEntities).replaceAll("\\n","")==expectedDbStruct
+        dbGenerator.generate(entityDesignTable,dataDictTable).replaceAll("\\n","")==expectedDbStruct
 
 
 

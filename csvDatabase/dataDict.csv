@@ -1,7 +1,3 @@
 entity,category,qno,label,name,type,flow,clabel,valdn,value,lookup_category,lookup_field,lookup_ref,crosscheck_category,crosscheck_field,crosscheck_ref
-country,,1,,id,auto,,,,$stateParams.country_id,,,,,,
 country,,2,Country Name,name,text,,,,,,,,,,
-country,,3,Contitnent,continent,select,,continent,,,,,,,,
-state,,1,,id,auto,,,,$stateParams.state_id,,,,,,
 state,,2,State Name,name,text,,,,,,,,,,
-state,,3,Country,country,text,,country,,,,,,,,
