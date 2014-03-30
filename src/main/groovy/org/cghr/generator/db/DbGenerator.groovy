@@ -37,6 +37,7 @@ class DbGenerator {
 
             row ->
 
+
                 List entityProperties = []
                 String sql2 = "SELECT name,type,key,strategy FROM $entityDesignTable WHERE entity=?".toString()
                 gSql.rows(sql2, [row.entity]).each {
@@ -58,7 +59,8 @@ class DbGenerator {
                 [name: row.entity, properties: entityProperties]
         }
 
-       // println entityList
+
+
         entityList.each {
             entity ->
                 transformedEntityList.add(entityTransformer.transform(entity))

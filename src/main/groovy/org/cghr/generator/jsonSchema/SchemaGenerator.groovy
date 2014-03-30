@@ -18,6 +18,7 @@ class SchemaGenerator {
 
     List entityList = []
     List transformedEntityList = []
+    List generatedList = []
 
 
     SchemaGenerator(Sql gSql, EntityTransformer entityTransformer, Generator generator, String templateLocation) {
@@ -27,11 +28,66 @@ class SchemaGenerator {
         this.templateLocation = templateLocation
     }
 
-    String generate(List tablesWithEntitiesInfo, String tableWithPropertyItemInfo) {
+    List generate(String entitySchemaTable, String entitySchemaMasterPropertiesTable, String dataDictTable, String tableWithPropertyItemInfo) {
+        //List tablesWithEntitiesInfo, String tableWithPropertyItemInfo) {
 
-        tablesWithEntitiesInfo.each {
-            tableWithEntityInfo ->
-                collectEntities(tableWithEntityInfo, entityList, tableWithPropertyItemInfo)
+
+        String sql1 = "SELECT DISTINCT entity FROM $entitySchemaTable WHERE  entity!=''".toString()
+        List rows = gSql.rows(sql1)
+        entityList = rows.collect {
+            row ->
+
+                String query = "select onSave from $entitySchemaTable where entity=?".toString()
+                String onSave = gSql.firstRow(query, [row.entity]).onSave
+
+
+
+                List entityProperties = []
+                List multipleItemTypes = ['select', 'multiselect', 'lookup', 'select-inline']
+
+                String sql2 = "select name,value,type from $entitySchemaMasterPropertiesTable where entity=?".toString()
+                gSql.rows(sql2, [row.entity]).each {
+                    entityProperties.add(it)
+                }
+                String sql3 = "SELECT name,type,valdn,label,flow FROM $dataDictTable WHERE entity=?".toString()
+                gSql.rows(sql3, [row.entity]).each {
+
+
+                    if (multipleItemTypes.contains(it.type)) {
+
+                        it.items = []
+
+                        String sql4 = "SELECT  clabel FROM  dataDict WHERE entity=? and name=?".toString()
+
+                        String clabel = gSql.rows(sql4, [row.entity, it.name])[0].clabel
+
+
+                        String sql5 = "SELECT  text,value   FROM clabel WHERE name=?".toString()
+                        it.items = gSql.rows(sql5, [clabel])
+                        it.items = it.items.collect {
+                            sqlRow ->
+                                sqlRow.collectEntries {
+                                    k, v ->
+                                        [k.toLowerCase(), v]
+                                }
+                        }
+                        it.items
+
+                    }
+                    entityProperties.add(it)
+
+                }
+
+
+                entityProperties = entityProperties.collect {
+                    sqlRow ->
+                        sqlRow.collectEntries {
+                            k, v ->
+                                [k.toLowerCase(), v]
+                        }
+                }
+
+                [onSave: onSave, properties: entityProperties]
         }
 
 
@@ -41,47 +97,15 @@ class SchemaGenerator {
                 transformedEntityList.add(entityTransformer.transform(entity))
         }
 
-        return generator.generate(templateLocation, transformedEntityList[0])
-    }
 
-    List collectEntities(String tableWithEntityInfo, List listToCollect, String tableWithPropertyItemInfo) {
-
-
-        String sql = "select distinct entity from $tableWithEntityInfo".toString()
-        List rows = gSql.rows(sql)
-
-        List multipleItemTypes = ['select', 'multiselect', 'lookup', 'radio-inline']
-
-        rows.each {
-            row ->
-
-                String entityPropertiesQuery = "select name,type,valdn,label,flow from $tableWithEntityInfo where entity=?".toString()
-                List entityProperties = gSql.rows(entityPropertiesQuery, [row.entity])
-
-
-                entityProperties = entityProperties.collect {
-                    property ->
-                        List propertyItems = []
-                        if (multipleItemTypes.contains(property.type)) {
-
-                            String clabelSql = "select clabel from $tableWithEntityInfo where name=?".toString()
-                            String clabel = gSql.rows(clabelSql, [property.name])[0].clabel
-
-                            String propertyItemSql = "select text,value from  $tableWithPropertyItemInfo where name=?"
-                            propertyItems = gSql.rows(propertyItemSql, [clabel])
-                            property.items = propertyItems
-
-
-                        }
-                        return property
-
-                }
-
-                listToCollect.add([name: row.entity, onSuccess:'newState', properties: entityProperties])
+        transformedEntityList.each {
+            generatedList.add(generator.generate(templateLocation, it))
         }
 
 
+        generatedList
     }
+
 
     def generateToAFile(List tablesWithEntitiesInfo, File file) {
 

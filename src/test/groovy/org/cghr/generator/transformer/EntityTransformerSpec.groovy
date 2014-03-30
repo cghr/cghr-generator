@@ -78,7 +78,8 @@ class EntityTransformerSpec extends Specification {
                 [name: 'prop5', type: 'textarea'],
                 [name: 'prop6', type: 'heading'],
                 [name: 'prop7', type: 'lookup'],
-                [name: 'prop8', type: 'gps']
+                [name: 'prop8', type: 'gps'],
+                [name: 'prop9', type: 'ffq']
 
         ]];
         Map expectedTransformedEntity = [name: 'myentity', onSuccess: '$stateParams.go("newState")', properties: [
@@ -89,8 +90,8 @@ class EntityTransformerSpec extends Specification {
                 [name: 'prop5', type: 'textarea'],
                 [name: 'prop6', type: 'heading'],
                 [name: 'prop7', type: 'lookup'],
-                [name: 'prop8', type: 'gps']
-
+                [name: 'prop8', type: 'gps'],
+                [name: 'prop9', type: 'ffq']
         ]];
 
 

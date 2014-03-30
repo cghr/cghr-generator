@@ -24,6 +24,7 @@ class DbGeneratorIntegrationSpec extends Specification {
         given:
         String expectedDbStruct = new File('testResources/db.expected').text.replaceAll("\\n","")
 
+
         expect:
         dbGenerator.generate(entityDesignTable,dataDictTable).replaceAll("\\n","")==expectedDbStruct
 

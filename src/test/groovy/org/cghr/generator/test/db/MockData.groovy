@@ -2,6 +2,7 @@ package org.cghr.generator.test.db
 
 class MockData {
 
+
     def entityDesign = [
             user: [name: 'user', properties: [
                     [name: 'id', type: 'int', key: 'primary key', strategy: 'auto_increment'],
@@ -38,6 +39,36 @@ class MockData {
             ]
             ]
     ]
+    def schemaMasterProperties = [
+            user: [name: 'user', properties: [
+                    [name: 'datastore', type: 'hidden', value: 'user'],
+                    [name: 'id', type: 'hidden', value: '$stateParams.userId']
+            ]],
+            userlog: [name: 'userlog', properties: [
+                    [name: 'datastore', type: 'hidden', value: 'userlog'],
+                    [name: 'id', type: 'hidden', value: '$stateParams.userlogId']
+            ]],
+            country: [name: 'country', properties: [
+                    [name: 'datastore', type: 'hidden', value: 'country'],
+                    [name: 'id', type: 'hidden', value: '$stateParams.countryId'],
+                    [name: 'continentId', type: 'hidden', value: '$stateParams.continentId']
+            ]],
+            state: [name: 'state', properties: [
+                    [name: 'datastore', type: 'hidden', value: 'state'],
+                    [name: 'id', type: 'hidden', value: '$stateParams.stateId'],
+                    [name: 'countryId', type: 'hidden', value: '$stateParams.countryId']
+            ]]
+
+    ]
+    def entitySchema=[
+            user:[onSave:'context.userNext',properties: buildAllProperties('user')],
+            userlog:[onSave:'context.userlogNext',properties: buildAllProperties('userlog')],
+            country:[onSave:'context.countryNext',properties: buildAllProperties('country')],
+            state:[onSave:'context.stateNext',properties: buildAllProperties('state')]
+    ]
+
+
+
 
     def entitySampleData = [
             user: [name: 'user', properties: [
@@ -127,7 +158,7 @@ class MockData {
             ]
     ]
 
-    def entityDesignRawData=[
+    def entityDesignRawData = [
             user: [name: 'user', properties: [
                     [name: 'id', type: 'int', key: 'primary key', strategy: 'auto_increment'],
                     [name: 'username', type: 'text'],
@@ -193,5 +224,17 @@ class MockData {
             it.subMap(columns)
         }
 
+    }
+    List buildAllProperties(String datastore){
+
+
+        List properties=[]
+        schemaMasterProperties.get(datastore).each {
+            properties.add(it)
+        }
+        dataDict.get(datastore).each {
+            properties.add(it)
+        }
+        return properties
     }
 }

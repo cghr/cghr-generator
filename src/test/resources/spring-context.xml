@@ -16,8 +16,24 @@
         <property name="password" value=""/>
     </bean>
 
+    <bean id="mockDataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.relique.jdbc.csv.CsvDriver"/>
+        <property name="url" value="jdbc:relique:csv:testResources/mockData"/>
+        <property name="username" value="sa"/>
+        <property name="password" value=""/>
+    </bean>
+
     <bean id="gSql" class="groovy.sql.Sql">
         <constructor-arg ref="dataSource"/>
+    </bean>
+
+    <bean id="sql" class="groovy.sql.Sql">
+        <constructor-arg ref="mockDataSource"/>
+    </bean>
+
+    <bean id="mockSql" class="org.cghr.generator.test.db.MockSql">
+        <constructor-arg ref="sql"></constructor-arg>
     </bean>
 
     <!-- db Type Mapping -->
@@ -109,6 +125,7 @@
         <entry key="dropdown" value="dropdown"></entry>
         <entry key="suggest" value="suggest"></entry>
         <entry key="hidden" value="hidden"></entry>
+        <entry key="ffq" value="ffq"></entry>
 
 
     </util:map>
@@ -142,12 +159,23 @@
 
     <!--db Generator-->
     <bean class="org.cghr.generator.db.DbGenerator">
-        <constructor-arg index="0" ref="gSql"></constructor-arg>
+        <constructor-arg index="0" ref="sql"></constructor-arg>
         <constructor-arg index="1" ref="dbEntityTransformer"></constructor-arg>
         <constructor-arg index="2" ref="generator"></constructor-arg>
-        <constructor-arg index="3" ref="dbTemplate"></constructor-arg>
+        <constructor-arg index="3" value="templates/db"></constructor-arg>
     </bean>
     <!--db Generator-->
+
+    <!-- schema Generator -->
+    <bean class="org.cghr.generator.jsonSchema.SchemaGenerator" id="schemaGenerator">
+        <constructor-arg index="0" ref="sql" />
+        <constructor-arg index="1" ref="schemaEntityTransformer" />
+        <constructor-arg index="2" ref="generator" />
+        <constructor-arg index="3" value="templates/jsonSchema" />
+
+    </bean>
+
+    <!-- schema Generator -->
 
 
     <!--Integration Testing Beans Ends-->

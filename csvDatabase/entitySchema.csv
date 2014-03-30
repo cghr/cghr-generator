@@ -1,0 +1,5 @@
+entity,schemaName,onSave
+user,context.user,context.userNext
+userlog,context.userlog,context.userNext
+country,context.country,context.countryNext
+continent,context.continent,context.continentNext

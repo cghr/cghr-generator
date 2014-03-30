@@ -1,5 +1,5 @@
 {
-    "onSuccess": "newState",
+    "onSave": "country.next",
     "properties": [{
         "name": "datastore",
         "type": "hidden",
@@ -9,14 +9,22 @@
         "value":"country",
         "items": []
     }, {
-        "name": "country_id",
+        "name": "countryId",
         "type": "hidden",
         "valdn": "",
         "label": "",
         "flow": "",
         "value":"$stateParams.countryId",
         "items": []
-    }, {
+    },{
+        "name": "continentId",
+        "type": "hidden",
+        "valdn": "",
+        "label": "",
+        "flow": "",
+         "value":"$stateParams.continentId",
+         "items": []
+    },{
         "name": "name",
         "type": "text",
         "valdn": "required",
@@ -25,21 +33,18 @@
         "value":"",
         "items": []
     }, {
-        "name": "continent",
+        "name": "language",
         "type": "radio",
         "valdn": "required",
-        "label": "Continent",
+        "label": "Language",
         "flow": "",
         "value":"",
         "items": [{
-            "text": "Asia",
-            "value": "asia"
+            "text": "Hindi",
+            "value": "hindi"
         }, {
-            "text": "Europe",
-            "value": "europe"
-        }, {
-            "text": "Africa",
-            "value": "africa"
+            "text": "English",
+            "value": "english"
         }]
     }]
 }
