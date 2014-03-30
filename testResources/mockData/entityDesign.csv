@@ -1,0 +1,11 @@
+entity,name,type,key,strategy
+user,id,int,primary key,
+user,username,text,,
+user,password,text,,
+userlog,id,int,primary key,auto_increment
+userlog,username,text,,
+userlog,status,text,,
+country,id,int,primary key,
+country,continentId,int,,
+state,id,int,primary key,
+state,countryId,int,,

@@ -1,0 +1,7 @@
+entity,name,value,type
+country,datastore,country,hidden
+country,countryId,$stateParams.countryId,hidden
+country,continentId,$stateParams.continentId,hidden
+state,datastore,state,hidden
+state,stateId,$stateParams.stateId,hidden
+state,countryId,$stateParams.countryId,hidden

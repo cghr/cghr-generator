@@ -1,0 +1,4 @@
+entity,name,type,label,valdn,flow,clabel
+country,name,text,Name,required,data.prop1 == 'yes' && data.prop2=='No',
+country,language,select,Language,required,,language
+state,name,text,Name,required,,

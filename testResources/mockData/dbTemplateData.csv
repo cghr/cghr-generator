@@ -1,0 +1,14 @@
+entity,name,type,key,strategy
+user,id,int(11),primary key,
+user,username,varchar(100),,
+user,password,varchar(100),,
+userlog,id,int(11),primary key,auto_increment
+userlog,username,varchar(100),,
+userlog,status,varchar(100),,
+country,id,int(11),primary key,
+country,continentId,int(11),,
+country,name,varchar(100),,
+country,language,varchar(100),,
+state,id,int(11),primary key,
+state,countryId,int(11),,
+state,name,varchar(100),,
