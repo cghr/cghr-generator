@@ -1,5 +1,3 @@
-package {{package}};
-
 import org.cghr.datamodel.DataModelUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,13 +18,13 @@ class GridService{
 	// {{title}}
     	@RequestMapping(value = "{{mapping}}", method = RequestMethod.GET, produces = "application/json")
     	@ResponseBody
-    	String get{{title}} ( {{#each pathVariables}} {{#unless @last}} @PathVariable Integer {{this}}, {{else}} @PathVariable Integer {{this}} {{/unless}} {{/each}}) {
+    	String get{{title}} ( {{#each pathVariables}} {{#unless @last}} @PathVariable Integer {{this~}}, {{else}} @PathVariable Integer {{this~}} {{/unless}} {{/each}}) {
 
     		sql = "{{sql}}";
     		filters = "{{filters}}";
     		sortings = "{{sortings}}";
 
-    		return constructJsonResponse(sql, filters, sortings, new Object[]{  {{#each pathVariables}} {{#unless @last}} {{this}},{{else}} {{this}} {{/unless}} {{/each}} });
+    		return constructJsonResponse(sql, filters, sortings, new Object[]{  {{~#each pathVariables ~}} {{#unless @last}} {{~ this ~}},{{else}} {{~ this ~}} {{/unless}} {{/each}} });
 
     	}
     {{/each}}

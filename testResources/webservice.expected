@@ -1,5 +1,3 @@
-package org.cghr.hc.service;
-
 import org.cghr.datamodel.DataModelUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,12 +15,12 @@ class GridService{
 
 
 
-	// Areas
-    	@RequestMapping(value = "/area", method = RequestMethod.GET, produces = "application/json")
+	// User
+    	@RequestMapping(value = "/user", method = RequestMethod.GET, produces = "application/json")
     	@ResponseBody
-    	String getAreas ( ) {
+    	String getUser ( ) {
 
-    		sql = "select * from area";
+    		sql = "select id,username from user";
     		filters = "#text_filter,#text_filter";
     		sortings = "int,str";
 
@@ -31,18 +29,30 @@ class GridService{
     	}
 
 
-	// Houses
-    	@RequestMapping(value = "/area/{areaId}/house", method = RequestMethod.GET, produces = "application/json")
+	// Country
+    	@RequestMapping(value = "/continent/{continentId}/country", method = RequestMethod.GET, produces = "application/json")
     	@ResponseBody
-    	String getHouses (   @PathVariable Integer areaId  ) {
+    	String getCountry (   @PathVariable Integer continentId  ) {
 
-    		sql = "select * from house where areaId=?";
+    		sql = "select id,name from country where continentId=?";
     		filters = "#text_filter,#text_filter";
     		sortings = "int,str";
 
-    		return constructJsonResponse(sql, filters, sortings, new Object[]{    areaId   });
+    		return constructJsonResponse(sql, filters, sortings, new Object[]{    continentId   });
 
     	}
+    	// State
+            	@RequestMapping(value = "/continent/{continentId}/country/{countryId}/state", method = RequestMethod.GET, produces = "application/json")
+            	@ResponseBody
+            	String getState (   @PathVariable Integer continentId,@PathVariable Integer countryId  ) {
+
+            		sql = "select id,name from state where continentId=? and countryId=?";
+            		filters = "#text_filter,#text_filter";
+            		sortings = "int,str";
+
+            		return constructJsonResponse(sql, filters, sortings, new Object[]{    continentId,countryId   });
+
+            	}
 
 
     // Creating a Json from sql Query

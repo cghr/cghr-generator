@@ -177,6 +177,18 @@
 
     <!-- schema Generator -->
 
+    <!-- Web service Generator-->
+    <bean class="org.cghr.generator.webservice.WebServiceGenerator" id="webserviceGenerator">
+        <constructor-arg index="0" ref="sql" />
+        <constructor-arg index="1" ref="generator" />
+    </bean>
+
+
+
+    <!-- Web service Generator-->
+
+
+
 
     <!--Integration Testing Beans Ends-->
 

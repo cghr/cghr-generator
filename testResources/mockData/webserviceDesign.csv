@@ -1,0 +1,4 @@
+title,mapping,sql,filters,sortings
+User,/user,"select id,username from user","#text_filter,#text_filter","int,str"
+Country,/continent/{continentId}/country,"select id,name from country where continentId=?","#text_filter,#text_filter","int,str"
+State,/continent/{continentId}/country/{countryId}/state,"select id,name from state where continentId=? and countryId=?","#text_filter,#text_filter","int,str"

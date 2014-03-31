@@ -1,10 +1,12 @@
 package org.cghr.generator
+
 import com.github.jknack.handlebars.Handlebars
 import org.cghr.generator.test.db.MockSql
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Shared
 import spock.lang.Specification
+
 /**
  * Created by ravitej on 25/3/14.
  */
@@ -42,9 +44,9 @@ class GeneratorSpec extends Specification {
         rows = rows.collect {
 
             if (multipleItems.contains(it.type)) {
-                String query="select text,value from itemsTemplateData  where name=?".toString()
-                it.items = mockSql.rows(query,[it.name])
-               // it.items=it.items.collect lowerCaseKeys
+                String query = "select text,value from itemsTemplateData  where name=?".toString()
+                it.items = mockSql.rows(query, [it.name])
+                // it.items=it.items.collect lowerCaseKeys
 
             }
             it
@@ -55,12 +57,11 @@ class GeneratorSpec extends Specification {
     def setupSpec() {
 
 
-
-
-        webserviceTemplateData = [package: 'org.cghr.hc.service', reports:
+        webserviceTemplateData = [reports:
                 [
-                        [title: 'Areas', mapping: '/area', sql: 'select * from area', filters: '#text_filter,#text_filter', sortings: 'int,str', pathVariables: []],
-                        [title: 'Houses', mapping: '/area/{areaId}/house', sql: 'select * from house where areaId=?', filters: '#text_filter,#text_filter', sortings: 'int,str', pathVariables: ['areaId']]
+                        [title: 'User', mapping: '/user', sql: 'select id,username from user', filters: '#text_filter,#text_filter', sortings: 'int,str', pathVariables: []],
+                        [title: 'Country', mapping: '/continent/{continentId}/country', sql: 'select id,name from country where continentId=?', filters: '#text_filter,#text_filter', sortings: 'int,str', pathVariables: ['continentId']],
+                        [title: 'State', mapping: '/continent/{continentId}/country/{countryId}/state', sql: 'select id,name from state where continentId=? and countryId=?', filters: '#text_filter,#text_filter', sortings: 'int,str', pathVariables: ['continentId','countryId']]
                 ]
         ];
 
