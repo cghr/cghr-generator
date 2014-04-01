@@ -7,4 +7,5 @@
 .idea/
 cghr-generator.iml
 out/
+generated/
 

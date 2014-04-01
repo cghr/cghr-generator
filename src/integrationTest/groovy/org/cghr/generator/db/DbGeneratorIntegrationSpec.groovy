@@ -1,8 +1,10 @@
 package org.cghr.generator.db
+
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Shared
 import spock.lang.Specification
+
 /**
  * Created by ravitej on 28/3/14.
  */
@@ -17,17 +19,16 @@ class DbGeneratorIntegrationSpec extends Specification {
 
 
     @Autowired
-    DbGenerator dbGenerator
+    DbGenerator dbGeneratorWithMock
 
     def "should generate dbStructure from a given list of entities"() {
 
         given:
-        String expectedDbStruct = new File('testResources/db.expected').text.replaceAll("\\n","")
+        String expectedDbStruct = new File('testResources/db.expected').text.replaceAll("\\n", "")
 
 
         expect:
-        dbGenerator.generate(entityDesignTable,dataDictTable).replaceAll("\\n","")==expectedDbStruct
-
+        dbGeneratorWithMock.generate(entityDesignTable, dataDictTable).replaceAll("\\n", "") == expectedDbStruct
 
 
     }

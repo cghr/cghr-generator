@@ -15,9 +15,9 @@ class WebServiceGeneratorIntegrationSpec extends Specification {
     String expectedStructure = 'testResources/webservice.expected'
 
     @Autowired
-    WebServiceGenerator webServiceGenerator
+    WebServiceGenerator webserviceGeneratorWithMock
 
-    def setup(){
+    def setup() {
 
     }
 
@@ -28,7 +28,7 @@ class WebServiceGeneratorIntegrationSpec extends Specification {
         String designTable = "webserviceDesign"
 
         expect:
-        webServiceGenerator.generate(designTable, templateLocation).replaceAll("\\s+", "") == expectedWebService
+        webserviceGeneratorWithMock.generate(designTable, templateLocation).replaceAll("\\s+", "") == expectedWebService
 
     }
 

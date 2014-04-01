@@ -1,4 +1,5 @@
 {
+    "schemaName":"country.basicInf",
     "onSave": "country.next",
     "properties": [{
         "name": "datastore",

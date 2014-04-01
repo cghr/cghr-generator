@@ -39,4 +39,10 @@ class WebServiceGenerator {
 
     }
 
+    def generateToAFile(String webServiceDesignTable, String templateLocation, File file) {
+
+        file.setText(generate(webServiceDesignTable, templateLocation))
+
+    }
+
 }

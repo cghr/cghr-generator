@@ -71,10 +71,10 @@ class DbGenerator {
     }
 
 
-    def generateToAFile(List tablesWithEntitiesInfo, File file) {
+    def generateToAFile(String entityDesignTable, String dataDictTable, File destinationFile) {
 
-        file.setText(generate(tablesWithEntitiesInfo))
+        destinationFile.write(generate(entityDesignTable, dataDictTable))
+
     }
-
 
 }

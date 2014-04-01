@@ -6,16 +6,16 @@
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
     http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
+    <!-- DataSource for real data -->
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <!--<property name="driverClassName" value="org.h2.Driver"/>-->
         <property name="driverClassName" value="org.relique.jdbc.csv.CsvDriver"/>
-        <!--<property name="url" value="jdbc:h2:mem:specs;database_to_upper=false"/>-->
         <property name="url" value="jdbc:relique:csv:csvDatabase"/>
         <property name="username" value="sa"/>
         <property name="password" value=""/>
     </bean>
 
+    <!-- DataSource for Mock Data (Sample data) for Unit/Integration test  -->
     <bean id="mockDataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.relique.jdbc.csv.CsvDriver"/>
@@ -28,12 +28,12 @@
         <constructor-arg ref="dataSource"/>
     </bean>
 
-    <bean id="sql" class="groovy.sql.Sql">
+    <bean id="sqlMock" class="groovy.sql.Sql">
         <constructor-arg ref="mockDataSource"/>
     </bean>
 
     <bean id="mockSql" class="org.cghr.generator.test.db.MockSql">
-        <constructor-arg ref="sql"></constructor-arg>
+        <constructor-arg ref="sqlMock"></constructor-arg>
     </bean>
 
     <!-- db Type Mapping -->
@@ -157,37 +157,70 @@
 
     </bean>
 
-    <!--db Generator-->
-    <bean class="org.cghr.generator.db.DbGenerator">
-        <constructor-arg index="0" ref="sql"></constructor-arg>
+    <!--db Generator With Mock Data-->
+    <bean class="org.cghr.generator.db.DbGenerator" id="dbGeneratorWithMock">
+        <constructor-arg index="0" ref="sqlMock"></constructor-arg>
         <constructor-arg index="1" ref="dbEntityTransformer"></constructor-arg>
         <constructor-arg index="2" ref="generator"></constructor-arg>
         <constructor-arg index="3" value="templates/db"></constructor-arg>
     </bean>
     <!--db Generator-->
 
+    <!-- schema Generator with Mock data-->
+    <bean class="org.cghr.generator.jsonSchema.SchemaGenerator" id="schemaGeneratorWithMock">
+        <constructor-arg index="0" ref="sqlMock"/>
+        <constructor-arg index="1" ref="schemaEntityTransformer"/>
+        <constructor-arg index="2" ref="generator"/>
+        <constructor-arg index="3" value="templates/jsonSchema"/>
+
+    </bean>
+
     <!-- schema Generator -->
+
+    <!-- Web service Generator with Mockk Data-->
+    <bean class="org.cghr.generator.webservice.WebServiceGenerator" id="webserviceGeneratorWithMock">
+        <constructor-arg index="0" ref="sqlMock"/>
+        <constructor-arg index="1" ref="generator"/>
+    </bean>
+
+    <!-- Web service Generator-->
+
+    <!-- Data store info generator -->
+    <bean class="org.cghr.generator.dataStoreInfo.DataStoreInfoGenerator" id="dataStoreInfoGeneratorWithMock">
+        <constructor-arg index="0" ref="sqlMock"/>
+        <constructor-arg index="1" ref="generator"/>
+    </bean>
+    <!-- Data store info generator -->
+
+
+    <!--db Generator With Mock Data-->
+    <bean class="org.cghr.generator.db.DbGenerator" id="dbGenerator">
+        <constructor-arg index="0" ref="gSql"></constructor-arg>
+        <constructor-arg index="1" ref="dbEntityTransformer"></constructor-arg>
+        <constructor-arg index="2" ref="generator"></constructor-arg>
+        <constructor-arg index="3" value="templates/db"></constructor-arg>
+    </bean>
+    <!--db Generator-->
+
+    <!-- schema Generator with Mock data-->
     <bean class="org.cghr.generator.jsonSchema.SchemaGenerator" id="schemaGenerator">
-        <constructor-arg index="0" ref="sql" />
-        <constructor-arg index="1" ref="schemaEntityTransformer" />
-        <constructor-arg index="2" ref="generator" />
-        <constructor-arg index="3" value="templates/jsonSchema" />
+        <constructor-arg index="0" ref="gSql"/>
+        <constructor-arg index="1" ref="schemaEntityTransformer"/>
+        <constructor-arg index="2" ref="generator"/>
+        <constructor-arg index="3" value="templates/jsonSchema"/>
 
     </bean>
 
     <!-- schema Generator -->
 
-    <!-- Web service Generator-->
+    <!-- Web service Generator with Mockk Data-->
     <bean class="org.cghr.generator.webservice.WebServiceGenerator" id="webserviceGenerator">
-        <constructor-arg index="0" ref="sql" />
-        <constructor-arg index="1" ref="generator" />
+        <constructor-arg index="0" ref="gSql"/>
+        <constructor-arg index="1" ref="generator"/>
     </bean>
 
 
-
     <!-- Web service Generator-->
-
-
 
 
     <!--Integration Testing Beans Ends-->

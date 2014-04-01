@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Shared
 import spock.lang.Specification
+
 /**
  * Created by ravitej on 27/3/14.
  */
@@ -104,7 +105,7 @@ class SchemaGeneratorSpec extends Specification {
             def sql = "SELECT DISTINCT entity FROM entitySchema WHERE  entity!=''".toString()
             rows(sql) >> mockSql.rows(sql)
 
-            sql = "select onSave from entitySchema where entity=?".toString()
+            sql = "select schemaName,onSave from entitySchema where entity=?".toString()
 
             firstRow(sql, ['user']) >> mockSql.firstRow(sql, ['user'])
             firstRow(sql, ['userlog']) >> mockSql.firstRow(sql, ['userlog'])
@@ -131,15 +132,14 @@ class SchemaGeneratorSpec extends Specification {
         }
         EntityTransformer entityTransformer = Stub() {
 
-            transform([onSave: 'country.next', properties: rawDataOf('country')]) >> [onSave: 'country.next', properties: transformedData('country')]
+            transform([schemaName: 'country.basicInf', onSave: 'country.next', properties: rawDataOf('country')]) >> [schemaName: 'country.basicInf', onSave: 'country.next', properties: transformedData('country')]
 
-            transform([onSave: 'state.next', properties: rawDataOf('state')]) >> [onSave: 'state.next', properties: transformedData('state')]
+            transform([schemaName: 'state.basicInf', onSave: 'state.next', properties: rawDataOf('state')]) >> [schemaName: 'state.basicInf', onSave: 'state.next', properties: transformedData('state')]
 
 
         }
         Generator generator = Stub() {
-            generate(templateLocation, [onSave: 'country.next', properties: transformedData('country')]) >> new File(expectedJsonStruct).text
-
+            generate(templateLocation, [schemaName: 'country.basicInf', onSave: 'country.next', properties: transformedData('country')]) >> new File(expectedJsonStruct).text
         }
 
         schemaGenerator = new SchemaGenerator(gSql, entityTransformer, generator, templateLocation)

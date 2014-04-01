@@ -1,0 +1,8 @@
+<bean id="dataStoreFactory" class="java.util.HashMap">
+    <constructor-arg>
+        <entry key="user" value="id"></entry>
+        <entry key="userlog" value="id"></entry>
+        <entry key="country" value="id"></entry>
+        <entry key="state" value="id"></entry>
+    </constructor-arg>
+</bean>

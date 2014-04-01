@@ -12,16 +12,16 @@ import spock.lang.Specification
 class SchemaGeneratorIntegrationSpec extends Specification {
 
     @Autowired
-    SchemaGenerator schemaGenerator
+    SchemaGenerator schemaGeneratorWithMock
 
 
     def "should generate "() {
         given:
-        String expectedJsonSchemaStruct=new File('testResources/jsonSchema.expected').text.replaceAll("\\s","")
-        String generated=schemaGenerator.generate('entitySchema','entitySchemaMasterProperties','dataDict','clabel')[0]
+        String expectedJsonSchemaStruct = new File('testResources/jsonSchema.expected').text.replaceAll("\\s", "")
+        String generated = schemaGeneratorWithMock.generate('entitySchema', 'entitySchemaMasterProperties', 'dataDict', 'clabel')[0]
 
         expect:
-        generated.replaceAll("\\s","")==expectedJsonSchemaStruct
+        generated.replaceAll("\\s", "") == expectedJsonSchemaStruct
 
     }
 

@@ -21,7 +21,7 @@ class GeneratorSpec extends Specification {
     Generator generator
 
     @Shared
-    Map dbTemplateData, webserviceTemplateData, jsonSchemaTemplateData
+    Map dbTemplateData, webserviceTemplateData, jsonSchemaTemplateData, dataStoreInfoTemplateData
 
     def lowerCaseKeys = {
         it.collectEntries {
@@ -61,7 +61,7 @@ class GeneratorSpec extends Specification {
                 [
                         [title: 'User', mapping: '/user', sql: 'select id,username from user', filters: '#text_filter,#text_filter', sortings: 'int,str', pathVariables: []],
                         [title: 'Country', mapping: '/continent/{continentId}/country', sql: 'select id,name from country where continentId=?', filters: '#text_filter,#text_filter', sortings: 'int,str', pathVariables: ['continentId']],
-                        [title: 'State', mapping: '/continent/{continentId}/country/{countryId}/state', sql: 'select id,name from state where continentId=? and countryId=?', filters: '#text_filter,#text_filter', sortings: 'int,str', pathVariables: ['continentId','countryId']]
+                        [title: 'State', mapping: '/continent/{continentId}/country/{countryId}/state', sql: 'select id,name from state where continentId=? and countryId=?', filters: '#text_filter,#text_filter', sortings: 'int,str', pathVariables: ['continentId', 'countryId']]
                 ]
         ];
 
@@ -77,9 +77,18 @@ class GeneratorSpec extends Specification {
         ]];
 
         jsonSchemaTemplateData = [
+                schemaName: "country.basicInf",
                 onSave: "country.next",
                 properties: getPropertiesJsonSchemaTemplateData('country')
         ];
+        dataStoreInfoTemplateData = [
+                entities: [
+                        [name: 'user', keyField: 'id'],
+                        [name: 'userlog', keyField: 'id'],
+                        [name: 'country', keyField: 'id'],
+                        [name: 'state', keyField: 'id']
+                ]
+        ]
 
         Handlebars handlebars = new Handlebars();
         generator = new Generator(handlebars)
@@ -117,6 +126,16 @@ class GeneratorSpec extends Specification {
         expect:
         //Ignoring all white Spaces
         generator.generate('templates/webservice', webserviceTemplateData).replaceAll("\\s+", "") == webServiceStruct.text.replaceAll("\\s+", "")
+
+    }
+
+    def "should generate dataStoreInfo from a given dataSet"() {
+
+        given:
+        File dataStoreInfo = new File('testResources/dataStoreInfo.expected')
+
+        expect:
+        generator.generate('templates/dataStoreInfo', dataStoreInfoTemplateData).replaceAll("\\s+", "") == dataStoreInfo.text.replaceAll("\\s+", "")
 
     }
 }

@@ -29,16 +29,15 @@ class SchemaGenerator {
     }
 
     List generate(String entitySchemaTable, String entitySchemaMasterPropertiesTable, String dataDictTable, String tableWithPropertyItemInfo) {
-        //List tablesWithEntitiesInfo, String tableWithPropertyItemInfo) {
-
 
         String sql1 = "SELECT DISTINCT entity FROM $entitySchemaTable WHERE  entity!=''".toString()
         List rows = gSql.rows(sql1)
         entityList = rows.collect {
             row ->
 
-                String query = "select onSave from $entitySchemaTable where entity=?".toString()
+                def query = "select schemaName,onSave from $entitySchemaTable where entity=?".toString()
                 String onSave = gSql.firstRow(query, [row.entity]).onSave
+                String schemaName = gSql.firstRow(query, [row.entity]).schemaName
 
 
 
@@ -57,12 +56,12 @@ class SchemaGenerator {
 
                         it.items = []
 
-                        String sql4 = "SELECT  clabel FROM  dataDict WHERE entity=? and name=?".toString()
+                        String sql4 = "SELECT  clabel FROM  $dataDictTable WHERE entity=? and name=?".toString()
 
                         String clabel = gSql.rows(sql4, [row.entity, it.name])[0].clabel
 
 
-                        String sql5 = "SELECT  text,value   FROM clabel WHERE name=?".toString()
+                        String sql5 = "SELECT  text,value   FROM $tableWithPropertyItemInfo WHERE name=?".toString()
                         it.items = gSql.rows(sql5, [clabel])
                         it.items = it.items.collect {
                             sqlRow ->
@@ -87,7 +86,7 @@ class SchemaGenerator {
                         }
                 }
 
-                [onSave: onSave, properties: entityProperties]
+                [schemaName: schemaName, onSave: onSave, properties: entityProperties]
         }
 
 
@@ -98,6 +97,7 @@ class SchemaGenerator {
         }
 
 
+
         transformedEntityList.each {
             generatedList.add(generator.generate(templateLocation, it))
         }
@@ -106,10 +106,16 @@ class SchemaGenerator {
         generatedList
     }
 
+    void generateToAFolder(String entitySchemaTable, String entitySchemaMasterPropertiesTable, String dataDictTable, String tableWithPropertyItemInfo, String folderPath) {
 
-    def generateToAFile(List tablesWithEntitiesInfo, File file) {
+        List generatedList = generate(entitySchemaTable, entitySchemaMasterPropertiesTable, dataDictTable, tableWithPropertyItemInfo)
+        int i = 0
+        entityList.each {
+            entity ->
+                new File(folderPath + '/' + entity.schemaName + '.json').setText(generatedList[i++])
 
-        file.setText(generate(tablesWithEntitiesInfo))
+        }
+
     }
 
 
