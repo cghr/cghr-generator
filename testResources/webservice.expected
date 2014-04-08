@@ -1,4 +1,4 @@
-import org.cghr.datamodel.DataModelUtil;
+import org.cghr.dataViewModel.DataModelUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,13 +18,13 @@ class GridService{
 	// User
     	@RequestMapping(value = "/user", method = RequestMethod.GET, produces = "application/json")
     	@ResponseBody
-    	String getUser ( ) {
+    	String getUser () {
 
     		sql = "select id,username from user";
     		filters = "#text_filter,#text_filter";
     		sortings = "int,str";
 
-    		return constructJsonResponse(sql, filters, sortings, new Object[]{   });
+    		return constructJsonResponse(sql,[],filters, sortings);
 
     	}
 
@@ -38,7 +38,7 @@ class GridService{
     		filters = "#text_filter,#text_filter";
     		sortings = "int,str";
 
-    		return constructJsonResponse(sql, filters, sortings, new Object[]{    continentId   });
+    		return constructJsonResponse(sql,[continentId],filters, sortings);
 
     	}
     	// State
@@ -50,16 +50,16 @@ class GridService{
             		filters = "#text_filter,#text_filter";
             		sortings = "int,str";
 
-            		return constructJsonResponse(sql, filters, sortings, new Object[]{    continentId,countryId   });
+            		return constructJsonResponse(sql,[continentId,countryId],filters, sortings);
 
             	}
 
 
-    // Creating a Json from sql Query
-        SuppressWarnings("unchecked")
-        String constructJsonResponse(String sql, String filters,String sortings, Object[] params) {
 
-        		return new DataModelUtil().constructJsonResponse(sql, filters,sortings, params);
+        // Creating a Json from sql Query
+        String constructJsonResponse(String sql,List params,String filters,String sortings) {
+
+        		return new DataModelUtil().constructJsonResponse(sql,params,filters,sortings);
         }
 
 

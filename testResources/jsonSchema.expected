@@ -8,7 +8,10 @@
         "label": "",
         "flow": "",
         "value":"country",
-        "items": []
+        "items": [],
+        "image":"",
+        "lookup":{},
+        "crossFlow":[]
     }, {
         "name": "countryId",
         "type": "hidden",
@@ -16,7 +19,10 @@
         "label": "",
         "flow": "",
         "value":"$stateParams.countryId",
-        "items": []
+        "items": [],
+        "image":"",
+        "lookup":{},
+        "crossFlow":[]
     },{
         "name": "continentId",
         "type": "hidden",
@@ -24,7 +30,10 @@
         "label": "",
         "flow": "",
          "value":"$stateParams.continentId",
-         "items": []
+         "items": [],
+         "image":"",
+         "lookup":{},
+         "crossFlow":[]
     },{
         "name": "name",
         "type": "text",
@@ -32,7 +41,10 @@
         "label": "Name",
         "flow": "data.prop1 == &#x27;yes&#x27; &amp;&amp;  data.prop2==&#x27;No&#x27;",
         "value":"",
-        "items": []
+        "items": [],
+        "image":"",
+        "lookup":{},
+        "crossFlow":[]
     }, {
         "name": "language",
         "type": "radio",
@@ -46,6 +58,36 @@
         }, {
             "text": "English",
             "value": "english"
-        }]
-    }]
+        }],
+        "image":"example.jpg",
+        "lookup":{},
+        "crossFlow":[{
+            "entity":"language",
+            "field":"name",
+            "ref":"countryId",
+            "condition":"country==&#x27;india&#x27;"
+        },{
+           "entity":"language",
+           "field":"name",
+           "ref":"countryId",
+           "condition":"continent==&#x27;asia&#x27;"
+         }]
+    },{
+        "name":"capital",
+        "type":"lookup",
+        "valdn":"required",
+        "label":"Capital",
+        "flow":"",
+        "value":"",
+        "items":[],
+        "image":"",
+        "lookup":{
+        "entity":"continent",
+        "field":"country",
+        "ref":"continentId"
+        },
+        "crossFlow":[]
+
+    }
+    ]
 }

@@ -3,7 +3,7 @@
 "onSave":"{{onSave}}",
 "properties":[
 {{#each properties}}
-    {{#unless @last}}
+
         {
         "name":"{{name}}",
         "type":"{{type}}",
@@ -19,27 +19,19 @@
                 {"text":"{{text}}","value":"{{value}}"}
             {{/unless}}
         {{/each}}
-        ]
-        },
-    {{else}}
-        {
-        "name":"{{name}}",
-        "type":"{{type}}",
-        "valdn":"{{valdn}}",
-        "label":"{{label}}",
-        "flow":"{{flow}}",
-        "value":"{{value}}",
-        "items":[
-        {{#each items}}
-            {{#unless @last}}
-                {"text":"{{text}}","value":"{{value}}"},
-            {{else}}
-                {"text":"{{text}}","value":"{{value}}"}
-            {{/unless}}
-        {{/each}}
-        ]
+        ],
+        "image":"{{image}}",
+        "lookup":{
+        {{#with lookup}}
+            "lookup_entity":"{{lookup_entity}}",
+            "lookup_field":"{{lookup_field}}",
+            "lookup_ref":"{{lookup_ref}}"
+        {{/with}}
         }
-    {{/unless}}
+
+        }{{~#unless @last ~}},
+ {{/unless}}
+
 {{/each}}
 
 ]

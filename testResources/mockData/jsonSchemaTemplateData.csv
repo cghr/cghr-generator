@@ -1,6 +1,7 @@
-entity,name,type,label,value,valdn,flow,clabel
-country,datastore,hidden,,country,,,
-country,countryId,hidden,,$stateParams.countryId,,,
-country,continentId,hidden,,$stateParams.continentId,,,
-country,name,text,Name,,required,data.prop1 == 'yes' && data.prop2=='No',
-country,language,radio,Language,,required,,language
+entity,name,type,label,value,valdn,flow,clabel,image,crossFlow
+country,datastore,hidden,,country,,,,,
+country,countryId,hidden,,$stateParams.countryId,,,,,
+country,continentId,hidden,,$stateParams.continentId,,,,,
+country,name,text,Name,,required,data.prop1 == 'yes' && data.prop2=='No',,,
+country,language,radio,Language,,required,,language,example.jpg,countryLanguage
+country,capital,lookup,Capital,,required,,,,

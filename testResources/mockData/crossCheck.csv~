@@ -1,0 +1,3 @@
+name,entity,field,ref,condition
+memberSex,member,sex,memberId,sex=='Female'
+memberAge,member,age,memberId,age>30 && 
