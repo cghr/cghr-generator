@@ -8,4 +8,5 @@
 cghr-generator.iml
 out/
 generated/
+csvDatabase
 

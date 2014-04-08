@@ -43,7 +43,7 @@ class EntityTransformerSpec extends Specification {
                 [name: 'prop1', type: 'int(11)'],
                 [name: 'prop2', type: 'int(11)'],
                 [name: 'prop3', type: 'varchar(100)'],
-                [name: 'prop4', type: 'clob'],
+                [name: 'prop4', type: 'text'],
                 [name: 'prop5', type: 'timestamp'],
                 [name: 'prop6', type: 'varchar(100)'],
                 [name: 'prop7', type: 'varchar(100)'],

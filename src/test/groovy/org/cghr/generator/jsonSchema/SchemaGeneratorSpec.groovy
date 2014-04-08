@@ -41,9 +41,10 @@ class SchemaGeneratorSpec extends Specification {
         mockSql.rows(sql, [entity]).each {
             list.add(it)
         }
-        sql = "select name,type,valdn,label,flow from dataDict where entity=?".toString()
+        sql = "select name,type,valdn,label,flow,image,crossflow from dataDict where entity=?".toString()
         mockSql.rows(sql, [entity]).each {
 
+            def property=it
 
             if (multipleItems.contains(it.type)) {
                 it.items = []
@@ -55,13 +56,29 @@ class SchemaGeneratorSpec extends Specification {
                 it.items = mockSql.rows(sql, [clabel])
 
             }
+            if ("lookup"==it.type) {
+
+                sql="SELECT lookup from dataDict where entity=? and name=?"
+                def lookupName=mockSql.firstRow(sql,[entity,it.name]).lookup
 
 
+                sql="SELECT entity,field,ref from lookup where name=?".toString()
+                it.lookup=mockSql.firstRow(sql,[lookupName])
+
+            }
+            if (it.crossflow!='') {
+
+                def crossFlowName=it.crossflow
+                sql = "select entity,field,ref,condition from crossFlow  where name=?".toString()
+                it.crossFlow = mockSql.rows(sql, [crossFlowName])
+
+            }
+            it.remove('crossflow');
             list.add(it)
 
 
         }
-
+        println 'in spec '+list
         list
 
     }
@@ -118,7 +135,7 @@ class SchemaGeneratorSpec extends Specification {
             rows(sql, ['country']) >> mockSql.rows(sql, ['country'])
             rows(sql, ['state']) >> mockSql.rows(sql, ['state'])
 
-            sql = "SELECT name,type,valdn,label,flow FROM dataDict WHERE entity=?".toString()
+            sql = "select name,type,valdn,label,flow,image,crossflow from dataDict where entity=?".toString()
             rows(sql, ['country']) >> mockSql.rows(sql, ['country'])
             rows(sql, ['state']) >> mockSql.rows(sql, ['state'])
 
@@ -128,25 +145,37 @@ class SchemaGeneratorSpec extends Specification {
             sql = "SELECT  text,value   FROM clabel WHERE name=?"
             rows(sql, ['language']) >> mockSql.rows(sql, ['language'])
 
+            sql="SELECT lookup from dataDict where entity=? and name=?"
+            firstRow(sql,['country','capital']) >> mockSql.firstRow(sql,['country','capital'])
+
+
+            sql="SELECT entity,field,ref from lookup where name=?".toString()
+            firstRow(sql,['capital']) >> mockSql.firstRow(sql,['capital'])
+
+            sql="select entity,field,ref,condition from crossFlow  where name=?".toString()
+            rows(sql,['countryLanguage']) >> mockSql.rows(sql,['countryLanguage'])
+
+
+
 
         }
         EntityTransformer entityTransformer = Stub() {
 
-            transform([schemaName: 'country.basicInf', onSave: 'country.next', properties: rawDataOf('country')]) >> [schemaName: 'country.basicInf', onSave: 'country.next', properties: transformedData('country')]
-
+            transform([schemaName: 'country.basicInf', onSave: 'country.next', properties: rawDataOf('country')]) >> [schemaName: 'country.basicInf', onSave: 'country.next', properties: transformedData('country')];
             transform([schemaName: 'state.basicInf', onSave: 'state.next', properties: rawDataOf('state')]) >> [schemaName: 'state.basicInf', onSave: 'state.next', properties: transformedData('state')]
 
 
         }
         Generator generator = Stub() {
             generate(templateLocation, [schemaName: 'country.basicInf', onSave: 'country.next', properties: transformedData('country')]) >> new File(expectedJsonStruct).text
+
         }
 
         schemaGenerator = new SchemaGenerator(gSql, entityTransformer, generator, templateLocation)
     }
 
 
-    def "should generate dbStructure from a given list of entities"() {
+    def "should generate schema structure from a given list of entities"() {
 
         given:
         String expectedSchemaStruct = new File(expectedJsonStruct).text.replaceAll("\\s", "");

@@ -18,6 +18,7 @@ class Generator {
 
     String generate(String templateLocation, Map context) {
 
+
         Template template = handlebars.compile(templateLocation)
         return template.apply(context)
 

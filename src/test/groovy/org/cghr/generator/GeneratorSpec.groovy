@@ -38,18 +38,36 @@ class GeneratorSpec extends Specification {
 
     def getPropertiesJsonSchemaTemplateData(String entity) {
 
-        List multipleItems = ['radio', 'checkbox', 'radio-inline']
-        String sql = "select name,type,label,value,valdn,flow from jsonSchemaTemplateData where entity=?".toString()
+        List multipleItems = ['radio', 'checkbox', 'radio-inline', 'dropdown', 'suggest', 'duration']
+        String sql = "select name,type,label,value,valdn,flow,image,crossFlow from jsonSchemaTemplateData where entity=?".toString()
         def rows = mockSql.rows(sql, [entity])
         rows = rows.collect {
 
             if (multipleItems.contains(it.type)) {
-                String query = "select text,value from itemsTemplateData  where name=?".toString()
-                it.items = mockSql.rows(query, [it.name])
+                sql = "select text,value from itemsTemplateData  where name=?".toString()
+                it.items = mockSql.rows(sql, [it.name])
                 // it.items=it.items.collect lowerCaseKeys
 
             }
+            if ('lookup' == it.type) {
+
+                sql = "SELECT lookup from dataDict where entity=? and name=?"
+                def lookupName = mockSql.firstRow(sql, [entity, it.name]).lookup
+
+
+                sql = "SELECT entity,field,ref from lookup where name=?".toString()
+                it.lookup = mockSql.firstRow(sql, [lookupName])
+
+            }
+            if (it.crossflow!='') {
+
+                sql = "select entity,field,ref,condition from crossFlow  where name=?".toString()
+                it.crossFlow = mockSql.rows(sql, [it.crossflow])
+
+            }
+
             it
+
         }
 
     }

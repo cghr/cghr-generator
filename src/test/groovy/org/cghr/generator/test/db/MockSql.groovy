@@ -33,11 +33,18 @@ class MockSql {
 
     def firstRow(String sql, List args) {
 
-        mockSql.firstRow(sql, args)
-//                .collectEntries {
-//            k, v ->
-//                [k.toLowerCase(), v]
-//        }
+
+        Map row = mockSql.firstRow(sql, args)
+
+        if (row != null) {
+           Map map= row.collectEntries {
+                key,value ->
+                    [key.toLowerCase(),value]
+            }
+
+            return map;
+        }
+        return [:];
     }
 
     def firstRow(String sql) {

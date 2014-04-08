@@ -1,7 +1,997 @@
-name,text,value
-continent,Asia,asia
-continent,Europe,europe
-continent,Africa,africa
-country,India,india
-country,SriLanka,srilanka
-country,Pakistan,pakistan
+name,value,text
+area,Urban,Urban
+area,Rural,Rural
+constructionType,Kuccha,Kuccha
+constructionType,Pucca,Pucca
+constructionType,Mixed,Mixed
+hhAvailability,Respondents Available,Respondents Available
+hhAvailability,Door temporarily locked,Door temporarily locked
+hhAvailability,Door permanently locked,Door permanently locked
+hhAvailability,Refused to participate,Refused to participate
+salutations,Mr.,Mr.
+salutations,Mrs or Ms.,Mrs or Ms.
+religion,Hinduism,Hinduism
+religion,Islam,Islam
+religion,Christianity,Christianity
+religion,Sikhism,Sikhism
+religion,Buddhism,Buddhism
+religion,Jainism,Jainism
+religion,Others-Specify,Others-Specify
+clabel1,Yes,Yes
+clabel1,No,No
+benefitGovtScheme,None,None
+benefitGovtScheme,Below Poverty Line (BPL) Card Holder,Below Poverty Line (BPL) Card Holder
+benefitGovtScheme,Rajiv Gandhi Health Insurance Scheme,Rajiv Gandhi Health Insurance Scheme
+benefitGovtScheme,Janani Suraksha Yojana (JSY),Janani Suraksha Yojana (JSY)
+benefitGovtScheme,Mahatma Gandhi National Rural Employment Guarantee Act (NREGA),Mahatma Gandhi National Rural Employment Guarantee Act (NREGA)
+benefitGovtScheme,Pradhan MantriRozgarYojna(PMRY),Pradhan MantriRozgarYojna(PMRY)
+benefitGovtScheme,Others- Specify,Others- Specify
+cookFuel,Electricity,Electricity
+cookFuel,LPG/CNG/ PNG / Biogas,LPG/CNG/ PNG / Biogas
+cookFuel,Kerosene,Kerosene
+cookFuel,"Solid fuel (Coal, wood, charcol etc)","Solid fuel (Coal, wood, charcol etc)"
+sourceDrinkingWater,Own Tap,Own Tap
+sourceDrinkingWater,Shared Tap,Shared Tap
+sourceDrinkingWater,Handpump/Hapsa,Handpump/Hapsa
+sourceDrinkingWater,Vihir,Vihir
+sourceDrinkingWater,Others,Others
+gender,Male,Male
+gender,Female,Female
+education,Illiterate,Illiterate
+education,Literate without formal education,Literate without formal education
+education,Below primary,Below primary
+education,Primary,Primary
+education,Middle,Middle
+education,Secondary/ Class-10/ Matric,Secondary/ Class-10/ Matric
+education,Hr. Sec/ Class XII/ Pre-Univ,Hr. Sec/ Class XII/ Pre-Univ
+education,Graduate and above,Graduate and above
+householdStatus,People available,People available
+householdStatus,Door Locked,Door Locked
+cookingPlace,"Indoor, in the main living area","Indoor, in the main living area"
+cookingPlace,"Indoor, in separate area used as kitchen","Indoor, in separate area used as kitchen"
+cookingPlace,"Outdoor, in a shed","Outdoor, in a shed"
+cookingPlace,"Outdoor, in the open air","Outdoor, in the open air"
+kitchenVentilation,Cooking done outside,Cooking done outside
+kitchenVentilation,Exhaust Fan,Exhaust Fan
+kitchenVentilation,Window,Window
+kitchenVentilation,Chimney,Chimney
+kitchenVentilation,No ventilation,No ventilation
+levelSmokiness,No smokiness,No smokiness
+levelSmokiness,Little,Little
+levelSmokiness,"Much, but not enough to irritate the eyes","Much, but not enough to irritate the eyes"
+levelSmokiness,Smokiness enough to irritate the eyes,Smokiness enough to irritate the eyes
+cookingOil,Gingelly Oil,Gingelly Oil
+cookingOil,Groundnut Oil,Groundnut Oil
+cookingOil,Mustartd Oil,Mustartd Oil
+cookingOil,Palm Oil,Palm Oil
+cookingOil,Sunflower oil,Sunflower oil
+cookingOil,Others,Others
+relationshipMale,Self,Self
+relationshipMale,Spouse,Spouse
+relationshipMale,Son,Son
+relationshipMale,Brother,Brother
+relationshipMale,Father,Father
+relationshipMale,Grandson,Grandson
+relationshipMale,Son-in-law,Son-in-law
+relationshipMale,Others,Others
+relationshipFemale,Self,Self
+relationshipFemale,Spouse,Spouse
+relationshipFemale,Daughter,Daughter
+relationshipFemale,Sister,Sister
+relationshipFemale,Mother,Mother
+relationshipFemale,Granddaughter,Granddaughter
+relationshipFemale,Daughter-in-law,Daughter-in-law
+relationshipFemale,Others,Others
+photoStatusInd,"Yes, taken","Yes, taken"
+photoStatusInd,Not taken,Not taken
+reasonNoPhoto,Camera not functioning,Camera not functioning
+reasonNoPhoto,Respondent refused to take picture,Respondent refused to take picture
+reasonNoPhoto,Others,Others
+mstatus,Never Married,Never Married
+mstatus,Married,Married
+mstatus,Remarried,Remarried
+mstatus,Window(er),Window(er)
+mstatus,Divorced,Divorced
+mstatus,Separated,Separated
+mstatus,Refused to Answer,Refused to Answer
+occupation,Salaried,Salaried
+occupation,Wage earner,Wage earner
+occupation,Professional business,Professional business
+occupation,Farmers,Farmers
+occupation,Agriculture labour,Agriculture labour
+occupation,Housewife,Housewife
+occupation,Non worker,Non worker
+occupation,others,others
+reasonWomenDeath,Pregnant when she died,Pregnant when she died
+reasonWomenDeath,Had a child birth,Had a child birth
+reasonWomenDeath,Had an abortion,Had an abortion
+reasonWomenDeath,Died within 42 days of childbirth,Died within 42 days of childbirth
+reasonWomenDeath,None of the above,None of the above
+reasonDeath,Tuberculosis (TB),Tuberculosis (TB)
+reasonDeath,Cancer,Cancer
+reasonDeath,Chronic obstructive pulmonary disease (COPD),Chronic obstructive pulmonary disease (COPD)
+reasonDeath,Acute heart attack,Acute heart attack
+reasonDeath,Malaria,Malaria
+reasonDeath,Stroke,Stroke
+reasonDeath,Renal failure,Renal failure
+reasonDeath,Suicide,Suicide
+reasonDeath,Others specify,Others specify
+clabel2,Daily,Daily
+clabel2,Less than daily,Less than daily
+clabel2,Not at all,Not at all
+clabel2,Refused to answer,Refused to answer
+clabel3,Illness or ill health,Illness or ill health
+clabel3,Doctors advice,Doctors advice
+clabel3,Health Precautions,Health Precautions
+clabel3,Financial reasons,Financial reasons
+clabel3,Other,Other
+clabel3,Do not know,Do not know
+clabel4,Yes,Yes
+clabel4,No,No
+clabel4,Refused to Answer,Refused to Answer
+rateHealthStatus,Excellent,Excellent
+rateHealthStatus,Good,Good
+rateHealthStatus,Fair,Fair
+rateHealthStatus,Poor,Poor
+clabel5,No,No
+clabel5,"Yes, on medications","Yes, on medications"
+clabel5,"Yes, but not on medications","Yes, but not on medications"
+clabel5,Unknown,Unknown
+clabel6,Mouth,Mouth
+clabel6,Throat,Throat
+clabel6,Oesophagus,Oesophagus
+clabel6,Lung,Lung
+clabel6,Liver,Liver
+clabel6,Prostrate,Prostrate
+clabel6,Abdomen,Abdomen
+clabel6,Blood,Blood
+clabel6,Penis,Penis
+clabel6,Other - specify,Other - specify
+clabel7,Cervix,Cervix
+clabel7,Breast,Breast
+clabel7,Ovary,Ovary
+clabel7,Lung,Lung
+clabel7,Abdomen,Abdomen
+clabel7,Blood,Blood
+clabel7,Liver,Liver
+clabel7,Mouth,Mouth
+clabel7,Throat,Throat
+clabel7,Oesophagus,Oesophagus
+clabel7,Others,Others
+clabel8,Andhra Pradesh,Andhra Pradesh
+clabel8,Delhi,Delhi
+clabel8,Goa,Goa
+clabel8,Gujarat,Gujarat
+clabel8,Karnataka,Karnataka
+clabel8,Madhya Pradesh,Madhya Pradesh
+clabel8,Maharashtra,Maharashtra
+clabel8,Punjab,Punjab
+clabel8,Rajasthan,Rajasthan
+clabel8,Uttar Pradesh,Uttar Pradesh
+clabel8,Others,Others
+clabel9,Nandurbar,Nandurbar
+clabel9,Dhule,Dhule
+clabel9,Jalgaon,Jalgaon
+clabel9,Buldana,Buldana
+clabel9,Akola,Akola
+clabel9,Washim,Washim
+clabel9,Amravati,Amravati
+clabel9,Wardha,Wardha
+clabel9,Nagpur,Nagpur
+clabel9,Bhandara,Bhandara
+clabel9,Gondiya,Gondiya
+clabel9,Gadchiroli,Gadchiroli
+clabel9,Chandrapur,Chandrapur
+clabel9,Yavatmal,Yavatmal
+clabel9,Nanded,Nanded
+clabel9,Hingoli,Hingoli
+clabel9,Parbhani,Parbhani
+clabel9,Jalna,Jalna
+clabel9,Aurangabad,Aurangabad
+clabel9,Nashik,Nashik
+clabel9,Thane,Thane
+clabel9,Mumbai Suburban,Mumbai Suburban
+clabel9,Mumbai,Mumbai
+clabel9,Raigarh,Raigarh
+clabel9,Pune,Pune
+clabel9,Ahmadnagar,Ahmadnagar
+clabel9,Bid,Bid
+clabel9,Latur,Latur
+clabel9,Osmanabad,Osmanabad
+clabel9,Solapur,Solapur
+clabel9,Satara,Satara
+clabel9,Ratnagiri,Ratnagiri
+clabel9,Sindhudurg,Sindhudurg
+clabel9,Kolhapur,Kolhapur
+clabel9,Sangli,Sangli
+clabel10,Brahman,Brahman
+clabel10,Dhangar,Dhangar
+clabel10,Lingayat,Lingayat
+clabel10,Mahar,Mahar
+clabel10,Mali,Mali
+clabel10,Mang,Mang
+clabel10,Maratha,Maratha
+clabel10,Other,Other
+typeFood,Veg,Veg
+typeFood,Veg using eggs,Veg using eggs
+typeFood,Non-veg,Non-veg
+clabel12,0,0
+clabel12,1,1
+clabel12,2,2
+clabel12,3,3
+clabel12,4,4
+clabel12,5,5
+clabel12,6,6
+clabel12,7,7
+clabel12,8,8
+clabel13,1,1
+clabel13,2,2
+clabel13,3,3
+clabel13,4,4
+clabel13,5,5
+clabel13,6,6
+clabel13,7,7
+clabel13,8,8
+clabel13,9,9
+clabel14,Does not drink at all,Does not drink at all
+clabel14,Does not drink much (occasional drinker),Does not drink much (occasional drinker)
+clabel14,Heavy drinker (drinks almost every day),Heavy drinker (drinks almost every day)
+clabel11,Baby was born alive,Baby was born alive
+clabel11,Miscarriage,Miscarriage
+clabel11,Abortion,Abortion
+clabel11,Currently Pregnant,Currently Pregnant
+age,Per day,Per day
+age,Per week,Per week
+age,Per month,Per month
+clabel15,Aerobics,Aerobics
+clabel15,Andhala topi,Andhala topi
+clabel15,Atayapataya,Atayapataya
+clabel15,Badminton,Badminton
+clabel15,Basketball,Basketball
+clabel15,Bhajani Paul,Bhajani Paul
+clabel15,Balla Phek,Balla Phek
+clabel15,Bhukadi,Bhukadi
+clabel15,Body Building,Body Building
+clabel15,Boxing,Boxing
+clabel15,Chikat Bhopala,Chikat Bhopala
+clabel15,Cricket,Cricket
+clabel15,Cycling,Cycling
+clabel15,Dori,Dori
+clabel15,Figadi,Figadi
+clabel15,Football,Football
+clabel15,Gajge,Gajge
+clabel15,Gymnastics,Gymnastics
+clabel15,Handball,Handball
+clabel15,Holiball,Holiball
+clabel15,Hututu,Hututu
+clabel15,Jor Baithak,Jor Baithak
+clabel15,Kabadi,Kabadi
+clabel15,Karate,Karate
+clabel15,Kho Kho,Kho Kho
+clabel15,Kusti,Kusti
+clabel15,Langadi,Langadi
+clabel15,Lapamdaon,Lapamdaon
+clabel15,Lezim,Lezim
+clabel15,Lompat,Lompat
+clabel15,Malkham,Malkham
+clabel15,Running,Running
+clabel15,Stretching exercises,Stretching exercises
+clabel15,Sur Parumba,Sur Parumba
+clabel15,Swimming,Swimming
+clabel15,Talim,Talim
+clabel15,Tennis,Tennis
+clabel15,Throw Ball,Throw Ball
+clabel15,Viti Dandu,Viti Dandu
+clabel15,Walking,Walking
+clabel15,Weight lifting,Weight lifting
+clabel15,Yoga,Yoga
+clabel15,Others,Others
+clabel16,Eat nothing during fasting,Eat nothing during fasting
+clabel16,Eat only fruits,Eat only fruits
+clabel16,Eat only dry fruits,Eat only dry fruits
+clabel16,Eat once/day,Eat once/day
+clabel16,Other,Other
+photoId,Aadhaar card,Aadhaar card
+photoId,Ration card,Ration card
+photoId,Driving license,Driving license
+photoId,PAN card,PAN card
+photoId,Voter ID,Voter ID
+photoId,Passport,Passport
+photoId,Others,Others
+photoId,Nothing,Nothing
+hhVisit,Respondents Available,Respondents Available
+hhVisit,Respondents Not available,Respondents Not available
+hhVisit,Door temporarily locked,Door temporarily locked
+hhVisit,Door permanently locked,Door permanently locked
+hhVisit,Refused to participate,Refused to participate
+ageDiedperson,D,D
+ageDiedperson,M,M
+ageDiedperson,Y,Y
+FFQ-UNITS,,
+Tambya,T-1,T-1
+Glass,G-1,G-1
+Fulpatra,F-1,F-1
+Cup (Big),K-1,K-1
+Cup (Medium),K-2,K-2
+Cup ( Small),K-3,K-3
+Dish,D-1,D-1
+Wati,W-1,W-1
+Pali,P-1,P-1
+Spoon (Big),S-1,S-1
+Spoon (Medium),S-2,S-2
+Spoon ( Small),S-3,S-3
+stateMother,Andaman & nicobar islands,Andaman & nicobar islands
+stateMother,Andhra pradesh,Andhra pradesh
+stateMother,Arunachal pradesh,Arunachal pradesh
+stateMother,Assam,Assam
+stateMother,Bihar,Bihar
+stateMother,Chandigarh,Chandigarh
+stateMother,Chhattisgarh,Chhattisgarh
+stateMother,Dadra & nagar haveli,Dadra & nagar haveli
+stateMother,Daman & diu,Daman & diu
+stateMother,Delhi,Delhi
+stateMother,Goa,Goa
+stateMother,Gujarat,Gujarat
+stateMother,Haryana,Haryana
+stateMother,Himachal pradesh,Himachal pradesh
+stateMother,Jammu & kashmir,Jammu & kashmir
+stateMother,Jharkhand,Jharkhand
+stateMother,Karnataka,Karnataka
+stateMother,Kerala,Kerala
+stateMother,Lakshadweep,Lakshadweep
+stateMother,Madhya pradesh,Madhya pradesh
+stateMother,Maharashtra,Maharashtra
+stateMother,Manipur,Manipur
+stateMother,Meghalaya,Meghalaya
+stateMother,Mizoram,Mizoram
+stateMother,Nagaland,Nagaland
+stateMother,Orissa,Orissa
+stateMother,Pondicherry,Pondicherry
+stateMother,Punjab,Punjab
+stateMother,Rajasthan,Rajasthan
+stateMother,Sikkim,Sikkim
+stateMother,Tamil nadu,Tamil nadu
+stateMother,Tripura,Tripura
+stateMother,Uttar pradesh,Uttar pradesh
+stateMother,Uttarakhand,Uttarakhand
+stateMother,West bengal,West bengal
+districtMother,Nicobars,Nicobars
+districtMother,North & middle Andamans,North & middle Andamans
+districtMother,South Andamans,South Andamans
+districtMother,Adilabad,Adilabad
+districtMother,Anantapur,Anantapur
+districtMother,Chittoor,Chittoor
+districtMother,Cuddapah,Cuddapah
+districtMother,East Godavari,East Godavari
+districtMother,Guntur,Guntur
+districtMother,Hyderabad,Hyderabad
+districtMother,Karimnagar,Karimnagar
+districtMother,Khammam,Khammam
+districtMother,Krishna,Krishna
+districtMother,Kurnool,Kurnool
+districtMother,Mahbubnagar,Mahbubnagar
+districtMother,Medak,Medak
+districtMother,Nalgonda,Nalgonda
+districtMother,Nellore,Nellore
+districtMother,Nizamabad,Nizamabad
+districtMother,Prakasam,Prakasam
+districtMother,Rangareddi,Rangareddi
+districtMother,Srikakulam,Srikakulam
+districtMother,Visakhapatnam,Visakhapatnam
+districtMother,Vizianagaram,Vizianagaram
+districtMother,Warangal,Warangal
+districtMother,West Godavari,West Godavari
+districtMother,Anjaw,Anjaw
+districtMother,Changlang,Changlang
+districtMother,Dibang Valley,Dibang Valley
+districtMother,East Kameng,East Kameng
+districtMother,East Siang,East Siang
+districtMother,Kurung Kumey,Kurung Kumey
+districtMother,Lohit,Lohit
+districtMother,Lower Dibang Valley,Lower Dibang Valley
+districtMother,Lower Subansiri,Lower Subansiri
+districtMother,Papum Pare,Papum Pare
+districtMother,Tawang,Tawang
+districtMother,Tirap,Tirap
+districtMother,Upper Siang,Upper Siang
+districtMother,Upper Subansiri,Upper Subansiri
+districtMother,West Kameng,West Kameng
+districtMother,West Siang,West Siang
+districtMother,Baksa,Baksa
+districtMother,Barpeta,Barpeta
+districtMother,Bongaigaon,Bongaigaon
+districtMother,Cachar,Cachar
+districtMother,Cachar,Cachar
+districtMother,Chirang,Chirang
+districtMother,Darrang,Darrang
+districtMother,Dhemaji,Dhemaji
+districtMother,Dhubri,Dhubri
+districtMother,Dibrugarh,Dibrugarh
+districtMother,Goalpara,Goalpara
+districtMother,Golaghat,Golaghat
+districtMother,Hailakandi,Hailakandi
+districtMother,Jorhat,Jorhat
+districtMother,Kamrup,Kamrup
+districtMother,Kamrup Metropolitan,Kamrup Metropolitan
+districtMother,Karbi Anglong,Karbi Anglong
+districtMother,Karimganj,Karimganj
+districtMother,Kokrajhar,Kokrajhar
+districtMother,Lakhimpur,Lakhimpur
+districtMother,Marigaon,Marigaon
+districtMother,Nagaon,Nagaon
+districtMother,Nalbari,Nalbari
+districtMother,Sibsagar,Sibsagar
+districtMother,Sonitpur,Sonitpur
+districtMother,Tinsukia,Tinsukia
+districtMother,Udalgiri,Udalgiri
+districtMother,Araria,Araria
+districtMother,Arwal,Arwal
+districtMother,Aurangabad,Aurangabad
+districtMother,Banka,Banka
+districtMother,Begusarai,Begusarai
+districtMother,Bhagalpur,Bhagalpur
+districtMother,Bhojpur,Bhojpur
+districtMother,Buxar,Buxar
+districtMother,Darbhanga,Darbhanga
+districtMother,Gaya,Gaya
+districtMother,Gopalganj,Gopalganj
+districtMother,Jamui,Jamui
+districtMother,Jehanabad,Jehanabad
+districtMother,Kaimur (Bhabua),Kaimur (Bhabua)
+districtMother,Katihar,Katihar
+districtMother,Khagaria,Khagaria
+districtMother,Kishanganj,Kishanganj
+districtMother,Lakhisarai,Lakhisarai
+districtMother,Madhepura,Madhepura
+districtMother,Madhubani,Madhubani
+districtMother,Munger,Munger
+districtMother,Muzaffarpur,Muzaffarpur
+districtMother,Nalanda,Nalanda
+districtMother,Nawada,Nawada
+districtMother,Pashchim Champaran,Pashchim Champaran
+districtMother,Patna,Patna
+districtMother,Purba Champaran,Purba Champaran
+districtMother,Purnia,Purnia
+districtMother,Rohtas,Rohtas
+districtMother,Saharsa,Saharsa
+districtMother,Samastipur,Samastipur
+districtMother,Saran,Saran
+districtMother,Sheikhpura,Sheikhpura
+districtMother,Sheohar,Sheohar
+districtMother,Sitamarhi,Sitamarhi
+districtMother,Siwan,Siwan
+districtMother,Supaul,Supaul
+districtMother,Vaishali,Vaishali
+districtMother,Chandigarh,Chandigarh
+districtMother,Baster,Baster
+districtMother,Bijapur,Bijapur
+districtMother,Bilaspur,Bilaspur
+districtMother,Dantewada,Dantewada
+districtMother,Dhamtari,Dhamtari
+districtMother,Durg,Durg
+districtMother,Janjgir - Champa,Janjgir - Champa
+districtMother,Jashpur,Jashpur
+districtMother,Kanker,Kanker
+districtMother,Kawardha,Kawardha
+districtMother,Korba,Korba
+districtMother,Koriya,Koriya
+districtMother,Mahasamund,Mahasamund
+districtMother,Narayanpur,Narayanpur
+districtMother,Raigarh,Raigarh
+districtMother,Raipur,Raipur
+districtMother,Rajnandgaon,Rajnandgaon
+districtMother,Surguja,Surguja
+districtMother,Dadra & Nagar Haveli,Dadra & Nagar Haveli
+districtMother,Daman,Daman
+districtMother,Diu,Diu
+districtMother,Central District,Central District
+districtMother,East District,East District
+districtMother,New Delhi,New Delhi
+districtMother,North District,North District
+districtMother,North East District,North East District
+districtMother,North West District,North West District
+districtMother,South,South
+districtMother,South West,South West
+districtMother,West District,West District
+districtMother,North Goa,North Goa
+districtMother,South Goa,South Goa
+districtMother,Ahmedabad,Ahmedabad
+districtMother,Amreli,Amreli
+districtMother,Anand,Anand
+districtMother,Banas Kantha,Banas Kantha
+districtMother,Bharuch,Bharuch
+districtMother,Bhavnagar,Bhavnagar
+districtMother,Dohad,Dohad
+districtMother,Gandhinagar,Gandhinagar
+districtMother,Jamnagar,Jamnagar
+districtMother,Junagadh,Junagadh
+districtMother,Kheda,Kheda
+districtMother,Kutch,Kutch
+districtMother,Mahesana,Mahesana
+districtMother,Narmada,Narmada
+districtMother,Navsari,Navsari
+districtMother,Panch Mahal,Panch Mahal
+districtMother,Patan,Patan
+districtMother,Porbandar,Porbandar
+districtMother,Rajkot,Rajkot
+districtMother,Sabar Kantha,Sabar Kantha
+districtMother,Surat,Surat
+districtMother,Surendranagar,Surendranagar
+districtMother,Tapi,Tapi
+districtMother,The Dangs,The Dangs
+districtMother,Vadodara,Vadodara
+districtMother,Valsad,Valsad
+districtMother,Ambala,Ambala
+districtMother,Bhiwani,Bhiwani
+districtMother,Faridabad,Faridabad
+districtMother,Fatehabad,Fatehabad
+districtMother,Gurgaon,Gurgaon
+districtMother,Hisar,Hisar
+districtMother,Jamuna nagar,Jamuna nagar
+districtMother,Jhajjar,Jhajjar
+districtMother,Jind,Jind
+districtMother,Kaithal,Kaithal
+districtMother,Karnal,Karnal
+districtMother,Kurukshetra,Kurukshetra
+districtMother,Mahendragarh,Mahendragarh
+districtMother,Mewat,Mewat
+districtMother,palwal,palwal
+districtMother,Panchkula,Panchkula
+districtMother,Panipat,Panipat
+districtMother,Rewari,Rewari
+districtMother,Rohtak,Rohtak
+districtMother,Sirsa,Sirsa
+districtMother,Sonipat,Sonipat
+districtMother,Bilaspur,Bilaspur
+districtMother,Chamba,Chamba
+districtMother,Hamirpur,Hamirpur
+districtMother,Kangra,Kangra
+districtMother,Kinnaur,Kinnaur
+districtMother,Kullu,Kullu
+districtMother,Lahul & Spiti,Lahul & Spiti
+districtMother,Mandi,Mandi
+districtMother,Shimla,Shimla
+districtMother,Sirmaur,Sirmaur
+districtMother,Solan,Solan
+districtMother,Una,Una
+districtMother,Anantnag,Anantnag
+districtMother,Badgam,Badgam
+districtMother,Bandipora,Bandipora
+districtMother,Baramula,Baramula
+districtMother,Doda,Doda
+districtMother,Ganderbal,Ganderbal
+districtMother,Jammu,Jammu
+districtMother,Kargil,Kargil
+districtMother,Kathua,Kathua
+districtMother,Kishtwar,Kishtwar
+districtMother,Kulgam,Kulgam
+districtMother,Kupwara,Kupwara
+districtMother,Leh (Ladakh),Leh (Ladakh)
+districtMother,Pulwama,Pulwama
+districtMother,Punch,Punch
+districtMother,Rajauri,Rajauri
+districtMother,Ramban,Ramban
+districtMother,Reasi,Reasi
+districtMother,Samba,Samba
+districtMother,Shupiyan,Shupiyan
+districtMother,Srinagar,Srinagar
+districtMother,Udhampur,Udhampur
+districtMother,Bokaro,Bokaro
+districtMother,Chatra,Chatra
+districtMother,Deoghar,Deoghar
+districtMother,Dhanbad,Dhanbad
+districtMother,Dumka,Dumka
+districtMother,Garhwa,Garhwa
+districtMother,Giridih,Giridih
+districtMother,Godda,Godda
+districtMother,Gumla,Gumla
+districtMother,Hazaribagh,Hazaribagh
+districtMother,Jamtara,Jamtara
+districtMother,Khunti,Khunti
+districtMother,Kodarma,Kodarma
+districtMother,Latehar,Latehar
+districtMother,Lohardaga,Lohardaga
+districtMother,Pakaur,Pakaur
+districtMother,Palamu,Palamu
+districtMother,Pashchimi Singhbhum,Pashchimi Singhbhum
+districtMother,Purbi Singhbhum,Purbi Singhbhum
+districtMother,Ramgarh,Ramgarh
+districtMother,Ranchi,Ranchi
+districtMother,Sahebganj,Sahebganj
+districtMother,Seraikela- Kharsawan,Seraikela- Kharsawan
+districtMother,Simdega,Simdega
+districtMother,Bagalkot,Bagalkot
+districtMother,Bangalore Rural,Bangalore Rural
+districtMother,Bangalore Urban,Bangalore Urban
+districtMother,Belgaum,Belgaum
+districtMother,Bellary,Bellary
+districtMother,Bidar,Bidar
+districtMother,Bijapur,Bijapur
+districtMother,Chamrajnagar,Chamrajnagar
+districtMother,Chikballapur,Chikballapur
+districtMother,Chikmagalur,Chikmagalur
+districtMother,Chitradurga,Chitradurga
+districtMother,Dakshina Kannada,Dakshina Kannada
+districtMother,Davangere,Davangere
+districtMother,Dharwad,Dharwad
+districtMother,Gadag,Gadag
+districtMother,Gulbarga,Gulbarga
+districtMother,Hassan,Hassan
+districtMother,Haveri,Haveri
+districtMother,Kodagu,Kodagu
+districtMother,Kolar,Kolar
+districtMother,Koppal,Koppal
+districtMother,Mandya,Mandya
+districtMother,Mysore,Mysore
+districtMother,Raichur,Raichur
+districtMother,Ramnagar,Ramnagar
+districtMother,Shimoga,Shimoga
+districtMother,Tumkur,Tumkur
+districtMother,Udupi,Udupi
+districtMother,Uttara Kannada,Uttara Kannada
+districtMother,Yadgir,Yadgir
+districtMother,Alappuzha,Alappuzha
+districtMother,Ernakulam,Ernakulam
+districtMother,Idukki,Idukki
+districtMother,Kannur,Kannur
+districtMother,Kasaragod,Kasaragod
+districtMother,Kollam,Kollam
+districtMother,Kottayam,Kottayam
+districtMother,Kozhikode,Kozhikode
+districtMother,Malappuram,Malappuram
+districtMother,Palakkad,Palakkad
+districtMother,Pathanamthitta,Pathanamthitta
+districtMother,Thiruvananthapuram,Thiruvananthapuram
+districtMother,Thrissur,Thrissur
+districtMother,Wayanad,Wayanad
+districtMother,Lakshadweep,Lakshadweep
+districtMother,Alirajpur,Alirajpur
+districtMother,Anuppur,Anuppur
+districtMother,Ashoknagar,Ashoknagar
+districtMother,Balaghat,Balaghat
+districtMother,Barwani,Barwani
+districtMother,Betul,Betul
+districtMother,Bhind,Bhind
+districtMother,Bhopal,Bhopal
+districtMother,Burhanpur,Burhanpur
+districtMother,Chhatarpur,Chhatarpur
+districtMother,Chhindwara,Chhindwara
+districtMother,Damoh,Damoh
+districtMother,Datia,Datia
+districtMother,Dewas,Dewas
+districtMother,Dhar,Dhar
+districtMother,Dindori,Dindori
+districtMother,East Nimar( Khandwa),East Nimar( Khandwa)
+districtMother,Guna,Guna
+districtMother,Gwalior,Gwalior
+districtMother,Harda,Harda
+districtMother,Hoshangabad,Hoshangabad
+districtMother,Indore,Indore
+districtMother,Jabalpur,Jabalpur
+districtMother,Jhabua,Jhabua
+districtMother,Katni,Katni
+districtMother,Mandla,Mandla
+districtMother,Mandsaur,Mandsaur
+districtMother,Morena,Morena
+districtMother,Narsimhapur,Narsimhapur
+districtMother,Neemuch,Neemuch
+districtMother,Panna,Panna
+districtMother,Raisen,Raisen
+districtMother,Rajgarh,Rajgarh
+districtMother,Ratlam,Ratlam
+districtMother,Rewa,Rewa
+districtMother,Sagar,Sagar
+districtMother,Satna,Satna
+districtMother,Sehore,Sehore
+districtMother,Seoni,Seoni
+districtMother,Shahdol,Shahdol
+districtMother,Shajapur,Shajapur
+districtMother,Sheopur,Sheopur
+districtMother,Shivpuri,Shivpuri
+districtMother,Sidhi,Sidhi
+districtMother,Singrauli,Singrauli
+districtMother,Tikamgarh,Tikamgarh
+districtMother,Ujjain,Ujjain
+districtMother,Umaria,Umaria
+districtMother,Vidisha,Vidisha
+districtMother,West Nimar (Khargone),West Nimar (Khargone)
+districtMother,Ahmadnagar,Ahmadnagar
+districtMother,Akola,Akola
+districtMother,Amravati,Amravati
+districtMother,Aurangabad,Aurangabad
+districtMother,Bhandara,Bhandara
+districtMother,Bid,Bid
+districtMother,Buldana,Buldana
+districtMother,Chandrapur,Chandrapur
+districtMother,Dhule,Dhule
+districtMother,Gadchiroli,Gadchiroli
+districtMother,Gondiya,Gondiya
+districtMother,Hingoli,Hingoli
+districtMother,Jalgaon,Jalgaon
+districtMother,Jalna,Jalna
+districtMother,Kolhapur,Kolhapur
+districtMother,Latur,Latur
+districtMother,Mumbai,Mumbai
+districtMother,Mumbai (Suburban),Mumbai (Suburban)
+districtMother,Nagpur,Nagpur
+districtMother,Nanded,Nanded
+districtMother,Nandurbar,Nandurbar
+districtMother,Nashik,Nashik
+districtMother,Osmanabad,Osmanabad
+districtMother,Parbhani,Parbhani
+districtMother,Pune,Pune
+districtMother,Raigarh,Raigarh
+districtMother,Ratnagiri,Ratnagiri
+districtMother,Sangli,Sangli
+districtMother,Satara,Satara
+districtMother,Sindhudurg,Sindhudurg
+districtMother,Solapur,Solapur
+districtMother,Thane,Thane
+districtMother,Wardha,Wardha
+districtMother,Washim,Washim
+districtMother,Yavatmal,Yavatmal
+districtMother,Bishnupur,Bishnupur
+districtMother,Chandel,Chandel
+districtMother,Churachandpur,Churachandpur
+districtMother,Imphal East,Imphal East
+districtMother,Imphal West,Imphal West
+districtMother,Senapati,Senapati
+districtMother,Tamenglong,Tamenglong
+districtMother,Thoubal,Thoubal
+districtMother,Ukhrul,Ukhrul
+districtMother,East Garo Hills,East Garo Hills
+districtMother,East Khasi Hills,East Khasi Hills
+districtMother,Jaintia Hills,Jaintia Hills
+districtMother,Ri Bhoi,Ri Bhoi
+districtMother,South Garo Hills,South Garo Hills
+districtMother,West Garo Hills,West Garo Hills
+districtMother,West Khasi Hills,West Khasi Hills
+districtMother,Aizawl,Aizawl
+districtMother,Champhai,Champhai
+districtMother,Kolasib,Kolasib
+districtMother,Lawngtlai,Lawngtlai
+districtMother,Lunglei,Lunglei
+districtMother,Mamit,Mamit
+districtMother,Saiha,Saiha
+districtMother,Serchhip,Serchhip
+districtMother,Dimapur,Dimapur
+districtMother,Kiphire,Kiphire
+districtMother,Kohima,Kohima
+districtMother,Longleng,Longleng
+districtMother,Mokokchung,Mokokchung
+districtMother,Mon,Mon
+districtMother,Peren,Peren
+districtMother,Phek,Phek
+districtMother,Tuensang,Tuensang
+districtMother,Wokha,Wokha
+districtMother,Zunheboto,Zunheboto
+districtMother,Anugul,Anugul
+districtMother,Balangir,Balangir
+districtMother,Baleshwar,Baleshwar
+districtMother,Bargarh,Bargarh
+districtMother,Baudh,Baudh
+districtMother,Bhadrak,Bhadrak
+districtMother,Cuttack,Cuttack
+districtMother,Debagarh,Debagarh
+districtMother,Dhenkanal,Dhenkanal
+districtMother,Gajapati,Gajapati
+districtMother,Ganjam,Ganjam
+districtMother,Jagatsinghapur,Jagatsinghapur
+districtMother,Jajapur,Jajapur
+districtMother,Jharsuguda,Jharsuguda
+districtMother,Kalahandi,Kalahandi
+districtMother,Kandhamal,Kandhamal
+districtMother,Kendrapara,Kendrapara
+districtMother,Kendujhar (Keonjhar),Kendujhar (Keonjhar)
+districtMother,Khordha,Khordha
+districtMother,Koraput,Koraput
+districtMother,Malkangiri,Malkangiri
+districtMother,Mayurbhanj,Mayurbhanj
+districtMother,Nabarangapur,Nabarangapur
+districtMother,Nayagarh,Nayagarh
+districtMother,Nuapada,Nuapada
+districtMother,Puri,Puri
+districtMother,Rayagada,Rayagada
+districtMother,Sambalpur,Sambalpur
+districtMother,Sonapur,Sonapur
+districtMother,Sundargarh,Sundargarh
+districtMother,Karaikal,Karaikal
+districtMother,Mahe,Mahe
+districtMother,Pondicherry,Pondicherry
+districtMother,Yanam,Yanam
+districtMother,Ajitgarh(Mohali),Ajitgarh(Mohali)
+districtMother,Amritsar,Amritsar
+districtMother,Barnala,Barnala
+districtMother,Bathinda,Bathinda
+districtMother,Faridkot,Faridkot
+districtMother,Fatehgarh Sahib,Fatehgarh Sahib
+districtMother,Firozpur,Firozpur
+districtMother,Gurdaspur,Gurdaspur
+districtMother,Hoshiarpur,Hoshiarpur
+districtMother,Jalandhar,Jalandhar
+districtMother,Kapurthala,Kapurthala
+districtMother,Ludhiana,Ludhiana
+districtMother,Mansa,Mansa
+districtMother,Moga,Moga
+districtMother,Muktsar,Muktsar
+districtMother,Patiala,Patiala
+districtMother,Roopnagar,Roopnagar
+districtMother,Sangrur,Sangrur
+districtMother,Shahid Bhagatpur,Shahid Bhagatpur
+districtMother,Tarn Taran,Tarn Taran
+districtMother,Ajmer,Ajmer
+districtMother,Alwar,Alwar
+districtMother,Banswara,Banswara
+districtMother,Baran,Baran
+districtMother,Barmer,Barmer
+districtMother,Bharatpur,Bharatpur
+districtMother,Bhilwara,Bhilwara
+districtMother,Bikaner,Bikaner
+districtMother,Bundi,Bundi
+districtMother,Chittaurgarh,Chittaurgarh
+districtMother,Churu,Churu
+districtMother,Dausa,Dausa
+districtMother,Dhaulpur,Dhaulpur
+districtMother,Dungarpur,Dungarpur
+districtMother,Ganganagar,Ganganagar
+districtMother,Hanumangarh,Hanumangarh
+districtMother,Jaipur,Jaipur
+districtMother,Jaisalmer,Jaisalmer
+districtMother,Jalor,Jalor
+districtMother,Jhalawar,Jhalawar
+districtMother,Jhunjhunun,Jhunjhunun
+districtMother,Jodhpur,Jodhpur
+districtMother,Karauli,Karauli
+districtMother,Kota,Kota
+districtMother,Nagaur,Nagaur
+districtMother,Pali,Pali
+districtMother,Pratapgarh,Pratapgarh
+districtMother,Rajsamand,Rajsamand
+districtMother,Sawai Madhopur,Sawai Madhopur
+districtMother,Sikar,Sikar
+districtMother,Sirohi,Sirohi
+districtMother,Tonk,Tonk
+districtMother,Udaipur,Udaipur
+districtMother,East Sikkim,East Sikkim
+districtMother,North Sikkim,North Sikkim
+districtMother,South Sikkim,South Sikkim
+districtMother,West Sikkim,West Sikkim
+districtMother,Ariyalur,Ariyalur
+districtMother,Chennai,Chennai
+districtMother,Coimbatore,Coimbatore
+districtMother,Cuddalore,Cuddalore
+districtMother,Dharmapuri,Dharmapuri
+districtMother,Dindigul,Dindigul
+districtMother,Erode,Erode
+districtMother,Kancheepuram,Kancheepuram
+districtMother,Kanniyakumari,Kanniyakumari
+districtMother,Karur,Karur
+districtMother,Krishnagiri,Krishnagiri
+districtMother,Madurai,Madurai
+districtMother,Nagapattinam,Nagapattinam
+districtMother,Namakkal,Namakkal
+districtMother,Perambalur,Perambalur
+districtMother,Pudukkottai,Pudukkottai
+districtMother,Ramanathapuram,Ramanathapuram
+districtMother,Salem,Salem
+districtMother,Sivaganga,Sivaganga
+districtMother,Thanjavur,Thanjavur
+districtMother,The Nilgiris,The Nilgiris
+districtMother,Theni,Theni
+districtMother,Thirupur,Thirupur
+districtMother,Thiruvallur,Thiruvallur
+districtMother,Thiruvarur,Thiruvarur
+districtMother,Thoothukkudi,Thoothukkudi
+districtMother,Tiruchirappalli,Tiruchirappalli
+districtMother,Tirunelveli,Tirunelveli
+districtMother,Tiruvannamalai,Tiruvannamalai
+districtMother,Vellore,Vellore
+districtMother,Viluppuram,Viluppuram
+districtMother,Virudhunagar,Virudhunagar
+districtMother,Dhalai,Dhalai
+districtMother,North Tripura,North Tripura
+districtMother,South Tripura (Gomati),South Tripura (Gomati)
+districtMother,West Tripura,West Tripura
+districtMother,Agra,Agra
+districtMother,Aligarh,Aligarh
+districtMother,Allahabad,Allahabad
+districtMother,Ambedkar Nagar,Ambedkar Nagar
+districtMother,Auraiya,Auraiya
+districtMother,Azamgarh,Azamgarh
+districtMother,Badaun,Badaun
+districtMother,Baghpat,Baghpat
+districtMother,Bahraich,Bahraich
+districtMother,Ballia,Ballia
+districtMother,Balrampur,Balrampur
+districtMother,Banda,Banda
+districtMother,Barabanki,Barabanki
+districtMother,Bareilly,Bareilly
+districtMother,Basti,Basti
+districtMother,Bijnor,Bijnor
+districtMother,Bulandshahr,Bulandshahr
+districtMother,Chandauli,Chandauli
+districtMother,Chitrakoot,Chitrakoot
+districtMother,Deoria,Deoria
+districtMother,Etah,Etah
+districtMother,Etawah,Etawah
+districtMother,Faizabad,Faizabad
+districtMother,Farrukhabad,Farrukhabad
+districtMother,Fatehpur,Fatehpur
+districtMother,Firozabad,Firozabad
+districtMother,Gautam Buddha Nagar,Gautam Buddha Nagar
+districtMother,Ghaziabad,Ghaziabad
+districtMother,Ghazipur,Ghazipur
+districtMother,Gonda,Gonda
+districtMother,Gorakhpur,Gorakhpur
+districtMother,Hamirpur,Hamirpur
+districtMother,Hardoi,Hardoi
+districtMother,Hathras,Hathras
+districtMother,Jalaun,Jalaun
+districtMother,Jaunpur,Jaunpur
+districtMother,Jhansi,Jhansi
+districtMother,Jyotiba Phule Nagar,Jyotiba Phule Nagar
+districtMother,Kannauj,Kannauj
+districtMother,Kanpur Dehat,Kanpur Dehat
+districtMother,Kanpur Nagar,Kanpur Nagar
+districtMother,Kanshiram Nagar,Kanshiram Nagar
+districtMother,Kaushambi,Kaushambi
+districtMother,Kheri (Lakhimpur),Kheri (Lakhimpur)
+districtMother,Kushinagar,Kushinagar
+districtMother,Lalitpur,Lalitpur
+districtMother,Lucknow,Lucknow
+districtMother,Maharajganj,Maharajganj
+districtMother,Mahoba,Mahoba
+districtMother,Mainpuri,Mainpuri
+districtMother,Mathura,Mathura
+districtMother,Mau,Mau
+districtMother,Meerut,Meerut
+districtMother,Mirzapur,Mirzapur
+districtMother,Moradabad,Moradabad
+districtMother,Muzaffarnagar,Muzaffarnagar
+districtMother,Pilibhit,Pilibhit
+districtMother,Pratapgarh,Pratapgarh
+districtMother,Rae Bareli,Rae Bareli
+districtMother,Rampur,Rampur
+districtMother,Saharanpur,Saharanpur
+districtMother,Sant Kabir Nagar,Sant Kabir Nagar
+districtMother,Sant Ravidas Nagar,Sant Ravidas Nagar
+districtMother,Shahjahanpur,Shahjahanpur
+districtMother,Shrawasti,Shrawasti
+districtMother,Siddharthnagar,Siddharthnagar
+districtMother,Sitapur,Sitapur
+districtMother,Sonbhadra,Sonbhadra
+districtMother,Sultanpur,Sultanpur
+districtMother,Unnao,Unnao
+districtMother,Varanasi,Varanasi
+districtMother,Almora,Almora
+districtMother,Bageshwar,Bageshwar
+districtMother,Chamoli,Chamoli
+districtMother,Champawat,Champawat
+districtMother,Dehradun,Dehradun
+districtMother,Garhwal,Garhwal
+districtMother,Hardwar,Hardwar
+districtMother,Nainital,Nainital
+districtMother,Pithoragarh,Pithoragarh
+districtMother,Rudraprayag,Rudraprayag
+districtMother,Tehri Garhwal,Tehri Garhwal
+districtMother,Udham Singh Nagar,Udham Singh Nagar
+districtMother,Uttarkashi,Uttarkashi
+districtMother,Bankura,Bankura
+districtMother,Barddhaman,Barddhaman
+districtMother,Birbhum,Birbhum
+districtMother,Dakshin Dinajpur,Dakshin Dinajpur
+districtMother,Darjiling,Darjiling
+districtMother,East Medinipur,East Medinipur
+districtMother,Haora,Haora
+districtMother,Hugli,Hugli
+districtMother,Jalpaiguri,Jalpaiguri
+districtMother,Koch Bihar,Koch Bihar
+districtMother,Kolkata,Kolkata
+districtMother,Maldah,Maldah
+districtMother,Murshidabad,Murshidabad
+districtMother,Nadia,Nadia
+districtMother,North Twenty Four Pargana,North Twenty Four Pargana
+districtMother,Puruliya,Puruliya
+districtMother,South Twenty Four Pargana,South Twenty Four Pargana
+districtMother,Uttar Dinajpur,Uttar Dinajpur
+districtMother,West Medinipur,West Medinipur

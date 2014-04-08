@@ -21,6 +21,7 @@ class SchemaGenerator {
     List generatedList = []
 
 
+
     SchemaGenerator(Sql gSql, EntityTransformer entityTransformer, Generator generator, String templateLocation) {
         this.gSql = gSql
         this.entityTransformer = entityTransformer
@@ -42,27 +43,27 @@ class SchemaGenerator {
 
 
                 List entityProperties = []
-                List multipleItemTypes = ['select', 'multiselect', 'lookup', 'select-inline']
+                List multipleItemTypes = ['select', 'multiselect','select-inline','dropdown','suggest','duration']
 
-                String sql2 = "select name,value,type from $entitySchemaMasterPropertiesTable where entity=?".toString()
-                gSql.rows(sql2, [row.entity]).each {
+                def sql = "select name,value,type from $entitySchemaMasterPropertiesTable where entity=?".toString()
+                gSql.rows(sql, [row.entity]).each {
                     entityProperties.add(it)
                 }
-                String sql3 = "SELECT name,type,valdn,label,flow FROM $dataDictTable WHERE entity=?".toString()
-                gSql.rows(sql3, [row.entity]).each {
+                 sql = "select name,type,valdn,label,flow,image,crossflow from $dataDictTable where entity=?".toString()
+                gSql.rows(sql, [row.entity]).each {
 
 
                     if (multipleItemTypes.contains(it.type)) {
 
                         it.items = []
 
-                        String sql4 = "SELECT  clabel FROM  $dataDictTable WHERE entity=? and name=?".toString()
+                        sql = "SELECT  clabel FROM  $dataDictTable WHERE entity=? and name=?".toString()
 
-                        String clabel = gSql.rows(sql4, [row.entity, it.name])[0].clabel
+                        String clabel = gSql.rows(sql, [row.entity, it.name])[0].clabel
 
 
-                        String sql5 = "SELECT  text,value   FROM $tableWithPropertyItemInfo WHERE name=?".toString()
-                        it.items = gSql.rows(sql5, [clabel])
+                        sql = "SELECT  text,value   FROM $tableWithPropertyItemInfo WHERE name=?".toString()
+                        it.items = gSql.rows(sql, [clabel])
                         it.items = it.items.collect {
                             sqlRow ->
                                 sqlRow.collectEntries {
@@ -70,9 +71,34 @@ class SchemaGenerator {
                                         [k.toLowerCase(), v]
                                 }
                         }
-                        it.items
+                    }
+                    if('lookup'==it.type){
+
+                        sql="SELECT lookup from $dataDictTable where entity=? and name=?".toString()
+                        def lookupName=gSql.firstRow(sql,[row.entity,it.name]).lookup
+
+
+                        sql="SELECT entity,field,ref from lookup where name=?".toString()
+                        it.lookup=gSql.firstRow(sql,[lookupName])
+
 
                     }
+                    if (it.crossflow!='') {
+
+                        def crossFlowName=it.crossflow
+                        sql = "select entity,field,ref,condition from crossFlow  where name=?".toString()
+                        it.crossFlow = gSql.rows(sql, [crossFlowName])
+
+                        it.crossFlow = it.crossFlow.collect {
+                            sqlRow ->
+                                sqlRow.collectEntries {
+                                    k, v ->
+                                        [k.toLowerCase(), v]
+                                }
+                        }
+
+                    }
+                    it.remove('crossflow');
                     entityProperties.add(it)
 
                 }
@@ -82,6 +108,9 @@ class SchemaGenerator {
                     sqlRow ->
                         sqlRow.collectEntries {
                             k, v ->
+                                if(k=='crossFlow')
+                                    return [k,v];
+                                else
                                 [k.toLowerCase(), v]
                         }
                 }
@@ -89,15 +118,16 @@ class SchemaGenerator {
                 [schemaName: schemaName, onSave: onSave, properties: entityProperties]
         }
 
-
-
+        println 'entity list '
+        println entityList
         entityList.each {
             entity ->
                 transformedEntityList.add(entityTransformer.transform(entity))
         }
 
 
-
+        println 'transformted list '
+        println transformedEntityList
         transformedEntityList.each {
             generatedList.add(generator.generate(templateLocation, it))
         }

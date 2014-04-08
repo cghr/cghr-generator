@@ -40,7 +40,7 @@
     <util:map id="dbTypeMapping">
         <entry key="int" value="int(11)"></entry>
         <entry key="text" value="varchar(100)"></entry>
-        <entry key="longtext" value="clob"></entry>
+        <entry key="longtext" value="text"></entry>
         <entry key="timestamp" value="timestamp"></entry>
         <entry key="select" value="varchar(100)"></entry>
         <entry key="select-inline" value="varchar(100)"></entry>

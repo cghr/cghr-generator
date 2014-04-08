@@ -13,24 +13,26 @@
         "value":"{{value}}",
         "items":[
         {{#each items}}
-            {{#unless @last}}
-                {"text":"{{text}}","value":"{{value}}"},
-            {{else}}
-                {"text":"{{text}}","value":"{{value}}"}
-            {{/unless}}
+            {"text":"{{text}}","value":"{{value}}"}
+            {{~#unless @last ~}},{{/unless}}
         {{/each}}
         ],
         "image":"{{image}}",
         "lookup":{
         {{#with lookup}}
-            "lookup_entity":"{{lookup_entity}}",
-            "lookup_field":"{{lookup_field}}",
-            "lookup_ref":"{{lookup_ref}}"
+            "entity":"{{entity}}",
+            "field":"{{field}}",
+            "ref":"{{ref}}"
         {{/with}}
-        }
+        },
+        "crossFlow":[
+        {{#each crossFlow}}
+        {"entity":"{{entity}}","field":"{{field}}","ref":"{{ref}}","condition":"{{condition}}"}
+        {{~#unless @last ~}},{{/unless}}
+        {{/each}}
+        ]}
 
-        }{{~#unless @last ~}},
- {{/unless}}
+        {{~#unless @last ~}},{{/unless}}
 
 {{/each}}
 
