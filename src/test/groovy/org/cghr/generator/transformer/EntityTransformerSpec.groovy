@@ -40,8 +40,8 @@ class EntityTransformerSpec extends Specification {
         ]];
 
         Map expectedTransformedEntity = [name: 'myentity',onSave: 'doSomething', properties: [
-                [name: 'prop1', type: 'int(11)'],
-                [name: 'prop2', type: 'int(11)'],
+                [name: 'prop1', type: 'bigint(10)'],
+                [name: 'prop2', type: 'bigint(10)'],
                 [name: 'prop3', type: 'varchar(100)'],
                 [name: 'prop4', type: 'text'],
                 [name: 'prop5', type: 'timestamp'],

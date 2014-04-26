@@ -36,12 +36,12 @@ class SchemaGeneratorSpec extends Specification {
     def rawDataOf(String entity) {
 
         List list = []
-        List multipleItems = ['select', 'select-inline', 'multiselect']
+        List multipleItems = ['select', 'multiselect','select-inline','dropdown','suggest','duration','ffq']
         def sql = "select name,value,type from entitySchemaMasterProperties where entity=?".toString()
         mockSql.rows(sql, [entity]).each {
             list.add(it)
         }
-        sql = "select name,type,valdn,label,flow,image,crossflow from dataDict where entity=?".toString()
+        sql = "select name,type,valdn,label,flow,image,crossflow,crosscheck from dataDict where entity=?".toString()
         mockSql.rows(sql, [entity]).each {
 
             def property=it
@@ -66,6 +66,15 @@ class SchemaGeneratorSpec extends Specification {
                 it.lookup=mockSql.firstRow(sql,[lookupName])
 
             }
+            if(it.crosscheck!=''){
+
+                sql="SELECT crossCheck from dataDict where entity=? and name=?".toString()
+                def crossCheckName=mockSql.firstRow(sql,[entity,it.name]).crosscheck
+
+
+                sql="SELECT entity,field,ref,condition from crossCheck where name=?".toString()
+                it.crossCheck=mockSql.firstRow(sql,[crossCheckName])
+            }
             if (it.crossflow!='') {
 
                 def crossFlowName=it.crossflow
@@ -74,11 +83,12 @@ class SchemaGeneratorSpec extends Specification {
 
             }
             it.remove('crossflow');
+            it.remove('crosscheck');
             list.add(it)
 
 
         }
-        println 'in spec '+list
+        //println 'in spec '+list
         list
 
     }
@@ -87,7 +97,7 @@ class SchemaGeneratorSpec extends Specification {
 
         List list = []
 
-        List multipleItems = ['radio', 'radio-inline', 'checkbox']
+        List multipleItems = ['select', 'multiselect','select-inline','dropdown','suggest','duration','ffq']
         def sql = "select name,type,valdn,label,flow from jsonSchemaTemplateData where entity=?".toString()
 
         mockSql.rows(sql, [entity]).each {
@@ -135,7 +145,7 @@ class SchemaGeneratorSpec extends Specification {
             rows(sql, ['country']) >> mockSql.rows(sql, ['country'])
             rows(sql, ['state']) >> mockSql.rows(sql, ['state'])
 
-            sql = "select name,type,valdn,label,flow,image,crossflow from dataDict where entity=?".toString()
+            sql = "select name,type,valdn,label,flow,image,crossflow,crosscheck from dataDict where entity=?".toString()
             rows(sql, ['country']) >> mockSql.rows(sql, ['country'])
             rows(sql, ['state']) >> mockSql.rows(sql, ['state'])
 
@@ -151,6 +161,12 @@ class SchemaGeneratorSpec extends Specification {
 
             sql="SELECT entity,field,ref from lookup where name=?".toString()
             firstRow(sql,['capital']) >> mockSql.firstRow(sql,['capital'])
+
+            sql="SELECT crossCheck from dataDict where entity=? and name=?"
+            firstRow(sql,['country','capital']) >> mockSql.firstRow(sql,['country','capital'])
+
+            sql="SELECT entity,field,ref,condition from crossCheck where name=?"
+            firstRow(sql,['capitalName']) >> mockSql.firstRow(sql,['capitalName'])
 
             sql="select entity,field,ref,condition from crossFlow  where name=?".toString()
             rows(sql,['countryLanguage']) >> mockSql.rows(sql,['countryLanguage'])

@@ -1,2 +1,2 @@
-entity,schemaName,onSave
-country,country.basicInf,country.next
+entity,entityAlias,schemaName,onSave
+country,country,country.basicInf,country.next

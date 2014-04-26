@@ -30,7 +30,16 @@
         {"entity":"{{entity}}","field":"{{field}}","ref":"{{ref}}","condition":"{{condition}}"}
         {{~#unless @last ~}},{{/unless}}
         {{/each}}
-        ]}
+        ],
+        "crossCheck":{
+        {{#with crossCheck}}
+            "entity":"{{entity}}",
+            "field":"{{field}}",
+            "ref":"{{ref}}",
+            "condition":"{{condition}}"
+        {{/with}}
+        }
+        }
 
         {{~#unless @last ~}},{{/unless}}
 

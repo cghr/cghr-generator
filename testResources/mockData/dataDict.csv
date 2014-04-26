@@ -1,5 +1,5 @@
-entity,name,type,label,valdn,flow,clabel,image,lookup,crossFlow
-country,name,text,Name,required,data.prop1 == 'yes' && data.prop2=='No',,,,
-country,language,select,Language,required,,language,example.jpg,,countryLanguage
-country,capital,lookup,Capital,required,,,,capital,
-state,name,text,Name,required,,,,,
+entity,name,type,label,valdn,flow,clabel,image,lookup,crossFlow,crossCheck
+country,name,text,Name,required,data.prop1 == 'yes' && data.prop2=='No',,,,,
+country,language,select,Language,required,,language,example.jpg,,countryLanguage,
+country,capital,lookup,Capital,required,,,,capital,,capitalName
+state,name,text,Name,required,,,,,,

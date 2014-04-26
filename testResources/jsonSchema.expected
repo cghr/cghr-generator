@@ -11,7 +11,8 @@
         "items": [],
         "image":"",
         "lookup":{},
-        "crossFlow":[]
+        "crossFlow":[],
+        "crossCheck":{}
     }, {
         "name": "countryId",
         "type": "hidden",
@@ -22,7 +23,8 @@
         "items": [],
         "image":"",
         "lookup":{},
-        "crossFlow":[]
+        "crossFlow":[],
+        "crossCheck":{}
     },{
         "name": "continentId",
         "type": "hidden",
@@ -33,18 +35,20 @@
          "items": [],
          "image":"",
          "lookup":{},
-         "crossFlow":[]
+         "crossFlow":[],
+         "crossCheck":{}
     },{
         "name": "name",
         "type": "text",
         "valdn": "required",
         "label": "Name",
-        "flow": "data.prop1 == &#x27;yes&#x27; &amp;&amp;  data.prop2==&#x27;No&#x27;",
+        "flow": "data.prop1 == 'yes' &&  data.prop2=='No'",
         "value":"",
         "items": [],
         "image":"",
         "lookup":{},
-        "crossFlow":[]
+        "crossFlow":[],
+        "crossCheck":{}
     }, {
         "name": "language",
         "type": "radio",
@@ -65,13 +69,14 @@
             "entity":"language",
             "field":"name",
             "ref":"countryId",
-            "condition":"country==&#x27;india&#x27;"
+            "condition":"country=='india'"
         },{
            "entity":"language",
            "field":"name",
            "ref":"countryId",
-           "condition":"continent==&#x27;asia&#x27;"
-         }]
+           "condition":"continent=='asia'"
+         }],
+         "crossCheck":{}
     },{
         "name":"capital",
         "type":"lookup",
@@ -86,7 +91,13 @@
         "field":"country",
         "ref":"continentId"
         },
-        "crossFlow":[]
+        "crossFlow":[],
+        "crossCheck":{
+        "entity":"capitals",
+        "field":"name",
+        "ref":"capitalId",
+        "condition":"maxlength[{value}]"
+        }
 
     }
     ]

@@ -19,7 +19,7 @@ class DataStoreInfoGenerator {
 
     String generate(String entityDesignTable, String templateLocation) {
 
-        def sql = "select distinct entity from $entityDesignTable".toString()
+        def sql = "select distinct entity from $entityDesignTable where entity!=''".toString()
         List entities = gSql.rows(sql).collect {
             row ->
                 sql = "select name from $entityDesignTable where entity=? and key='primary key'".toString()
@@ -33,7 +33,7 @@ class DataStoreInfoGenerator {
 
     def generateToAFile(String entityDesignTable, String templateLocation, File destFile) {
 
-        destFile.setText(generator.generate(templateLocation, [entities: entities]))
+        destFile.setText(generate(entityDesignTable,templateLocation))
     }
 
 

@@ -82,11 +82,11 @@ relationshipFemale,Mother,Mother
 relationshipFemale,Granddaughter,Granddaughter
 relationshipFemale,Daughter-in-law,Daughter-in-law
 relationshipFemale,Others,Others
-photoStatusInd,"Yes, taken","Yes, taken"
-photoStatusInd,Not taken,Not taken
-reasonNoPhoto,Camera not functioning,Camera not functioning
-reasonNoPhoto,Respondent refused to take picture,Respondent refused to take picture
-reasonNoPhoto,Others,Others
+clabel17,"Yes, taken","Yes, taken"
+clabel17,Not taken,Not taken
+clabel18,Camera not functioning,Camera not functioning
+clabel18,Respondent refused to take picture,Respondent refused to take picture
+clabel18,Others,Others
 mstatus,Never Married,Never Married
 mstatus,Married,Married
 mstatus,Remarried,Remarried
@@ -137,16 +137,16 @@ clabel5,No,No
 clabel5,"Yes, on medications","Yes, on medications"
 clabel5,"Yes, but not on medications","Yes, but not on medications"
 clabel5,Unknown,Unknown
+clabel6,Prostrate,Prostrate
 clabel6,Mouth,Mouth
-clabel6,Throat,Throat
-clabel6,Oesophagus,Oesophagus
 clabel6,Lung,Lung
 clabel6,Liver,Liver
-clabel6,Prostrate,Prostrate
+clabel6,Throat,Throat
+clabel6,Oesophagus,Oesophagus
 clabel6,Abdomen,Abdomen
 clabel6,Blood,Blood
 clabel6,Penis,Penis
-clabel6,Other - specify,Other - specify
+clabel6,Others,Others
 clabel7,Cervix,Cervix
 clabel7,Breast,Breast
 clabel7,Ovary,Ovary
@@ -158,52 +158,6 @@ clabel7,Mouth,Mouth
 clabel7,Throat,Throat
 clabel7,Oesophagus,Oesophagus
 clabel7,Others,Others
-clabel8,Andhra Pradesh,Andhra Pradesh
-clabel8,Delhi,Delhi
-clabel8,Goa,Goa
-clabel8,Gujarat,Gujarat
-clabel8,Karnataka,Karnataka
-clabel8,Madhya Pradesh,Madhya Pradesh
-clabel8,Maharashtra,Maharashtra
-clabel8,Punjab,Punjab
-clabel8,Rajasthan,Rajasthan
-clabel8,Uttar Pradesh,Uttar Pradesh
-clabel8,Others,Others
-clabel9,Nandurbar,Nandurbar
-clabel9,Dhule,Dhule
-clabel9,Jalgaon,Jalgaon
-clabel9,Buldana,Buldana
-clabel9,Akola,Akola
-clabel9,Washim,Washim
-clabel9,Amravati,Amravati
-clabel9,Wardha,Wardha
-clabel9,Nagpur,Nagpur
-clabel9,Bhandara,Bhandara
-clabel9,Gondiya,Gondiya
-clabel9,Gadchiroli,Gadchiroli
-clabel9,Chandrapur,Chandrapur
-clabel9,Yavatmal,Yavatmal
-clabel9,Nanded,Nanded
-clabel9,Hingoli,Hingoli
-clabel9,Parbhani,Parbhani
-clabel9,Jalna,Jalna
-clabel9,Aurangabad,Aurangabad
-clabel9,Nashik,Nashik
-clabel9,Thane,Thane
-clabel9,Mumbai Suburban,Mumbai Suburban
-clabel9,Mumbai,Mumbai
-clabel9,Raigarh,Raigarh
-clabel9,Pune,Pune
-clabel9,Ahmadnagar,Ahmadnagar
-clabel9,Bid,Bid
-clabel9,Latur,Latur
-clabel9,Osmanabad,Osmanabad
-clabel9,Solapur,Solapur
-clabel9,Satara,Satara
-clabel9,Ratnagiri,Ratnagiri
-clabel9,Sindhudurg,Sindhudurg
-clabel9,Kolhapur,Kolhapur
-clabel9,Sangli,Sangli
 clabel10,Brahman,Brahman
 clabel10,Dhangar,Dhangar
 clabel10,Lingayat,Lingayat
@@ -215,15 +169,13 @@ clabel10,Other,Other
 typeFood,Veg,Veg
 typeFood,Veg using eggs,Veg using eggs
 typeFood,Non-veg,Non-veg
-clabel12,0,0
-clabel12,1,1
-clabel12,2,2
-clabel12,3,3
-clabel12,4,4
-clabel12,5,5
-clabel12,6,6
-clabel12,7,7
-clabel12,8,8
+clabel12,0,
+clabel12,1,
+clabel12,2,
+clabel12,3,
+clabel12,4,
+clabel12,5,
+clabel12,6,
 clabel13,1,1
 clabel13,2,2
 clabel13,3,3
@@ -299,27 +251,12 @@ photoId,Voter ID,Voter ID
 photoId,Passport,Passport
 photoId,Others,Others
 photoId,Nothing,Nothing
-hhVisit,Respondents Available,Respondents Available
-hhVisit,Respondents Not available,Respondents Not available
-hhVisit,Door temporarily locked,Door temporarily locked
-hhVisit,Door permanently locked,Door permanently locked
-hhVisit,Refused to participate,Refused to participate
-ageDiedperson,D,D
-ageDiedperson,M,M
-ageDiedperson,Y,Y
-FFQ-UNITS,,
-Tambya,T-1,T-1
-Glass,G-1,G-1
-Fulpatra,F-1,F-1
-Cup (Big),K-1,K-1
-Cup (Medium),K-2,K-2
-Cup ( Small),K-3,K-3
-Dish,D-1,D-1
-Wati,W-1,W-1
-Pali,P-1,P-1
-Spoon (Big),S-1,S-1
-Spoon (Medium),S-2,S-2
-Spoon ( Small),S-3,S-3
+hhVisit,Available,Available
+hhVisit,Unavailable,Unavailable
+hhVisit,Refused,Refused
+ageDiedperson,Days,Days
+ageDiedperson,Months,Months
+ageDiedperson,Years,Years
 stateMother,Andaman & nicobar islands,Andaman & nicobar islands
 stateMother,Andhra pradesh,Andhra pradesh
 stateMother,Arunachal pradesh,Arunachal pradesh
@@ -995,3 +932,49 @@ districtMother,Puruliya,Puruliya
 districtMother,South Twenty Four Pargana,South Twenty Four Pargana
 districtMother,Uttar Dinajpur,Uttar Dinajpur
 districtMother,West Medinipur,West Medinipur
+contraceptives,None,None
+contraceptives,Natural calendar method,Natural calendar method
+contraceptives,IUD/Copper T/Loop,IUD/Copper T/Loop
+contraceptives,Tubal ligation,Tubal ligation
+contraceptives,Male condom,Male condom
+contraceptives,Oral contraceptive/pills,Oral contraceptive/pills
+contraceptives,Others,Others
+ffqUnits,Tambya (T-1),Tambya (T-1)
+ffqUnits,Glass (G-1),Glass (G-1)
+ffqUnits,Fulpatra (F-1),Fulpatra (F-1)
+ffqUnits,Cup (Big)(K-1),Cup (Big)(K-1)
+ffqUnits,Cup (Medium) (K-2),Cup (Medium) (K-2)
+ffqUnits,Cup ( Small) (K-3),Cup ( Small) (K-3)
+ffqUnits,Dish(D-1),Dish(D-1)
+ffqUnits,Wati(W-1),Wati(W-1)
+ffqUnits,Pali(P-1),Pali(P-1)
+ffqUnits,Spoon (Big)(S-1),Spoon (Big)(S-1)
+ffqUnits,Spoon (Medium)(S-2),Spoon (Medium)(S-2)
+ffqUnits,Spoon ( Small)(S-3),Spoon ( Small)(S-3)
+clabel19,Per Day,Per Day
+clabel19,Per Week,Per Week
+clabel19,Per Month,Per Month
+language,Marathi,Marathi
+language,Bengali,Bengali
+language,Hindi,Hindi
+language,English,English
+language,Assamese,Assamese
+language,Dogri,Dogri
+language,Gujarati,Gujarati
+language,Bodo,Bodo
+language,Kannada,Kannada
+language,Kashmiri,Kashmiri
+language,Konkani,Konkani
+language,Maithili,Maithili
+language,Malayalam,Malayalam
+language,Manipuri ,Manipuri 
+language,Nepali,Nepali
+language,Oriya,Oriya
+language,Punjabi,Punjabi
+language,Sanskrit,Sanskrit
+language,Santali,Santali
+language,Sindhi,Sindhi
+language,Tamil,Tamil
+language,Telugu,Telugu
+language,Urdu,Urdu
+language,Others,Others

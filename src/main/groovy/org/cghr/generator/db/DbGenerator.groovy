@@ -29,9 +29,9 @@ class DbGenerator {
 
     String generate(String entityDesignTable, String dataDictTable) {
 
-        String sql1 = "SELECT DISTINCT entity FROM $entityDesignTable  WHERE  entity!=''".toString()
+        def sql = "SELECT DISTINCT entity FROM $entityDesignTable  WHERE  entity!=''".toString()
 
-        List rows = gSql.rows(sql1)
+        List rows = gSql.rows(sql)
 
         entityList = rows.collect {
 
@@ -39,14 +39,15 @@ class DbGenerator {
 
 
                 List entityProperties = []
-                String sql2 = "SELECT name,type,key,strategy FROM $entityDesignTable WHERE entity=?".toString()
-                gSql.rows(sql2, [row.entity]).each {
+                sql = "SELECT name,type,key,strategy FROM $entityDesignTable WHERE entity=?".toString()
+                gSql.rows(sql, [row.entity]).each {
                     entityProperties.add(it)
                 }
-                String sql3 = "SELECT name,type FROM $dataDictTable WHERE entity=?  and type!='heading'".toString()
-                gSql.rows(sql3, [row.entity]).each {
+                sql = "SELECT distinct name,type FROM $dataDictTable WHERE entity=?  and type!='heading'".toString()
+                gSql.rows(sql, [row.entity]).each {
                     entityProperties.add(it)
                 }
+
                 entityProperties = entityProperties.collect {
                     sqlRow ->
                         sqlRow.collectEntries {
@@ -60,12 +61,10 @@ class DbGenerator {
         }
 
 
-
         entityList.each {
             entity ->
                 transformedEntityList.add(entityTransformer.transform(entity))
         }
-
 
         return generator.generate(templateLocation, [entities: transformedEntityList])
     }

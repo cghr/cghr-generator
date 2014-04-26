@@ -75,6 +75,9 @@ class DbGeneratorSpec extends Specification {
             String sql2 = "SELECT name,type,key,strategy FROM entityDesign WHERE entity=?"
             rows(sql2, ['user']) >> mockSql.rows(sql2, ['user'])
 
+            def sql="SELECT distinct entityAlias from entitySchema where entity=?"
+            rows(sql,['country']) >> mockSql.rows(sql,['country'])
+
             String sql3 = "SELECT name,type,key,strategy FROM entityDesign WHERE entity=?"
             rows(sql2, ['userlog']) >> mockSql.rows(sql2, ['userlog'])
 
@@ -84,10 +87,10 @@ class DbGeneratorSpec extends Specification {
             String sql5 = "SELECT name,type,key,strategy FROM entityDesign WHERE entity=?"
             rows(sql2, ['state']) >> mockSql.rows(sql2, ['state'])
 
-            def sql6 = "SELECT name,type FROM dataDict WHERE entity=?  and type!='heading'"
+            def sql6 = "SELECT distinct name,type FROM dataDict WHERE entity=?  and type!='heading'"
             rows(sql6, ['country']) >> mockSql.rows(sql6, ['country'])
 
-            def sql7 = "SELECT name,type FROM dataDict WHERE entity=?  and type!='heading'"
+            def sql7 = "SELECT distinct name,type FROM dataDict WHERE entity=?  and type!='heading'"
             rows(sql7, ['state']) >> mockSql.rows(sql6, ['state'])
 
         }

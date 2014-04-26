@@ -1,12 +1,12 @@
 #Table:user
 DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user`(id int(11) primary key,username varchar(100),password varchar(100));
+CREATE TABLE `user`(id bigint(10) primary key,username varchar(100),password varchar(100));
 #Table:userlog
 DROP TABLE IF EXISTS `userlog`;
-CREATE TABLE `userlog`(id int(11) primary key auto_increment,username varchar(100),status varchar(100));
+CREATE TABLE `userlog`(id bigint(10) primary key auto_increment,username varchar(100),status varchar(100));
 #Table:country
 DROP TABLE IF EXISTS `country`;
-CREATE TABLE `country`(id int(11) primary key,continentId int(11),name varchar(100),language varchar(100),capital varchar(100));
+CREATE TABLE `country`(id bigint(10) primary key,continentId bigint(10),name varchar(100),language varchar(100),capital varchar(100));
 #Table:state
 DROP TABLE IF EXISTS `state`;
-CREATE TABLE `state`(id int(11) primary key,countryId int(11),name varchar(100));
+CREATE TABLE `state`(id bigint(10) primary key,countryId bigint(10),name varchar(100));

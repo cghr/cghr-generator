@@ -1,0 +1,2 @@
+name,entity,field,ref,condition
+capitalName,capitals,name,capitalId,maxlength[{value}]

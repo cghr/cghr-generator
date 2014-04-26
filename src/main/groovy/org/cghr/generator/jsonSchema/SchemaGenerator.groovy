@@ -43,13 +43,13 @@ class SchemaGenerator {
 
 
                 List entityProperties = []
-                List multipleItemTypes = ['select', 'multiselect','select-inline','dropdown','suggest','duration']
+                List multipleItemTypes = ['select', 'multiselect','select-inline','dropdown','suggest','duration','ffq']
 
                 def sql = "select name,value,type from $entitySchemaMasterPropertiesTable where entity=?".toString()
                 gSql.rows(sql, [row.entity]).each {
                     entityProperties.add(it)
                 }
-                 sql = "select name,type,valdn,label,flow,image,crossflow from $dataDictTable where entity=?".toString()
+                 sql = "select name,type,valdn,label,flow,image,crossflow,crosscheck from $dataDictTable where entity=?".toString()
                 gSql.rows(sql, [row.entity]).each {
 
 
@@ -83,6 +83,19 @@ class SchemaGenerator {
 
 
                     }
+                    if(it.crosscheck!=''){
+
+                        sql="SELECT crossCheck from $dataDictTable where entity=? and name=?".toString()
+                        def crossCheckName=gSql.firstRow(sql,[row.entity,it.name]).crossCheck
+
+
+                        sql="SELECT entity,field,ref,condition from crossCheck where name=?".toString()
+                        it.crossCheck=gSql.firstRow(sql,[crossCheckName])
+                        println 'cross check'
+                        println it.crossCheck
+
+
+                    }
                     if (it.crossflow!='') {
 
                         def crossFlowName=it.crossflow
@@ -99,6 +112,7 @@ class SchemaGenerator {
 
                     }
                     it.remove('crossflow');
+                    it.remove('crosscheck');
                     entityProperties.add(it)
 
                 }
@@ -108,7 +122,7 @@ class SchemaGenerator {
                     sqlRow ->
                         sqlRow.collectEntries {
                             k, v ->
-                                if(k=='crossFlow')
+                                if(k=='crossFlow' || k=='crossCheck')
                                     return [k,v];
                                 else
                                 [k.toLowerCase(), v]
@@ -118,16 +132,16 @@ class SchemaGenerator {
                 [schemaName: schemaName, onSave: onSave, properties: entityProperties]
         }
 
-        println 'entity list '
-        println entityList
+        //println 'entity list '
+        //println entityList
         entityList.each {
             entity ->
                 transformedEntityList.add(entityTransformer.transform(entity))
         }
 
 
-        println 'transformted list '
-        println transformedEntityList
+        //println 'transformted list '
+        //println transformedEntityList
         transformedEntityList.each {
             generatedList.add(generator.generate(templateLocation, it))
         }

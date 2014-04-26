@@ -15,6 +15,7 @@ class DataStoreInfoGeneratorSpec extends Specification {
 
     @Autowired
     MockSql mockSql
+
     DataStoreInfoGenerator dataStoreInfoGenerator
 
     String templateLocation = 'templates/dataStoreInfo'
@@ -36,7 +37,7 @@ class DataStoreInfoGeneratorSpec extends Specification {
 
         Sql gSql = Stub() {
 
-            def query = "select distinct entity from entityDesign"
+            def query = "select distinct entity from entityDesign where entity!=''"
             rows(query) >> mockSql.rows(query)
             query = "select name from entityDesign where entity=? and key='primary key'"
             firstRow(query, ['user']) >> mockSql.firstRow(query, ['user'])

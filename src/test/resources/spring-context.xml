@@ -38,7 +38,7 @@
 
     <!-- db Type Mapping -->
     <util:map id="dbTypeMapping">
-        <entry key="int" value="int(11)"></entry>
+        <entry key="int" value="bigint(10)"></entry>
         <entry key="text" value="varchar(100)"></entry>
         <entry key="longtext" value="text"></entry>
         <entry key="timestamp" value="timestamp"></entry>
@@ -46,7 +46,7 @@
         <entry key="select-inline" value="varchar(100)"></entry>
         <entry key="multiselect" value="varchar(100)"></entry>
         <entry key="lookup" value="varchar(100)"></entry>
-        <entry key="auto" value="int(11)"></entry>
+        <entry key="auto" value="bigint(10)"></entry>
         <entry key="gps" value-ref="gps"></entry>
         <entry key="duration" value-ref="duration"></entry>
         <entry key="dropdown" value="varchar(100)"></entry>
@@ -114,7 +114,7 @@
     <util:map id="schemaTypeMapping">
         <entry key="text" value="text"></entry>
         <entry key="select" value="radio"></entry>
-        <entry key="select-inline" value="radio"></entry>
+        <entry key="select-inline" value="radio-inline"></entry>
         <entry key="multiselect" value="checkbox"></entry>
         <entry key="auto" value="hidden"></entry>
         <entry key="textarea" value="textarea"></entry>
@@ -218,9 +218,13 @@
         <constructor-arg index="0" ref="gSql"/>
         <constructor-arg index="1" ref="generator"/>
     </bean>
-
-
     <!-- Web service Generator-->
+
+    <bean class="org.cghr.generator.dataStoreInfo.DataStoreInfoGenerator" id="dataStoreInfoGenerator">
+        <constructor-arg index="0" ref="gSql"/>
+        <constructor-arg index="1" ref="generator"/>
+    </bean>
+
 
 
     <!--Integration Testing Beans Ends-->
