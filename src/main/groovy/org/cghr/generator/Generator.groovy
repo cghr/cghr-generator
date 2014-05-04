@@ -8,7 +8,6 @@ import org.apache.commons.lang3.StringEscapeUtils
  */
 class Generator {
 
-
     Handlebars handlebars
 
 

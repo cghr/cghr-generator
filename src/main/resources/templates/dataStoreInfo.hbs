@@ -1,7 +1,1 @@
-<bean id="dataStoreFactory" class="java.util.HashMap">
-    <constructor-arg>
-        {{#each entities}}
-            <entry key="{{name}}" value="{{keyField}}"></entry>
-        {{/each}}
-    </constructor-arg>
-</bean>
+dataStoreFactory(HashMap, [ {{~#each entities}} {{name}}:'{{keyField}}' {{~#unless @last ~}},{{/unless ~}} {{/each}} ])
