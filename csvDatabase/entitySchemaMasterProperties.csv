@@ -6,6 +6,7 @@ house,areaId,$stateParams.areaId,hidden
 household,datastore,household,hidden
 household,householdId,$stateParams.householdId,hidden
 household,houseId,$stateParams.houseId,hidden
+household,areaId,$stateParams.areaId,hidden
 ,,,
 enumVisit,datastore,enumVisit,hidden
 enumVisit,householdId,$stateParams.householdId,hidden
@@ -16,6 +17,8 @@ hcVisit,householdId,$stateParams.householdId,hidden
 member,datastore,member,hidden
 member,memberId,$stateParams.memberId,hidden
 member,householdId,$stateParams.householdId,hidden
+member,houseId,$stateParams.houseId,hidden
+member,areaId,$stateParams.areaId,hidden
 ,,,
 hcMember,datastore,hcMember,hidden
 hcMember,memberId,$stateParams.memberId,hidden
