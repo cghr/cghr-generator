@@ -24,6 +24,7 @@ class DataStoreInfoGenerator {
             row ->
                 sql = "select name from $entityDesignTable where entity=? and key='primary key'".toString()
                 Map info = gSql.firstRow(sql, [row.entity])
+                if (info == null) return;
                 [name: row.entity, keyField: info.name]
         }
 
@@ -33,7 +34,7 @@ class DataStoreInfoGenerator {
 
     def generateToAFile(String entityDesignTable, String templateLocation, File destFile) {
 
-        destFile.setText(generate(entityDesignTable,templateLocation))
+        destFile.setText(generate(entityDesignTable, templateLocation))
     }
 
 

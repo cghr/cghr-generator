@@ -9,10 +9,27 @@
 
 // Apply the groovy plugin to add support for Groovy
 apply plugin: 'groovy'
-apply plugin: 'eclipse'
+apply plugin: 'maven'
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "net.saliman:gradle-cobertura-plugin:2.2.2"
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:0.4.0'
+    }
+}
+apply plugin: 'cobertura'
+apply plugin: 'coveralls'
 
-sourceCompatibility = 1.6
-version = '0.1'
+cobertura.coverageFormats = ['html', 'xml'] // coveralls plugin depends on xml format report
+cobertura.coverageSourceDirs = sourceSets.main.groovy.srcDirs
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+version = '0.1-beta1'
+group = 'org.cghr'
 
 jar {
     manifest {
@@ -34,7 +51,8 @@ repositories {
 test {
     systemProperties 'property': 'value'
     include 'testResources'
-    include 'src/integrationTest'
+    include 'src/integrationTest/**/*Spec.class'
+    include "**/*Spec.class"
 }
 sourceSets {
     integrationTest
