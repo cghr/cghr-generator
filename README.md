@@ -1,4 +1,4 @@
-CGHR-Generator  [![Build Status](https://travis-ci.org/cghr/cghr-generator.png?branch=master)](https://travis-ci.org/cghr/cghr-generator)[![Coverage Status](https://img.shields.io/coveralls/cghr/cghr-generator.svg)](https://coveralls.io/r/cghr/cghr-generator?branch=master)
+CGHR-Generator  [![Build Status](https://travis-ci.org/cghr/cghr-generator.png?branch=master)](https://travis-ci.org/cghr/cghr-generator)  [![Coverage Status](https://img.shields.io/coveralls/cghr/cghr-generator.svg)](https://coveralls.io/r/cghr/cghr-generator?branch=master)
 =============
 
 
