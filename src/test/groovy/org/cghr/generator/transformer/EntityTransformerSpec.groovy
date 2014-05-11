@@ -25,7 +25,7 @@ class EntityTransformerSpec extends Specification {
         entityTransformer = new EntityTransformer(dbTypeMapping)
 
 
-        Map givenEntity = [name: 'myentity',onSave:'doSomething',properties: [
+        Map givenEntity = [name: 'myentity', onSave: 'doSomething', properties: [
                 [name: 'prop1', type: 'int'],
                 [name: 'prop2', type: 'int'],
                 [name: 'prop3', type: 'text'],
@@ -39,12 +39,12 @@ class EntityTransformerSpec extends Specification {
                 [name: 'prop11', type: 'ffq']
         ]];
 
-        Map expectedTransformedEntity = [name: 'myentity',onSave: 'doSomething', properties: [
+        Map expectedTransformedEntity = [name: 'myentity', onSave: 'doSomething', properties: [
                 [name: 'prop1', type: 'bigint(10)'],
                 [name: 'prop2', type: 'bigint(10)'],
                 [name: 'prop3', type: 'varchar(100)'],
                 [name: 'prop4', type: 'text'],
-                [name: 'prop5', type: 'timestamp'],
+                [name: 'prop5', type: 'timestamp default current_timestamp'],
                 [name: 'prop6', type: 'varchar(100)'],
                 [name: 'prop7', type: 'varchar(100)'],
                 [name: 'prop9', type: 'varchar(100)'],

@@ -1,4 +1,5 @@
 package org.cghr.generator
+
 import org.cghr.generator.dataStoreInfo.DataStoreInfoGenerator
 import org.cghr.generator.db.DbGenerator
 import org.cghr.generator.jsonSchema.SchemaGenerator
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Ignore
 import spock.lang.Specification
+
 /**
  * Created by ravitej on 1/4/14.
  */
@@ -48,9 +50,6 @@ class GenerateAll extends Specification {
 
     }
 
-
-
-
     @Ignore
     def "should generate dbStructure,json schemas and webservice "() {
 
@@ -67,9 +66,9 @@ class GenerateAll extends Specification {
         //Generate data store Info
         dataStoreInfoGenerator.generateToAFile(entityDesignTable, "/templates/dataStoreInfo", dataStoreInfoFile)
 
-        File baseDir=new File('generated/schemas/')
+        File baseDir = new File('generated/schemas/')
         baseDir.listFiles().each {
-            println "'"+it.name+"',"
+            println "'" + it.name + "',"
         }
 
 
