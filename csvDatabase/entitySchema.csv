@@ -29,5 +29,6 @@ ffqNonVeg,hc.ffqDetail.nonveg,hc.ffqDetail.sweets
 ffqSweets,hc.ffqDetail.sweets,hc.ffqDetail.spicemix
 ffqSpiceMix,hc.ffqDetail.spicemix,hc.ffqDetail.snacks
 ffqSnacks,hc.ffqDetail.snacks,hc.ffqDetail.foodAdditives
-ffqFoodAdditives,hc.ffqDetail.foodAdditives,hc.householdDetail.member
+ffqFoodAdditives,hc.ffqDetail.foodAdditives,hc.ffqDetail.invitationCard
+invitationCard,hc.ffqDetail.invitationCard,hc.householdDetail.member
 resampling,resamp.memberDetail.basicInf,resamp.houseDetail.household

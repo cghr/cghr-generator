@@ -1,6 +1,7 @@
 package org.cghr.generator.jsonSchema
 
 import groovy.sql.Sql
+import org.apache.commons.io.FileUtils
 import org.cghr.generator.Generator
 import org.cghr.generator.transformer.EntityTransformer
 
@@ -19,7 +20,6 @@ class SchemaGenerator {
     List entityList = []
     List transformedEntityList = []
     List generatedList = []
-
 
 
     SchemaGenerator(Sql gSql, EntityTransformer entityTransformer, Generator generator, String templateLocation) {
@@ -43,13 +43,13 @@ class SchemaGenerator {
 
 
                 List entityProperties = []
-                List multipleItemTypes = ['select', 'multiselect','select-inline','dropdown','suggest','duration','ffq']
+                List multipleItemTypes = ['select', 'multiselect', 'select-inline', 'dropdown', 'suggest', 'duration', 'ffq']
 
                 def sql = "select name,value,type from $entitySchemaMasterPropertiesTable where entity=?".toString()
                 gSql.rows(sql, [row.entity]).each {
                     entityProperties.add(it)
                 }
-                 sql = "select name,type,valdn,label,flow,image,crossflow,crosscheck from $dataDictTable where entity=?".toString()
+                sql = "select name,type,valdn,label,flow,image,crossflow,crosscheck from $dataDictTable where entity=?".toString()
                 gSql.rows(sql, [row.entity]).each {
 
 
@@ -72,33 +72,33 @@ class SchemaGenerator {
                                 }
                         }
                     }
-                    if('lookup'==it.type){
+                    if ('lookup' == it.type) {
 
-                        sql="SELECT lookup from $dataDictTable where entity=? and name=?".toString()
-                        def lookupName=gSql.firstRow(sql,[row.entity,it.name]).lookup
+                        sql = "SELECT lookup from $dataDictTable where entity=? and name=?".toString()
+                        def lookupName = gSql.firstRow(sql, [row.entity, it.name]).lookup
 
 
-                        sql="SELECT entity,field,ref from lookup where name=?".toString()
-                        it.lookup=gSql.firstRow(sql,[lookupName])
+                        sql = "SELECT entity,field,ref from lookup where name=?".toString()
+                        it.lookup = gSql.firstRow(sql, [lookupName])
 
 
                     }
-                    if(it.crosscheck!=''){
+                    if (it.crosscheck != '') {
 
-                        sql="SELECT crossCheck from $dataDictTable where entity=? and name=?".toString()
-                        def crossCheckName=gSql.firstRow(sql,[row.entity,it.name]).crossCheck
+                        sql = "SELECT crossCheck from $dataDictTable where entity=? and name=?".toString()
+                        def crossCheckName = gSql.firstRow(sql, [row.entity, it.name]).crossCheck
 
 
-                        sql="SELECT entity,field,ref,condition from crossCheck where name=?".toString()
-                        it.crossCheck=gSql.firstRow(sql,[crossCheckName])
+                        sql = "SELECT entity,field,ref,condition from crossCheck where name=?".toString()
+                        it.crossCheck = gSql.firstRow(sql, [crossCheckName])
                         println 'cross check'
                         println it.crossCheck
 
 
                     }
-                    if (it.crossflow!='') {
+                    if (it.crossflow != '') {
 
-                        def crossFlowName=it.crossflow
+                        def crossFlowName = it.crossflow
                         sql = "select entity,field,ref,condition from crossFlow  where name=?".toString()
                         it.crossFlow = gSql.rows(sql, [crossFlowName])
 
@@ -122,10 +122,10 @@ class SchemaGenerator {
                     sqlRow ->
                         sqlRow.collectEntries {
                             k, v ->
-                                if(k=='crossFlow' || k=='crossCheck')
-                                    return [k,v];
+                                if (k == 'crossFlow' || k == 'crossCheck')
+                                    return [k, v];
                                 else
-                                [k.toLowerCase(), v]
+                                    [k.toLowerCase(), v]
                         }
                 }
 
@@ -139,7 +139,6 @@ class SchemaGenerator {
                 transformedEntityList.add(entityTransformer.transform(entity))
         }
 
-
         //println 'transformted list '
         //println transformedEntityList
         transformedEntityList.each {
@@ -151,6 +150,8 @@ class SchemaGenerator {
     }
 
     void generateToAFolder(String entitySchemaTable, String entitySchemaMasterPropertiesTable, String dataDictTable, String tableWithPropertyItemInfo, String folderPath) {
+
+        FileUtils.cleanDirectory(new File(folderPath))
 
         List generatedList = generate(entitySchemaTable, entitySchemaMasterPropertiesTable, dataDictTable, tableWithPropertyItemInfo)
         int i = 0

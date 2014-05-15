@@ -29,7 +29,8 @@ benefitGovtScheme,Others- Specify,Others- Specify
 cookFuel,Electricity,Electricity
 cookFuel,LPG/CNG/ PNG / Biogas,LPG/CNG/ PNG / Biogas
 cookFuel,Kerosene,Kerosene
-cookFuel,"Solid fuel (Coal, wood, charcol etc)","Solid fuel (Coal, wood, charcol etc)"
+cookFuel,"Coal ,Charcoal","Coal ,Charcoal"
+cookFuel,"Wood,cowdung , crop etc)","Wood,cowdung , crop etc)"
 sourceDrinkingWater,Own Tap,Own Tap
 sourceDrinkingWater,Shared Tap,Shared Tap
 sourceDrinkingWater,Handpump/Hapsa,Handpump/Hapsa

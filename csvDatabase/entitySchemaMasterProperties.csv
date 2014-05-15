@@ -19,10 +19,12 @@ member,memberId,$stateParams.memberId,hidden
 member,householdId,$stateParams.householdId,hidden
 member,houseId,$stateParams.houseId,hidden
 member,areaId,$stateParams.areaId,hidden
+member,timelog,timestamp,hidden
 ,,,
 hcMember,datastore,hcMember,hidden
 hcMember,memberId,$stateParams.memberId,hidden
 hcMember,user,user.id,hidden
+hcMember,timelog,timestamp,hidden
 ,,,
 householdCommonQs,datastore,householdCommonQs,hidden
 householdCommonQs,householdId,$stateParams.householdId,hidden
@@ -102,3 +104,5 @@ ffqFoodAdditives,starttime,timestamp,hidden
 resampling,datastore,resampling,hidden
 resampling,memberId,$stateParams.memberId,hidden
 resampling,starttime,timestamp,hidden
+invitationCard,datastore,invitationCard,hidden
+invitationCard,memberId,$stateParams.memberId,hidden
