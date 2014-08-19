@@ -39,7 +39,7 @@ class GeneratorSpec extends Specification {
     def getPropertiesJsonSchemaTemplateData(String entity) {
 
         List multipleItems = ['radio', 'checkbox', 'radio-inline', 'dropdown', 'suggest', 'duration']
-        String sql = "select name,type,label,value,valdn,flow,image,crossFlow,crossCheck from jsonSchemaTemplateData where entity=?".toString()
+        String sql = "select name,type,label,value,valdn,flow,image,crossFlow,crossCheck,help from jsonSchemaTemplateData where entity=?".toString()
         def rows = mockSql.rows(sql, [entity])
         rows = rows.collect {
 
@@ -59,18 +59,18 @@ class GeneratorSpec extends Specification {
                 it.lookup = mockSql.firstRow(sql, [lookupName])
 
             }
-            if(it.crosscheck!=''){
+            if (it.crosscheck != '') {
 
-                sql="SELECT crosscheck from dataDict where entity=? and name=?".toString()
-                def crossCheckName=mockSql.firstRow(sql,[entity,it.name]).crosscheck
+                sql = "SELECT crosscheck from dataDict where entity=? and name=?".toString()
+                def crossCheckName = mockSql.firstRow(sql, [entity, it.name]).crosscheck
 
 
-                sql="SELECT entity,field,ref,condition from crossCheck where name=?".toString()
-                it.crossCheck=mockSql.firstRow(sql,[crossCheckName])
+                sql = "SELECT entity,field,ref,condition from crossCheck where name=?".toString()
+                it.crossCheck = mockSql.firstRow(sql, [crossCheckName])
 
 
             }
-            if (it.crossflow!='') {
+            if (it.crossflow != '') {
 
                 sql = "select entity,field,ref,condition from crossFlow  where name=?".toString()
                 it.crossFlow = mockSql.rows(sql, [it.crossflow])

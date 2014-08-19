@@ -48,7 +48,8 @@
         <entry key="lookup" value="varchar(100)"></entry>
         <entry key="auto" value="bigint(10)"></entry>
         <entry key="gps" value-ref="gps"></entry>
-        <entry key="duration" value-ref="duration"></entry>
+        <entry key="text_select" value-ref="text_select"></entry>
+        <entry key="select_text" value-ref="select_text"></entry>
         <entry key="dropdown" value="varchar(100)"></entry>
         <entry key="suggest" value="varchar(100)"></entry>
         <entry key="ffq" value-ref="ffq"></entry>
@@ -71,17 +72,31 @@
         <entry key="type" value="varchar(100)"></entry>
     </util:map>
 
-    <util:list id="duration">
-        <ref bean="duration_value"></ref>
-        <ref bean="duration_unit"></ref>
+    <util:list id="text_select">
+        <ref bean="text_select_value"></ref>
+        <ref bean="text_select_unit"></ref>
     </util:list>
 
-    <util:map id="duration_value">
+    <util:map id="text_select_value">
+    <entry key="name" value="{name}_value"></entry>
+        <entry key="type" value="varchar(100)"></entry>
+    </util:map>
+
+    <util:map id="text_select_unit">
+    <entry key="name" value="{name}_unit"></entry>
+        <entry key="type" value="varchar(100)"></entry>
+    </util:map>
+    <util:list id="select_text">
+        <ref bean="select_text_value"></ref>
+        <ref bean="select_text_unit"></ref>
+    </util:list>
+
+    <util:map id="select_text_value">
         <entry key="name" value="{name}_value"></entry>
         <entry key="type" value="varchar(100)"></entry>
     </util:map>
 
-    <util:map id="duration_unit">
+    <util:map id="select_text_unit">
         <entry key="name" value="{name}_unit"></entry>
         <entry key="type" value="varchar(100)"></entry>
     </util:map>
@@ -121,7 +136,8 @@
         <entry key="heading" value="heading"></entry>
         <entry key="lookup" value="lookup"></entry>
         <entry key="gps" value="gps"></entry>
-        <entry key="duration" value="duration"></entry>
+        <entry key="text_select" value="text_select"></entry>
+        <entry key="select_text" value="select_text"></entry>
         <entry key="dropdown" value="dropdown"></entry>
         <entry key="suggest" value="suggest"></entry>
         <entry key="hidden" value="hidden"></entry>
@@ -224,7 +240,6 @@
         <constructor-arg index="0" ref="gSql"/>
         <constructor-arg index="1" ref="generator"/>
     </bean>
-
 
 
     <!--Integration Testing Beans Ends-->

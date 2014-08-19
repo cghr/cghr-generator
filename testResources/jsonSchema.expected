@@ -12,7 +12,8 @@
         "image":"",
         "lookup":{},
         "crossFlow":[],
-        "crossCheck":{}
+        "crossCheck":{},
+        "help":""
     }, {
         "name": "countryId",
         "type": "hidden",
@@ -24,7 +25,8 @@
         "image":"",
         "lookup":{},
         "crossFlow":[],
-        "crossCheck":{}
+        "crossCheck":{},
+        "help":""
     },{
         "name": "continentId",
         "type": "hidden",
@@ -36,7 +38,8 @@
          "image":"",
          "lookup":{},
          "crossFlow":[],
-         "crossCheck":{}
+         "crossCheck":{},
+         "help":""
     },{
         "name": "name",
         "type": "text",
@@ -48,7 +51,9 @@
         "image":"",
         "lookup":{},
         "crossFlow":[],
-        "crossCheck":{}
+        "crossCheck":{},
+        "help":"sampleHelp"
+
     }, {
         "name": "language",
         "type": "radio",
@@ -76,7 +81,8 @@
            "ref":"countryId",
            "condition":"continent=='asia'"
          }],
-         "crossCheck":{}
+         "crossCheck":{},
+         "help":""
     },{
         "name":"capital",
         "type":"lookup",
@@ -97,7 +103,8 @@
         "field":"name",
         "ref":"capitalId",
         "condition":"maxlength[{value}]"
-        }
+        },
+        "help":""
 
     }
     ]
