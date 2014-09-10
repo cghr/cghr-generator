@@ -11,6 +11,7 @@
         "items": [],
         "image":"",
         "lookup":{},
+        "metadata":{},
         "crossFlow":[],
         "crossCheck":{},
         "help":""
@@ -24,6 +25,7 @@
         "items": [],
         "image":"",
         "lookup":{},
+        "metadata":{},
         "crossFlow":[],
         "crossCheck":{},
         "help":""
@@ -37,6 +39,7 @@
          "items": [],
          "image":"",
          "lookup":{},
+         "metadata":{},
          "crossFlow":[],
          "crossCheck":{},
          "help":""
@@ -50,6 +53,7 @@
         "items": [],
         "image":"",
         "lookup":{},
+        "metadata":{},
         "crossFlow":[],
         "crossCheck":{},
         "help":"sampleHelp"
@@ -63,13 +67,17 @@
         "value":"",
         "items": [{
             "text": "Hindi",
-            "value": "hindi"
+            "value": "hindi",
+            "valdn":""
         }, {
             "text": "English",
-            "value": "english"
+            "value": "english",
+            "valdn":""
+
         }],
         "image":"example.jpg",
         "lookup":{},
+        "metadata":{},
         "crossFlow":[{
             "entity":"language",
             "field":"name",
@@ -97,6 +105,7 @@
         "field":"country",
         "ref":"continentId"
         },
+        "metadata":{},
         "crossFlow":[],
         "crossCheck":{
         "entity":"capitals",

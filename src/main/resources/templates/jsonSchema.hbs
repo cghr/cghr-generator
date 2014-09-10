@@ -13,7 +13,7 @@
         "value":"{{value}}",
         "items":[
         {{#each items}}
-            {"text":"{{text}}","value":"{{value}}"}
+            {"text":"{{text}}","value":"{{value}}","valdn":"{{valdn}}"}
             {{~#unless @last ~}},{{/unless}}
         {{/each}}
         ],
@@ -25,6 +25,14 @@
             "ref":"{{ref}}"
         {{/with}}
         },
+        "metadata":{
+                {{#with metadata}}
+                    "entity":"{{entity}}",
+                    "field":"{{field}}",
+                    "ref":"{{ref}}",
+                    "refValue":"{{refValue}}"
+                {{/with}}
+                },
         "crossFlow":[
         {{#each crossFlow}}
         {"entity":"{{entity}}","field":"{{field}}","ref":"{{ref}}","condition":"{{condition}}"}

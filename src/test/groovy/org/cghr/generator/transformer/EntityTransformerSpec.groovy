@@ -35,7 +35,7 @@ class EntityTransformerSpec extends Specification {
                 [name: 'prop7', type: 'lookup'],
                 [name: 'prop8', type: 'gps'],
                 [name: 'prop9', type: 'multiselect'],
-                [name: 'prop10', type: 'duration'],
+                [name: 'prop10', type: 'text_select'],
                 [name: 'prop11', type: 'ffq']
         ]];
 

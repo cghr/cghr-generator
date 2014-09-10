@@ -1,4 +1,5 @@
 package org.cghr.generator
+
 import com.github.jknack.handlebars.Handlebars
 import com.github.jknack.handlebars.Template
 import org.apache.commons.lang3.StringEscapeUtils
@@ -12,7 +13,7 @@ class Generator {
 
 
     Generator(Handlebars handlebars) {
-        this.handlebars=handlebars
+        this.handlebars = handlebars
     }
 
     String generate(String templateLocation, Map context) {

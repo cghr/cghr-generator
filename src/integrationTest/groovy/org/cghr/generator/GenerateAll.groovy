@@ -1,5 +1,4 @@
 package org.cghr.generator
-
 import org.cghr.generator.dataStoreInfo.DataStoreInfoGenerator
 import org.cghr.generator.db.DbGenerator
 import org.cghr.generator.jsonSchema.SchemaGenerator
@@ -7,7 +6,6 @@ import org.cghr.generator.webservice.WebServiceGenerator
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification
-
 /**
  * Created by ravitej on 1/4/14.
  */
@@ -49,7 +47,7 @@ class GenerateAll extends Specification {
 
     }
 
-    //@Ignore
+
     def "should generate dbStructure,json schemas and webservice "() {
 
         given:

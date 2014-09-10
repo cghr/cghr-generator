@@ -43,7 +43,7 @@ class SchemaGenerator {
 
 
                 List entityProperties = []
-                List multipleItemTypes = ['select', 'multiselect', 'select-inline', 'dropdown', 'suggest', 'select_text', 'text_select', 'ffq']
+                List multipleItemTypes = ['select', 'multiselect', 'select-inline', 'dropdown', 'suggest', 'select_text', 'select_singletext', 'text_select', 'ffq']
 
                 def sql = "select name,value,type from $entitySchemaMasterPropertiesTable where entity=?".toString()
                 gSql.rows(sql, [row.entity]).each {
@@ -62,7 +62,7 @@ class SchemaGenerator {
                         String clabel = gSql.rows(sql, [row.entity, it.name])[0].clabel
 
 
-                        sql = "SELECT  text,value   FROM $tableWithPropertyItemInfo WHERE name=?".toString()
+                        sql = "SELECT  text,value,valdn   FROM $tableWithPropertyItemInfo WHERE name=?".toString()
                         it.items = gSql.rows(sql, [clabel])
                         it.items = it.items.collect {
                             sqlRow ->
@@ -81,7 +81,16 @@ class SchemaGenerator {
                         sql = "SELECT entity,field,ref from lookup where name=?".toString()
                         it.lookup = gSql.firstRow(sql, [lookupName])
 
+                    }
+                    if ('dynamic_dropdown' == it.type) {
 
+                        println row.entity
+                        println it.name
+                        sql = "SELECT dynamic_dropdown from $dataDictTable where entity=? and name=?".toString()
+                        def dynamicDropdownName = gSql.firstRow(sql, [row.entity, it.name]).dynamic_dropdown
+
+                        sql = "SELECT entity,field,ref,refValue from dynamicDropdown where name=?".toString()
+                        it.metadata = gSql.firstRow(sql, [dynamicDropdownName])
                     }
                     if (it.crosscheck != '') {
 
@@ -91,8 +100,6 @@ class SchemaGenerator {
 
                         sql = "SELECT entity,field,ref,condition from crossCheck where name=?".toString()
                         it.crossCheck = gSql.firstRow(sql, [crossCheckName])
-                        println 'cross check'
-                        println it.crossCheck
 
 
                     }
@@ -100,6 +107,8 @@ class SchemaGenerator {
 
                         def crossFlowName = it.crossflow
                         sql = "select entity,field,ref,condition from crossFlow  where name=?".toString()
+
+                        //println gSql.rows("select * from crossFlow")
                         it.crossFlow = gSql.rows(sql, [crossFlowName])
 
                         it.crossFlow = it.crossFlow.collect {
@@ -132,15 +141,11 @@ class SchemaGenerator {
                 [schemaName: schemaName, onSave: onSave, properties: entityProperties]
         }
 
-        println 'entity list '
-        println entityList
         entityList.each {
             entity ->
                 transformedEntityList.add(entityTransformer.transform(entity))
         }
 
-        println 'transformted list '
-        println transformedEntityList
         transformedEntityList.each {
             generatedList.add(generator.generate(templateLocation, it))
         }

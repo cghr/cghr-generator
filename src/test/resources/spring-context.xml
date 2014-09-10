@@ -50,9 +50,13 @@
         <entry key="gps" value-ref="gps"></entry>
         <entry key="text_select" value-ref="text_select"></entry>
         <entry key="select_text" value-ref="select_text"></entry>
+        <entry key="select_singletext" value-ref="select_text"></entry>
         <entry key="dropdown" value="varchar(100)"></entry>
+        <entry key="dynamic_dropdown" value="varchar(100)"></entry>
         <entry key="suggest" value="varchar(100)"></entry>
         <entry key="ffq" value-ref="ffq"></entry>
+        <entry key="alcoholFreq" value-ref="alcoholFreq"></entry>
+        <entry key="fmhDisease" value-ref="fmhDisease"></entry>
 
     </util:map>
 
@@ -122,6 +126,70 @@
         <entry key="type" value="varchar(100)"></entry>
     </util:map>
 
+    <!-- Alcohol Freq -->
+    <util:list id="alcoholFreq">
+        <ref bean="freq"></ref>
+        <ref bean="typicalDay"></ref>
+        <ref bean="specialDay"></ref>
+        <ref bean="lastTime"></ref>
+    </util:list>
+
+    <util:map id="freq">
+        <entry key="name" value="{name}_frequency"></entry>
+        <entry key="type" value="varchar(100)"></entry>
+    </util:map>
+
+    <util:map id="typicalDay">
+        <entry key="name" value="{name}_typicalDay"></entry>
+        <entry key="type" value="varchar(100)"></entry>
+    </util:map>
+
+    <util:map id="specialDay">
+        <entry key="name" value="{name}_specialDay"></entry>
+        <entry key="type" value="varchar(100)"></entry>
+    </util:map>
+
+    <util:map id="lastTime">
+        <entry key="name" value="{name}_lastTime"></entry>
+        <entry key="type" value="varchar(100)"></entry>
+    </util:map>
+
+
+    <!-- Fmh Disease -->
+    <util:list id="fmhDisease">
+        <ref bean="stroke"></ref>
+        <ref bean="heartAttack"></ref>
+        <ref bean="diabetes"></ref>
+        <ref bean="mentalDisorder"></ref>
+        <ref bean="cancer"></ref>
+    </util:list>
+
+    <util:map id="stroke">
+        <entry key="name" value="{name}_stroke"></entry>
+        <entry key="type" value="varchar(100)"></entry>
+    </util:map>
+
+    <util:map id="heartAttack">
+        <entry key="name" value="{name}_heartAttack"></entry>
+        <entry key="type" value="varchar(100)"></entry>
+    </util:map>
+
+    <util:map id="diabetes">
+        <entry key="name" value="{name}_diabetes"></entry>
+        <entry key="type" value="varchar(100)"></entry>
+    </util:map>
+
+    <util:map id="mentalDisorder">
+        <entry key="name" value="{name}_mentalDisorder"></entry>
+        <entry key="type" value="varchar(100)"></entry>
+    </util:map>
+
+    <util:map id="cancer">
+        <entry key="name" value="{name}_cancer"></entry>
+        <entry key="type" value="varchar(100)"></entry>
+    </util:map>
+
+
     <!-- db Type Mapping Ends-->
 
 
@@ -138,10 +206,14 @@
         <entry key="gps" value="gps"></entry>
         <entry key="text_select" value="text_select"></entry>
         <entry key="select_text" value="select_text"></entry>
+        <entry key="select_singletext" value="select_singletext"></entry>
         <entry key="dropdown" value="dropdown"></entry>
+        <entry key="dynamic_dropdown" value="dynamic_dropdown"></entry>
         <entry key="suggest" value="suggest"></entry>
         <entry key="hidden" value="hidden"></entry>
         <entry key="ffq" value="ffq"></entry>
+        <entry key="alcoholFreq" value="alcoholFreq"></entry>
+        <entry key="fmhDisease" value="fmhDisease"></entry>
 
 
     </util:map>

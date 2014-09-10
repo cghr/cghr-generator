@@ -52,7 +52,7 @@ class SchemaGeneratorSpec extends Specification {
 
                 String clabel = mockSql.rows(sql, [entity, it.name])[0].clabel
 
-                sql = "select text,value from clabel where name=?".toString()
+                sql = "select text,value,valdn from clabel where name=?".toString()
                 it.items = mockSql.rows(sql, [clabel])
             }
             if ("lookup" == it.type) {
@@ -106,7 +106,7 @@ class SchemaGeneratorSpec extends Specification {
 
                 String clabel = mockSql.rows(sql, [entity, it.name])[0].clabel
 
-                sql = "select text,value from clabel where name=?".toString()
+                sql = "select text,value,valdn from clabel where name=?".toString()
                 it.items = mockSql.rows(sql, [clabel])
 
             }
@@ -151,7 +151,7 @@ class SchemaGeneratorSpec extends Specification {
             sql = "SELECT  clabel FROM  dataDict WHERE entity=? and name=?".toString()
             rows(sql, ['country', 'language']) >> mockSql.rows(sql, ['country', 'language'])
 
-            sql = "SELECT  text,value   FROM clabel WHERE name=?"
+            sql = "SELECT  text,value,valdn   FROM clabel WHERE name=?"
             rows(sql, ['language']) >> mockSql.rows(sql, ['language'])
 
             sql = "SELECT lookup from dataDict where entity=? and name=?"

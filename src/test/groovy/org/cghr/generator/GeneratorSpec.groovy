@@ -44,7 +44,7 @@ class GeneratorSpec extends Specification {
         rows = rows.collect {
 
             if (multipleItems.contains(it.type)) {
-                sql = "select text,value from itemsTemplateData  where name=?".toString()
+                sql = "select text,value,valdn from itemsTemplateData  where name=?".toString()
                 it.items = mockSql.rows(sql, [it.name])
                 // it.items=it.items.collect lowerCaseKeys
 

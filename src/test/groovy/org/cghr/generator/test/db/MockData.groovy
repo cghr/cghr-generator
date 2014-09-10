@@ -101,9 +101,9 @@ class MockData {
                             [name: 'country_id', type: 'auto', value: '$stateParams.countryId'],
                             [name: 'name', type: 'text', label: 'Name', valdn: 'required', flow: "data.prop1 == 'yes' && data.prop2=='No'"],
                             [name: 'continent', type: 'select', label: 'Continent', valdn: 'required', items: [
-                                    [text: 'Asia', value: 'asia'],
-                                    [text: 'Europe', value: 'europe'],
-                                    [text: 'Africa', value: 'africa']
+                                    [text: 'Asia', value: 'asia',valdn: ''],
+                                    [text: 'Europe', value: 'europe',valdn: ''],
+                                    [text: 'Africa', value: 'africa',valdn: '']
                             ]]]
 
             ]
@@ -117,9 +117,9 @@ class MockData {
                             [name: 'id', label: '', type: 'auto', value: '$stateParams.countryId', valdn: '', flow: ''],
                             [name: 'name', label: 'Name', type: 'text', value: '', valdn: 'required', flow: "data.prop1 == 'yes' && data.prop2=='No'"],
                             [name: 'continent', label: 'Continent', type: 'select', value: '', valdn: 'required', flow: '', items: [
-                                    [text: 'Asia', value: 'asia'],
-                                    [text: 'Europe', value: 'europe'],
-                                    [text: 'Africa', value: 'africa']
+                                    [text: 'Asia', value: 'asia',valdn: ''],
+                                    [text: 'Europe', value: 'europe',valdn: ''],
+                                    [text: 'Africa', value: 'africa',valdn: '']
                             ]]
                     ]
             ]
@@ -134,9 +134,9 @@ class MockData {
                             [name: 'id', label: '', type: 'hidden', value: '$stateParams.countryId', valdn: '', flow: ''],
                             [name: 'name', label: 'Name', type: 'text', value: '', valdn: 'required', flow: "data.prop1 == 'yes' && data.prop2=='No'"],
                             [name: 'continent', label: 'Continent', type: 'radio', value: '', valdn: 'required', flow: '', items: [
-                                    [text: 'Asia', value: 'asia'],
-                                    [text: 'Europe', value: 'europe'],
-                                    [text: 'Africa', value: 'africa']
+                                    [text: 'Asia', value: 'asia',valdn: ''],
+                                    [text: 'Europe', value: 'europe',valdn: ''],
+                                    [text: 'Africa', value: 'africa',valdn: '']
                             ]]
                     ]
             ]
@@ -150,9 +150,9 @@ class MockData {
                             [name: 'country_id', type: 'hidden', value: '$stateParams.countryId'],
                             [name: 'name', type: 'text', label: 'Name', valdn: 'required', flow: "data.prop1 == 'yes' && data.prop2=='No'"],
                             [name: 'continent', type: 'radio', label: 'Continent', valdn: 'required', items: [
-                                    [text: 'Asia', value: 'asia'],
-                                    [text: 'Europe', value: 'europe'],
-                                    [text: 'Africa', value: 'africa']
+                                    [text: 'Asia', value: 'asia',valdn: ''],
+                                    [text: 'Europe', value: 'europe',valdn: ''],
+                                    [text: 'Africa', value: 'africa',valdn: '']
                             ]]]
 
             ]
