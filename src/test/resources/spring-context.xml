@@ -82,12 +82,12 @@
     </util:list>
 
     <util:map id="text_select_value">
-    <entry key="name" value="{name}_value"></entry>
+        <entry key="name" value="{name}_value"></entry>
         <entry key="type" value="varchar(100)"></entry>
     </util:map>
 
     <util:map id="text_select_unit">
-    <entry key="name" value="{name}_unit"></entry>
+        <entry key="name" value="{name}_unit"></entry>
         <entry key="type" value="varchar(100)"></entry>
     </util:map>
     <util:list id="select_text">
@@ -188,8 +188,6 @@
         <entry key="name" value="{name}_cancer"></entry>
         <entry key="type" value="varchar(100)"></entry>
     </util:map>
-
-
     <!-- db Type Mapping Ends-->
 
 
@@ -214,8 +212,6 @@
         <entry key="ffq" value="ffq"></entry>
         <entry key="alcoholFreq" value="alcoholFreq"></entry>
         <entry key="fmhDisease" value="fmhDisease"></entry>
-
-
     </util:map>
 
     <!-- Schema Type Mapping Ends-->

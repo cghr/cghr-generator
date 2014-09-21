@@ -35,8 +35,6 @@ class WebServiceGenerator {
         }
 
         generator.generate(templateLocation, [reports: reports])
-
-
     }
 
     def generateToAFile(String webServiceDesignTable, String templateLocation, File file) {

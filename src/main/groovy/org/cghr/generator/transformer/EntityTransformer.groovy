@@ -4,7 +4,7 @@ package org.cghr.generator.transformer
  */
 class EntityTransformer {
 
-    Map transformedEntity=[:]
+    Map transformedEntity = [:]
     Map propertyTypeMapping
 
     EntityTransformer(Map propertyTypeMapping) {
@@ -15,26 +15,26 @@ class EntityTransformer {
     Map transform(Map givenEntity) {
 
 
-        transformedEntity=givenEntity //Copy all properties initially
+        transformedEntity = givenEntity //Copy all properties initially
 
-        List multipleProperties=[]
+        List multipleProperties = []
 
 
         transformedEntity.properties = givenEntity.properties.collect {
 
-            Map transformedProperty=it
-            if(propertyTypeMapping.get(it.type) instanceof List){
+            Map transformedProperty = it
+            if (propertyTypeMapping.get(it.type) instanceof List) {
 
-                List propertyList=propertyTypeMapping.get(it.type)
+                List propertyList = propertyTypeMapping.get(it.type)
                 propertyList.each {
-                    prop->
-                    multipleProperties.add([name:prop.name.replace("{name}",it.name),type:prop.type])
+                    prop ->
+                        multipleProperties.add([name: prop.name.replace("{name}", it.name), type: prop.type])
 
                 }
                 return [:]
 
             }
-            transformedProperty.type=propertyTypeMapping.get(it.type)
+            transformedProperty.type = propertyTypeMapping.get(it.type)
             return transformedProperty
 
         }
@@ -42,7 +42,7 @@ class EntityTransformer {
             transformedEntity.properties.add(it)
         }
 
-        transformedEntity.properties= transformedEntity.properties.findAll{
+        transformedEntity.properties = transformedEntity.properties.findAll {
             !it.isEmpty()
         }
 

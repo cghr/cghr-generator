@@ -61,7 +61,7 @@ class SchemaGeneratorSpec extends Specification {
                 def lookupName = mockSql.firstRow(sql, [entity, it.name]).lookup
 
 
-                sql = "SELECT entity,field,ref from lookup where name=?".toString()
+                sql = "SELECT entity,field,ref,condition from lookup where name=?".toString()
                 it.lookup = mockSql.firstRow(sql, [lookupName])
 
             }
@@ -158,7 +158,7 @@ class SchemaGeneratorSpec extends Specification {
             firstRow(sql, ['country', 'capital']) >> mockSql.firstRow(sql, ['country', 'capital'])
 
 
-            sql = "SELECT entity,field,ref from lookup where name=?".toString()
+            sql = "SELECT entity,field,ref,condition from lookup where name=?".toString()
             firstRow(sql, ['capital']) >> mockSql.firstRow(sql, ['capital'])
 
             sql = "SELECT crossCheck from dataDict where entity=? and name=?"

@@ -78,7 +78,7 @@ class SchemaGenerator {
                         def lookupName = gSql.firstRow(sql, [row.entity, it.name]).lookup
 
 
-                        sql = "SELECT entity,field,ref from lookup where name=?".toString()
+                        sql = "SELECT entity,field,ref,condition from lookup where name=?".toString()
                         it.lookup = gSql.firstRow(sql, [lookupName])
 
                     }

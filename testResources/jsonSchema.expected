@@ -103,7 +103,8 @@
         "lookup":{
         "entity":"continent",
         "field":"country",
-        "ref":"continentId"
+        "ref":"continentId",
+        "condition":""
         },
         "metadata":{},
         "crossFlow":[],

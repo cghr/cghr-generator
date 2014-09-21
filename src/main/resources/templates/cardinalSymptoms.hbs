@@ -1,0 +1,6 @@
+[
+{{~#each symptoms}}
+{"name":"{{name}}","text":"{{text}}","keywords":"{{keywords}}"}
+{{~#unless @last ~}},{{~/unless ~}}
+{{~/each ~}}
+]
