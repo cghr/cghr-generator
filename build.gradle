@@ -54,22 +54,50 @@ test {
     include 'src/integrationTest/**/*Spec.class'
     include "**/*Spec.class"
 }
+
 sourceSets {
-    integrationTest
+    // Note that just declaring this sourceset creates two configurations.
+    integrationTest {
+        groovy {
+            compileClasspath += main.output
+            runtimeClasspath += main.output
+        }
+    }
+}
+
+configurations {
+    intTestCompile.extendsFrom testCompile
+    intTestRuntime.extendsFrom testRuntime
 }
 
 task intTest(type: Test) {
+    description = "Run integration tests (located in src/intTest/...)."
     testClassesDir = sourceSets.integrationTest.output.classesDir
     classpath = sourceSets.integrationTest.runtimeClasspath
-
 }
+
+//sourceSets {
+//    integrationTest
+//}
+//
+//
+//task intTest(type: Test) {
+//    testClassesDir = sourceSets.integrationTest.output.classesDir
+//    classpath = sourceSets.integrationTest.runtimeClasspath
+//
+//}
 
 String springVersion = '3.2.5.RELEASE'
 // In this section you declare the dependencies for your production and test code
-
+configurations {
+    provided
+    provided.extendsFrom(compile)
+}
 
 assemble.dependsOn clean
 check.dependsOn intTest
+
+
 
 dependencies {
 
