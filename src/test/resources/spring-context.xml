@@ -130,7 +130,7 @@
     <util:list id="alcoholFreq">
         <ref bean="freq"></ref>
         <ref bean="typicalDay"></ref>
-        <ref bean="specialDay"></ref>
+
         <ref bean="lastTime"></ref>
     </util:list>
 
@@ -144,10 +144,6 @@
         <entry key="type" value="varchar(100)"></entry>
     </util:map>
 
-    <util:map id="specialDay">
-        <entry key="name" value="{name}_specialDay"></entry>
-        <entry key="type" value="varchar(100)"></entry>
-    </util:map>
 
     <util:map id="lastTime">
         <entry key="name" value="{name}_lastTime"></entry>

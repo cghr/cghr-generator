@@ -24,6 +24,8 @@ class DataStoreInfoGenerator {
             row ->
                 sql = "select name from $entityDesignTable where entity=? and key='primary key'".toString()
                 Map info = gSql.firstRow(sql, [row.entity])
+                println row.entity
+                println info
                 if (info == null) return;
                 [name: row.entity, keyField: info.name]
         }

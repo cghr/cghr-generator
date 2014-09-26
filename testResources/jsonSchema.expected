@@ -1,6 +1,10 @@
 {
     "schemaName":"country.basicInf",
     "onSave": "country.next",
+    "condition":"",
+    "success":"",
+    "fail":"",
+    "crossEntity":"",
     "properties": [{
         "name": "datastore",
         "type": "hidden",

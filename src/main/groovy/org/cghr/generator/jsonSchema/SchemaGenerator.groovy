@@ -36,9 +36,15 @@ class SchemaGenerator {
         entityList = rows.collect {
             row ->
 
-                def query = "select schemaName,onSave from $entitySchemaTable where entity=?".toString()
+                def query = "select schemaName,onSave,condition,success,fail,crossEntity from $entitySchemaTable where entity=?".toString()
                 String onSave = gSql.firstRow(query, [row.entity]).onSave
                 String schemaName = gSql.firstRow(query, [row.entity]).schemaName
+
+                Map entitySchemaRow = gSql.firstRow(query, [row.entity])
+                String condition = entitySchemaRow.condition
+                String success = entitySchemaRow.success
+                String fail = entitySchemaRow.fail
+                String crossEntity = entitySchemaRow.crossEntity
 
 
 
@@ -138,7 +144,7 @@ class SchemaGenerator {
                         }
                 }
 
-                [schemaName: schemaName, onSave: onSave, properties: entityProperties]
+                [schemaName: schemaName, condition: condition, success: success, fail: fail, crossEntity: crossEntity, onSave: onSave, properties: entityProperties]
         }
 
         entityList.each {

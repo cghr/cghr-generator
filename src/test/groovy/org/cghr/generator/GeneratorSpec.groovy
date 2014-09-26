@@ -30,6 +30,7 @@ class GeneratorSpec extends Specification {
         }
     }
 
+
     def getPropertiesDbTemplateData(String entity) {
 
         String sql = "select name,type,key,strategy from dbTemplateData where entity=?".toString()

@@ -1,2 +1,2 @@
-entity,entityAlias,schemaName,onSave
-country,country,country.basicInf,country.next
+entity,entityAlias,schemaName,onSave,condition,success,fail,crossEntity
+country,country,country.basicInf,country.next,,,,

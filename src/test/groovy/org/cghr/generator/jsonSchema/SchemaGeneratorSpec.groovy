@@ -131,7 +131,7 @@ class SchemaGeneratorSpec extends Specification {
             def sql = "SELECT DISTINCT entity FROM entitySchema WHERE  entity!=''".toString()
             rows(sql) >> mockSql.rows(sql)
 
-            sql = "select schemaName,onSave from entitySchema where entity=?".toString()
+            sql = "select schemaName,onSave,condition,success,fail,crossEntity from entitySchema where entity=?".toString()
 
             firstRow(sql, ['user']) >> mockSql.firstRow(sql, ['user'])
             firstRow(sql, ['userlog']) >> mockSql.firstRow(sql, ['userlog'])
@@ -174,13 +174,13 @@ class SchemaGeneratorSpec extends Specification {
         }
         EntityTransformer entityTransformer = Stub() {
 
-            transform([schemaName: 'country.basicInf', onSave: 'country.next', properties: rawDataOf('country')]) >> [schemaName: 'country.basicInf', onSave: 'country.next', properties: transformedData('country')];
-            transform([schemaName: 'state.basicInf', onSave: 'state.next', properties: rawDataOf('state')]) >> [schemaName: 'state.basicInf', onSave: 'state.next', properties: transformedData('state')]
+            transform([schemaName: 'country.basicInf', condition: '', success: '', fail: '', crossEntity: '', onSave: 'country.next', properties: rawDataOf('country')]) >> [schemaName: 'country.basicInf', condition: '', success: '', fail: '', crossEntity: '', onSave: 'country.next', properties: transformedData('country')];
+            transform([schemaName: 'state.basicInf', condition: '', success: '', fail: '', crossEntity: '', onSave: 'state.next', properties: rawDataOf('state')]) >> [schemaName: 'state.basicInf', condition: '', success: '', fail: '', crossEntity: '', onSave: 'state.next', properties: transformedData('state')]
 
 
         }
         Generator generator = Stub() {
-            generate(templateLocation, [schemaName: 'country.basicInf', onSave: 'country.next', properties: transformedData('country')]) >> new File(expectedJsonStruct).text
+            generate(templateLocation, [schemaName: 'country.basicInf', condition: '', success: '', fail: '', crossEntity: '', onSave: 'country.next', properties: transformedData('country')]) >> new File(expectedJsonStruct).text
 
         }
 
