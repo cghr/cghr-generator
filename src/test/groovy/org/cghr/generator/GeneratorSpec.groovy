@@ -4,6 +4,7 @@ import com.github.jknack.handlebars.Handlebars
 import org.cghr.generator.test.db.MockSql
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
+import org.springframework.test.context.support.GenericGroovyXmlContextLoader
 import spock.lang.Shared
 import spock.lang.Specification
 
@@ -11,7 +12,7 @@ import spock.lang.Specification
  * Created by ravitej on 25/3/14.
  */
 
-@ContextConfiguration(locations = "classpath:spring-context.xml")
+@ContextConfiguration(locations = "classpath:spring-context.groovy", loader = GenericGroovyXmlContextLoader)
 class GeneratorSpec extends Specification {
 
 

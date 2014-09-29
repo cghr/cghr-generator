@@ -1,17 +1,20 @@
 package org.cghr.generator.db
+
 import groovy.sql.Sql
 import org.cghr.generator.Generator
 import org.cghr.generator.test.db.MockSql
 import org.cghr.generator.transformer.EntityTransformer
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
+import org.springframework.test.context.support.GenericGroovyXmlContextLoader
 import spock.lang.Shared
 import spock.lang.Specification
+
 /**
  * Created by ravitej on 27/3/14.
  */
 
-@ContextConfiguration(locations = "classpath:spring-context.xml")
+@ContextConfiguration(locations = "classpath:spring-context.groovy", loader = GenericGroovyXmlContextLoader)
 class DbGeneratorSpec extends Specification {
 
 
@@ -65,7 +68,6 @@ class DbGeneratorSpec extends Specification {
     def setup() {
 
 
-
         String templateLocation = 'templates/db.hbs'
         Sql gSql = Stub() {
 
@@ -75,8 +77,8 @@ class DbGeneratorSpec extends Specification {
             String sql2 = "SELECT name,type,key,strategy FROM entityDesign WHERE entity=?"
             rows(sql2, ['user']) >> mockSql.rows(sql2, ['user'])
 
-            def sql="SELECT distinct entityAlias from entitySchema where entity=?"
-            rows(sql,['country']) >> mockSql.rows(sql,['country'])
+            def sql = "SELECT distinct entityAlias from entitySchema where entity=?"
+            rows(sql, ['country']) >> mockSql.rows(sql, ['country'])
 
             String sql3 = "SELECT name,type,key,strategy FROM entityDesign WHERE entity=?"
             rows(sql2, ['userlog']) >> mockSql.rows(sql2, ['userlog'])
@@ -109,8 +111,6 @@ class DbGeneratorSpec extends Specification {
                     [name: 'country', properties: transformedData('country')],
                     [name: 'state', properties: transformedData('state')]
             ]]) >> new File('testResources/db.expected').text
-
-
 
 
         }

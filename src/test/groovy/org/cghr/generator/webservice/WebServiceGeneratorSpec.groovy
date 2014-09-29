@@ -5,12 +5,13 @@ import org.cghr.generator.Generator
 import org.cghr.generator.test.db.MockSql
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
+import org.springframework.test.context.support.GenericGroovyXmlContextLoader
 import spock.lang.Specification
 
 /**
  * Created by ravitej on 31/3/14.
  */
-@ContextConfiguration(locations = "classpath:spring-context.xml")
+@ContextConfiguration(locations = "classpath:spring-context.groovy", loader = GenericGroovyXmlContextLoader)
 class WebServiceGeneratorSpec extends Specification {
 
     WebServiceGenerator webServiceGenerator

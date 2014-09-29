@@ -87,7 +87,7 @@ task intTest(type: Test) {
 //
 //}
 
-String springVersion = '3.2.5.RELEASE'
+String springVersion = '4.1.0.RELEASE'
 // In this section you declare the dependencies for your production and test code
 configurations {
     provided

@@ -243,7 +243,7 @@ memberFamilyMedicalHistory,6,How many children (daugthers) do you have?,,noOfDau
 memberFamilyMedicalHistory,7,What is your mother's name?,,motherName,,text,"alpha,minlength[3],required",,,,,,,
 memberFamilyMedicalHistory,8,What is the state of origin of your mother?,,motherState,motherState,dropdown,required,,,,,,,
 memberFamilyMedicalHistory,9,What is the district of origin of your Mother?,,motherdistrict ,motherdistrict ,dynamic_dropdown,required,,,,,,,district
-memberFamilyMedicalHistory,10,What is your mother’s religion?,,motherReligion,,,,,,,,,,
+memberFamilyMedicalHistory,10,What is your mother’s religion?,,motherReligion,,text,,,,,,,,
 memberFamilyMedicalHistory,11,What is the caste of your mother?,,motherCaste,clabel10,select,required,data.motherReligion=='Hinduism',,,,,,
 memberFamilyMedicalHistory,12,"If Others, then please specify",,otherCasteMother,,text,required,data.casteMother=='Other',,,,,,
 memberFamilyMedicalHistory,13,What is the mother-tongue of your mother?,,motherTongue,language,dropdown,required,,,,,,,

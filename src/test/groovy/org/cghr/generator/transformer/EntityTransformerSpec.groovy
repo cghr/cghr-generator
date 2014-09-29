@@ -1,6 +1,7 @@
 package org.cghr.generator.transformer
 
 import org.springframework.test.context.ContextConfiguration
+import org.springframework.test.context.support.GenericGroovyXmlContextLoader
 import spock.lang.Specification
 
 import javax.annotation.Resource
@@ -8,7 +9,7 @@ import javax.annotation.Resource
 /**
  * Created by ravitej on 26/3/14.
  */
-@ContextConfiguration(locations = "classpath:spring-context.xml")
+@ContextConfiguration(locations = "classpath:spring-context.groovy", loader = GenericGroovyXmlContextLoader)
 class EntityTransformerSpec extends Specification {
 
     EntityTransformer entityTransformer
