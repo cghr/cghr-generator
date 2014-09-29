@@ -77,7 +77,7 @@ beans {
     webserviceGeneratorWithMock(WebServiceGenerator, sqlMock, generator)
     dataStoreInfoGeneratorWithMock(DataStoreInfoGenerator, sqlMock, generator)
     dbGenerator(DbGenerator, gSql, dbEntityTransformer, generator, dbTemplate)
-    schemaGenerator(SchemaGenerator, gSql, schemaEntityTransformer, generator, dbTemplate)
+    schemaGenerator(SchemaGenerator, gSql, schemaEntityTransformer, generator, jsonTemplate)
 
     webserviceGenerator(WebServiceGenerator, gSql, generator)
     dataStoreInfoGenerator(DataStoreInfoGenerator, gSql, generator)

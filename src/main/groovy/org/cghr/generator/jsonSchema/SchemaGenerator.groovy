@@ -149,6 +149,7 @@ class SchemaGenerator {
             entity ->
                 transformedEntityList.add(entityTransformer.transform(entity))
         }
+        println entityList
 
         transformedEntityList.each {
             generatedList.add(generator.generate(templateLocation, it))
@@ -166,6 +167,7 @@ class SchemaGenerator {
         int i = 0
         entityList.each {
             entity ->
+                //println entity.schemaName
                 new File(folderPath + '/' + entity.schemaName + '.json').setText(generatedList[i++])
 
         }

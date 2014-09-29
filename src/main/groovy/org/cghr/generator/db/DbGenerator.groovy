@@ -55,11 +55,6 @@ class DbGenerator {
                                 [k.toLowerCase(), v]
                         }
                 }
-                if (row.entity == 'memberAlcoholFreq') {
-                    println row.entity
-                    println entityProperties
-                }
-
 
                 [name: row.entity, properties: entityProperties]
         }

@@ -7,7 +7,6 @@ import org.cghr.generator.webservice.WebServiceGenerator
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.support.GenericGroovyXmlContextLoader
-import spock.lang.Ignore
 import spock.lang.Specification
 
 /**
@@ -52,7 +51,6 @@ class GenerateAll extends Specification {
     }
 
 
-    @Ignore
     def "should generate dbStructure,json schemas and webservice "() {
 
         given:
@@ -67,6 +65,11 @@ class GenerateAll extends Specification {
 
         //Generate data store Info
         dataStoreInfoGenerator.generateToAFile(entityDesignTable, "/templates/dataStoreInfo", dataStoreInfoFile)
+
+//        File baseDir = new File('generated/schemas/')
+//        baseDir.listFiles().each {
+//            println "'" + it.name + "',"
+//        }
 
 
     }
