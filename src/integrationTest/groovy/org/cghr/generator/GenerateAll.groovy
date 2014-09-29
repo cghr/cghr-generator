@@ -68,11 +68,6 @@ class GenerateAll extends Specification {
         //Generate data store Info
         dataStoreInfoGenerator.generateToAFile(entityDesignTable, "/templates/dataStoreInfo", dataStoreInfoFile)
 
-        File baseDir = new File('generated/schemas/')
-        baseDir.listFiles().each {
-            println "'" + it.name + "',"
-        }
-
 
     }
 

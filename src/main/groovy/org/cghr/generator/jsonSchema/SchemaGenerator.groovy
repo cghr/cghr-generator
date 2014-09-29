@@ -90,8 +90,6 @@ class SchemaGenerator {
                     }
                     if ('dynamic_dropdown' == it.type) {
 
-                        println row.entity
-                        println it.name
                         sql = "SELECT dynamic_dropdown from $dataDictTable where entity=? and name=?".toString()
                         def dynamicDropdownName = gSql.firstRow(sql, [row.entity, it.name]).dynamic_dropdown
 

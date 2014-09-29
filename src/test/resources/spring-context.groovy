@@ -39,7 +39,7 @@ beans {
             select_text: [[name: '{name}_value', type: 'varchar(100)'], [name: '{name}_unit', type: 'varchar(100)']],
             select_singletext: 'varchar(100)', dropdown: 'varchar(100)', dynamic_dropdown: 'varchar(100)', suggest: 'varchar(100)',
             ffq: [[name: '{name}_frequency', type: 'varchar(100)'], [name: '{name}_measure', type: 'varchar(100)'], [name: '{name}_unit', type: 'varchar(100)']],
-            alchoholFreq: [[name: '{name}_frequency', type: 'varchar(100)'], [name: '{name}_typicalDay', type: 'varchar(100)'], [name: '{name}_lastTime', type: 'varchar(100)']],
+            alcoholFreq: [[name: '{name}_frequency', type: 'varchar(100)'], [name: '{name}_typicalDay', type: 'varchar(100)'], [name: '{name}_lastTime', type: 'varchar(100)']],
             fmhDisease: [[name: '{name}_stroke', type: 'varchar(100)'], [name: '{name}_heartAttack', type: 'varchar(100)'], [name: '{name}_diabetes', type: 'varchar(100)'], [name: '{name}_mentalDisorder', type: 'varchar(100)'], [name: '{name}_cancer', type: 'varchar(100)']]
     ])
     schemaTypeMapping(HashMap, [
