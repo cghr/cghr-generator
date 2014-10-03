@@ -86,12 +86,14 @@
             "entity":"language",
             "field":"name",
             "ref":"countryId",
-            "condition":"country=='india'"
+            "condition":"country=='india'",
+            "whereCondition":""
         },{
            "entity":"language",
            "field":"name",
            "ref":"countryId",
-           "condition":"continent=='asia'"
+           "condition":"continent=='asia'",
+           "whereCondition":""
          }],
          "crossCheck":{},
          "help":""

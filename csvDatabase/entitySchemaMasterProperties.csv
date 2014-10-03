@@ -24,6 +24,7 @@ member,areaId,$stateParams.areaId,hidden
 ,,,
 hcMember,datastore,hcMember,hidden
 hcMember,memberId,$stateParams.memberId,hidden
+hcMember,householdId,$stateParams.householdId,hidden
 hcMember,surveyor,user.id,hidden
 ,,,
 householdCommonQs,datastore,householdCommonQs,hidden

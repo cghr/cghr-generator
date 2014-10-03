@@ -1,3 +1,3 @@
-name,entity,field,ref,condition
-countryLanguage,language,name,countryId,country=='india'
-countryLanguage,language,name,countryId,continent=='asia'
+name,entity,field,ref,condition,whereCondition
+countryLanguage,language,name,countryId,country=='india',
+countryLanguage,language,name,countryId,continent=='asia',

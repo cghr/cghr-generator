@@ -82,11 +82,15 @@ def output = ["sh", "-c", "gradle check"].execute().text
 println output
 println 'Generated schemas and db structure\n'
 
+def sqlImportPath = "~/apps/$projectName/services/src/main/webapp/sqlImport/".toString()
+
+println 'sql Import path'
+println sqlImportPath
 //Todo Copy
 ["sh", "-c", "cp generated/schemas/* ~/apps/$projectName/ui/src/assets/jsonSchema"].execute()
 ["sh", "-c", "cp generated/dbStructure/db.sql ~/apps/$projectName/services/src/main/webapp/sqlImport/"].execute()
-["sh", "-c", "cd ~/apps/$projectName/services/src/main/webapp/sqlImport"].execute()
-["sh", "-c", "mv db.sql a.sql"].execute()
+def cmd = ["sh", "-c", "mv $sqlImportPath/db.sql $sqlImportPath/a.sql "].execute()
+println cmd.text
 println 'copied to respective directories'
 
 

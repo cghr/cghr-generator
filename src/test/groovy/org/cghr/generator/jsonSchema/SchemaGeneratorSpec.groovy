@@ -8,13 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.support.GenericGroovyXmlContextLoader
 import spock.lang.Shared
-import spock.lang.Specification
 
 /**
  * Created by ravitej on 27/3/14.
  */
 @ContextConfiguration(locations = "classpath:spring-context.groovy", loader = GenericGroovyXmlContextLoader)
-class SchemaGeneratorSpec extends Specification {
+class SchemaGeneratorSpec {
 
     @Autowired
     MockSql mockSql
@@ -26,6 +25,7 @@ class SchemaGeneratorSpec extends Specification {
     String entitySchemaMasterPropertiesTable = 'entitySchemaMasterProperties'
     @Shared
     String dataDictTable = 'dataDict'
+
     @Shared
     String tableWithPropertyItemInfo = 'clabel'
     @Shared
@@ -42,7 +42,7 @@ class SchemaGeneratorSpec extends Specification {
         mockSql.rows(sql, [entity]).each {
             list.add(it)
         }
-        sql = "select name,type,valdn,label,flow,image,crossflow,crosscheck,help from dataDict where entity=?".toString()
+        sql = "select name,type,valdn,label,flow,image,crossflow,crosscheck,help,clabel from dataDict where entity=?".toString()
         mockSql.rows(sql, [entity]).each {
 
             def property = it
@@ -78,7 +78,7 @@ class SchemaGeneratorSpec extends Specification {
             if (it.crossflow != '') {
 
                 def crossFlowName = it.crossflow
-                sql = "select entity,field,ref,condition from crossFlow  where name=?".toString()
+                sql = "select entity,field,ref,condition,whereCondition from crossFlow  where name=?".toString()
                 it.crossFlow = mockSql.rows(sql, [crossFlowName])
 
             }
@@ -145,7 +145,7 @@ class SchemaGeneratorSpec extends Specification {
             rows(sql, ['country']) >> mockSql.rows(sql, ['country'])
             rows(sql, ['state']) >> mockSql.rows(sql, ['state'])
 
-            sql = "select name,type,valdn,label,flow,image,crossflow,crosscheck,help from dataDict where entity=?".toString()
+            sql = "select name,type,valdn,label,flow,image,crossflow,crosscheck,help,clabel from dataDict where entity=?".toString()
             rows(sql, ['country']) >> mockSql.rows(sql, ['country'])
             rows(sql, ['state']) >> mockSql.rows(sql, ['state'])
 
@@ -168,7 +168,7 @@ class SchemaGeneratorSpec extends Specification {
             sql = "SELECT entity,field,ref,condition from crossCheck where name=?"
             firstRow(sql, ['capitalName']) >> mockSql.firstRow(sql, ['capitalName'])
 
-            sql = "select entity,field,ref,condition from crossFlow  where name=?".toString()
+            sql = "select entity,field,ref,condition,whereCondition from crossFlow  where name=?".toString()
             rows(sql, ['countryLanguage']) >> mockSql.rows(sql, ['countryLanguage'])
 
 

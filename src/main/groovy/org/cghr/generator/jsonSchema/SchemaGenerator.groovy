@@ -55,7 +55,7 @@ class SchemaGenerator {
                 gSql.rows(sql, [row.entity]).each {
                     entityProperties.add(it)
                 }
-                sql = "select name,type,valdn,label,flow,image,crossflow,crosscheck,help from $dataDictTable where entity=?".toString()
+                sql = "select name,type,valdn,label,clabel,flow,image,crossflow,crosscheck,help,clabel from $dataDictTable where entity=?".toString()
                 gSql.rows(sql, [row.entity]).each {
 
 
@@ -63,9 +63,17 @@ class SchemaGenerator {
 
                         it.items = []
 
-                        sql = "SELECT  clabel FROM  $dataDictTable WHERE entity=? and name=?".toString()
+                        //sql = "SELECT  clabel FROM  $dataDictTable WHERE entity=? and name=?".toString()
 
-                        String clabel = gSql.rows(sql, [row.entity, it.name])[0].clabel
+                        String clabel = it.clabel
+                        //gSql.rows(sql, [row.entity, it.name])[0].clabel
+
+                        if (clabel.contains('relationship')) {
+                            println sql
+                            println row.entity + ' ' + it.name
+                            println clabel
+
+                        }
 
 
                         sql = "SELECT  text,value,valdn   FROM $tableWithPropertyItemInfo WHERE name=?".toString()
@@ -110,7 +118,7 @@ class SchemaGenerator {
                     if (it.crossflow != '') {
 
                         def crossFlowName = it.crossflow
-                        sql = "select entity,field,ref,condition from crossFlow  where name=?".toString()
+                        sql = "select entity,field,ref,condition,whereCondition from crossFlow  where name=?".toString()
 
                         //println gSql.rows("select * from crossFlow")
                         it.crossFlow = gSql.rows(sql, [crossFlowName])
@@ -122,6 +130,7 @@ class SchemaGenerator {
                                         [k.toLowerCase(), v]
                                 }
                         }
+                        // println it.crossFlow
 
                     }
                     it.remove('crossflow');
