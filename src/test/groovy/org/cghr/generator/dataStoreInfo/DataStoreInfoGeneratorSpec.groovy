@@ -1,7 +1,7 @@
 package org.cghr.generator.dataStoreInfo
 
-import groovy.sql.Sql
 import org.cghr.generator.Generator
+import org.cghr.generator.sqlUtil.SqlCustom
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.support.GenericGroovyXmlContextLoader
@@ -14,29 +14,19 @@ import spock.lang.Specification
 class DataStoreInfoGeneratorSpec extends Specification {
 
     @Autowired
-    Sql sqlMock
+    SqlCustom sqlCustom
 
     DataStoreInfoGenerator dataStoreInfoGenerator
-
     String templateLocation = 'templates/dataStoreInfo'
-    Map dataStoreInfoTemplateData = [
-            entities: [
-                    [name: 'user', keyField: 'id'],
-                    [name: 'userlog', keyField: 'id'],
-                    [name: 'country', keyField: 'id'],
-                    [name: 'state', keyField: 'id']
-            ]
-    ]
+
 
     def setup() {
 
+        String sql = "select  entity name,name keyfield from entityDesign where key='primary key'"
         Generator generator = Stub() {
-            generate(templateLocation, dataStoreInfoTemplateData) >> new File('testResources/dataStoreInfo.expected').text
-
+            generate(templateLocation, [entities: sqlCustom.rows(sql)]) >> new File('testResources/dataStoreInfo.expected').text
         }
-        dataStoreInfoGenerator = new DataStoreInfoGenerator(sqlMock, generator)
-
-
+        dataStoreInfoGenerator = new DataStoreInfoGenerator(sqlCustom, generator)
     }
 
     def "should  generate DataStore info from a given dataset"() {

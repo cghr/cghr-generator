@@ -42,15 +42,6 @@ class GenerateAll extends Specification {
     String schemaFolder = 'generated/schemas/'
 
 
-    def setupSpec() {
-
-    }
-
-    def setup() {
-
-    }
-
-
     def "should generate dbStructure,json schemas and webservice "() {
 
         given:
@@ -60,19 +51,13 @@ class GenerateAll extends Specification {
         //Generate json Schemas
         schemaGenerator.generateToAFolder(entitySchemaTable, entitySchemaMasterProperties, dataDictTable, tableWithPropertyItemInfo, schemaFolder)
 
-        //Generate Web service
-        //webserviceGenerator.generateToAFile(webserviceDesignTable, webserviceTemplateLocation, webserviceFile)
-
         //Generate data store Info
         dataStoreInfoGenerator.generateToAFile(entityDesignTable, "/templates/dataStoreInfo", dataStoreInfoFile)
-
-//        File baseDir = new File('generated/schemas/')
-//        baseDir.listFiles().each {
-//            println "'" + it.name + "',"
-//        }
-
 
     }
 
 
 }
+
+
+

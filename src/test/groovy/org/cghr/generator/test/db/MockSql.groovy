@@ -11,9 +11,9 @@ class MockSql {
     Sql mockSql
 
     MockSql(Sql sql) {
-
-        this.mockSql = sql;
+        this.mockSql = sql
     }
+
 
     def lowerCaseKeys = {
         it.collectEntries {
@@ -37,9 +37,9 @@ class MockSql {
         Map row = mockSql.firstRow(sql, args)
 
         if (row != null) {
-           Map map= row.collectEntries {
-                key,value ->
-                    [key.toLowerCase(),value]
+            Map map = row.collectEntries {
+                key, value ->
+                    [key.toLowerCase(), value]
             }
 
             return map;

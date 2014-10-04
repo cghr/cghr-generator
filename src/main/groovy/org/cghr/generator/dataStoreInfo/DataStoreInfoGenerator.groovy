@@ -10,22 +10,18 @@ import org.cghr.generator.Generator
 @TupleConstructor
 class DataStoreInfoGenerator {
 
-
     Sql gSql
     Generator generator
 
     String generate(String entityDesignTable, String templateLocation) {
 
-        def sql = "select  entity,name from $entityDesignTable where key='primary key'".toString()
-        List entities = gSql.rows(sql).collect { [name: it.entity, keyField: it.name] }
-
-        generator.generate(templateLocation, [entities: entities])
+        String sql = "select  entity name,name keyfield from $entityDesignTable where key='primary key'";
+        generator.generate(templateLocation, [entities: gSql.rows(sql)])
     }
 
     def generateToAFile(String entityDesignTable, String templateLocation, File destFile) {
 
         destFile.setText(generate(entityDesignTable, templateLocation))
     }
-
 
 }

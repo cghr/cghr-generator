@@ -20,6 +20,8 @@ class DbGeneratorSpec extends Specification {
 
     @Autowired
     MockSql mockSql
+    @Autowired
+    Sql sqlMock
 
     DbGenerator dbGenerator
     @Shared
@@ -29,75 +31,35 @@ class DbGeneratorSpec extends Specification {
 
 
     def rawDataOf(String entity) {
-
-        List list = []
-        def sql = "select name,type,key,strategy from entityDesign where entity=?".toString()
-        mockSql.rows(sql, [entity]).each {
-            list.add(it)
-        }
-        sql = "select name,type from dataDict where entity=?".toString()
-        mockSql.rows(sql, [entity]).each {
-            list.add(it)
-        }
-
-
-        list
-
+        getData(entity, 'rawData')
     }
 
     def transformedData(String entity) {
-
-        List list = []
-        def sql = "select name,type,key,strategy from dbTemplateData where entity=?".toString()
-        mockSql.rows(sql, [entity]).each {
-            list.add(it)
-        }
-        sql = "select name,type from jsonSchemaTemplateData where entity=?".toString()
-        mockSql.rows(sql, [entity]).each {
-            list.add(it)
-        }
-
-        list
+        getData(entity, 'transformedData')
     }
 
-
-    def setupSpec() {
-
+    def getData(String entity, String type) {
+        Map sqls = [
+                rawData: ["select name,type,key,strategy from entityDesign where entity=?", "select name,type from dataDict where entity=?"],
+                transformedData: ["select name,type,key,strategy from dbTemplateData where entity=?", "select name,type from jsonSchemaTemplateData where entity=?"]
+        ]
+        List list = (type == 'rawData') ? sqls.rawData : sqls.transformedData
+        List result = []
+        list.each {
+            mockSql.rows(it, [entity]).each {
+                row ->
+                    result.add(row)
+            }
+        }
+        return result
     }
 
     def setup() {
 
 
         String templateLocation = 'templates/db.hbs'
-        Sql gSql = Stub() {
 
-            String sql1 = "SELECT DISTINCT entity FROM entityDesign  WHERE  entity!=''"
-            rows(sql1) >> mockSql.rows(sql1)
-
-            String sql2 = "SELECT name,type,key,strategy FROM entityDesign WHERE entity=?"
-            rows(sql2, ['user']) >> mockSql.rows(sql2, ['user'])
-
-            def sql = "SELECT distinct entityAlias from entitySchema where entity=?"
-            rows(sql, ['country']) >> mockSql.rows(sql, ['country'])
-
-            String sql3 = "SELECT name,type,key,strategy FROM entityDesign WHERE entity=?"
-            rows(sql2, ['userlog']) >> mockSql.rows(sql2, ['userlog'])
-
-            String sql4 = "SELECT name,type,key,strategy FROM entityDesign WHERE entity=?"
-            rows(sql2, ['country']) >> mockSql.rows(sql2, ['country'])
-
-            String sql5 = "SELECT name,type,key,strategy FROM entityDesign WHERE entity=?"
-            rows(sql2, ['state']) >> mockSql.rows(sql2, ['state'])
-
-            def sql6 = "SELECT distinct name,type FROM dataDict WHERE entity=?  and type!='heading'"
-            rows(sql6, ['country']) >> mockSql.rows(sql6, ['country'])
-
-            def sql7 = "SELECT distinct name,type FROM dataDict WHERE entity=?  and type!='heading'"
-            rows(sql7, ['state']) >> mockSql.rows(sql6, ['state'])
-
-        }
         EntityTransformer entityTransformer = Stub() {
-
             transform([name: 'user', properties: rawDataOf('user')]) >> [name: 'user', properties: transformedData('user')]
             transform([name: 'userlog', properties: rawDataOf('userlog')]) >> [name: 'userlog', properties: transformedData('userlog')]
             transform([name: 'country', properties: rawDataOf('country')]) >> [name: 'country', properties: transformedData('country')]
@@ -114,8 +76,7 @@ class DbGeneratorSpec extends Specification {
 
 
         }
-
-        dbGenerator = new DbGenerator(gSql, entityTransformer, generator, templateLocation)
+        dbGenerator = new DbGenerator(sqlMock, entityTransformer, generator, templateLocation)
     }
 
 
@@ -123,7 +84,6 @@ class DbGeneratorSpec extends Specification {
 
         given:
         String expectedDbStruct = new File('testResources/db.expected').text.replaceAll("\\n", "")
-
 
         expect:
         dbGenerator.generate(entityDesignTable, dataDictTable).replaceAll("\\n", "") == expectedDbStruct
