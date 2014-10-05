@@ -3,7 +3,6 @@ package org.cghr.generator
 import org.cghr.generator.dataStoreInfo.DataStoreInfoGenerator
 import org.cghr.generator.db.DbGenerator
 import org.cghr.generator.jsonSchema.SchemaGenerator
-import org.cghr.generator.webservice.WebServiceGenerator
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.support.GenericGroovyXmlContextLoader
@@ -21,8 +20,6 @@ class GenerateAll extends Specification {
     @Autowired
     SchemaGenerator schemaGenerator
 
-    @Autowired
-    WebServiceGenerator webserviceGenerator
 
     @Autowired
     DataStoreInfoGenerator dataStoreInfoGenerator
@@ -33,9 +30,6 @@ class GenerateAll extends Specification {
     String entitySchemaTable = 'entitySchema'
     String entitySchemaMasterProperties = 'entitySchemaMasterProperties'
     String tableWithPropertyItemInfo = 'clabel'
-    String webserviceDesignTable = 'webserviceDesign'
-    String webserviceTemplateLocation = 'templates/webservice'
-    File webserviceFile = new File('generated/webservice/WebService.groovy')
     File dataStoreInfoFile = new File('generated/dataStoreInfo/dataStoreInfo.groovy')
 
     File dbFile = new File('generated/dbStructure/db.sql')

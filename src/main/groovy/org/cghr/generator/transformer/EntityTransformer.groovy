@@ -1,53 +1,45 @@
 package org.cghr.generator.transformer
+
+import groovy.transform.TupleConstructor
+
 /**
  * Created by ravitej on 26/3/14.
  */
+
+@TupleConstructor
 class EntityTransformer {
 
-    Map transformedEntity = [:]
+
     Map propertyTypeMapping
 
-    EntityTransformer(Map propertyTypeMapping) {
+    Map transform(Map entity) {
 
-        this.propertyTypeMapping = propertyTypeMapping
-    }
+        Map transformedEntity = entity.clone() //Copy all properties initially
 
-    Map transform(Map givenEntity) {
+        List stdItems = entity.properties.findAll { !(propertyTypeMapping.get(it.type) instanceof List) }
+        List multiplePropertyItems = entity.properties.findAll { (propertyTypeMapping.get(it.type) instanceof List) }
 
-
-        transformedEntity = givenEntity //Copy all properties initially
-
-        List multipleProperties = []
-
-
-        transformedEntity.properties = givenEntity.properties.collect {
-
-            Map transformedProperty = it
-            if (propertyTypeMapping.get(it.type) instanceof List) {
-
-                List propertyList = propertyTypeMapping.get(it.type)
-                propertyList.each {
-                    prop ->
-                        multipleProperties.add([name: prop.name.replace("{name}", it.name), type: prop.type])
-
-                }
-                return [:]
-
-            }
-            transformedProperty.type = propertyTypeMapping.get(it.type)
-            return transformedProperty
-
+        transformedEntity.properties = stdItems.collect {
+            it.type = propertyTypeMapping.get(it.type)
+            it
         }
-        multipleProperties.each {
-            transformedEntity.properties.add(it)
-        }
-
-        transformedEntity.properties = transformedEntity.properties.findAll {
-            !it.isEmpty()
+        multiplePropertyItems.each {
+            transformedEntity.properties.addAll(getItemWithMultipleProperties(it))
         }
 
         return transformedEntity
 
+    }
+
+    //Like text_select,select_text
+    List getItemWithMultipleProperties(Map item) {
+
+        List propertyList = propertyTypeMapping.get(item.type)
+        return propertyList.collect {
+            prop ->
+                [name: prop.name.replace("{name}", item.name), type: prop.type]
+
+        }
     }
 
 

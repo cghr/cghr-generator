@@ -7,7 +7,6 @@ import org.cghr.generator.jsonSchema.SchemaGenerator
 import org.cghr.generator.sqlUtil.SqlCustom
 import org.cghr.generator.test.db.MockSql
 import org.cghr.generator.transformer.EntityTransformer
-import org.cghr.generator.webservice.WebServiceGenerator
 import org.springframework.jdbc.datasource.DriverManagerDataSource
 
 beans {
@@ -74,14 +73,12 @@ beans {
     dbTemplate(String, "templates/db")
     jsonTemplate(String, "templates/jsonSchema")
 
-    dbGeneratorWithMock(DbGenerator, sqlMock, dbEntityTransformer, generator, dbTemplate)
+    dbGeneratorWithMock(DbGenerator, sqlCustom, dbEntityTransformer, generator, dbTemplate)
     schemaGeneratorWithMock(SchemaGenerator, sqlMock, schemaEntityTransformer, generator, jsonTemplate)
-    webserviceGeneratorWithMock(WebServiceGenerator, sqlMock, generator)
     dataStoreInfoGeneratorWithMock(DataStoreInfoGenerator, sqlCustom, generator)
-    dbGenerator(DbGenerator, gSql, dbEntityTransformer, generator, dbTemplate)
+    dbGenerator(DbGenerator, sqlCustom, dbEntityTransformer, generator, dbTemplate)
     schemaGenerator(SchemaGenerator, gSql, schemaEntityTransformer, generator, jsonTemplate)
 
-    webserviceGenerator(WebServiceGenerator, gSql, generator)
     dataStoreInfoGenerator(DataStoreInfoGenerator, sqlCustom, generator)
 
 

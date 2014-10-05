@@ -21,45 +21,38 @@ class DbGenerator {
     String generate(String entityDesignTable, String dataDictTable) {
 
         def sql = "SELECT DISTINCT entity FROM $entityDesignTable  WHERE  entity!=''".toString()
-        List entityList = gSql.rows(sql).collect {
+
+        List entityList = getEntityList(sql, entityDesignTable, dataDictTable)
+        return generator.generate(templateLocation, [entities: transform(entityList)])
+    }
+
+    List getEntityList(String sql, String entityDesignTable, String dataDictTable) {
+
+        return gSql.rows(sql).collect {
             row ->
-
                 List entityProperties = []
-                entityProperties.addAll(propertiesFromEntityDesign(row.entity, entityDesignTable))
-                entityProperties.addAll(propertiesFromDataDict(row.entity, dataDictTable))
-                [name: row.entity, properties: keysToLowerCase(entityProperties)]
+
+                entityProperties.addAll(propertiesFrom(entityDesignTable, row.entity))
+                entityProperties.addAll(propertiesFrom(dataDictTable, row.entity))
+                [name: row.entity, properties: entityProperties]
         }
-        List transformedEntityList = entityList.collect { entityTransformer.transform(it) }
-
-        return generator.generate(templateLocation, [entities: transformedEntityList])
     }
 
+    List transform(List entityList) {
+        entityList.collect { entityTransformer.transform(it) }
+    }
 
-    List propertiesFromEntityDesign(String entity, String entityDesignTable) {
+    List propertiesFrom(String table, String entity) {
+        String sql = (table == 'entityDesign') ? "SELECT name,type,key,strategy FROM entityDesign WHERE entity=?" :
+                "SELECT distinct name,type FROM dataDict WHERE entity=?  and type!='heading'"
 
-        def sql = "SELECT name,type,key,strategy FROM $entityDesignTable WHERE entity=?".toString()
         gSql.rows(sql, [entity])
     }
 
-    List propertiesFromDataDict(String entity, String dataDictTable) {
-        def sql = "SELECT distinct name,type FROM $dataDictTable WHERE entity=?  and type!='heading'".toString()
-        gSql.rows(sql, [entity])
-
-    }
 
     def generateToAFile(String entityDesignTable, String dataDictTable, File destinationFile) {
 
         destinationFile.write(generate(entityDesignTable, dataDictTable))
 
     }
-
-    List keysToLowerCase(List mapList) {
-
-        return mapList.collect {
-            Map map ->
-                map.collectEntries { k, v -> [k.toLowerCase(), v] }
-
-        }
-    }
-
 }

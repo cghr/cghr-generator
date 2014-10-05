@@ -2,6 +2,7 @@ package org.cghr.generator.db
 
 import groovy.sql.Sql
 import org.cghr.generator.Generator
+import org.cghr.generator.sqlUtil.SqlCustom
 import org.cghr.generator.test.db.MockSql
 import org.cghr.generator.transformer.EntityTransformer
 import org.springframework.beans.factory.annotation.Autowired
@@ -22,6 +23,8 @@ class DbGeneratorSpec extends Specification {
     MockSql mockSql
     @Autowired
     Sql sqlMock
+    @Autowired
+    SqlCustom sqlCustom
 
     DbGenerator dbGenerator
     @Shared
@@ -46,7 +49,7 @@ class DbGeneratorSpec extends Specification {
         List list = (type == 'rawData') ? sqls.rawData : sqls.transformedData
         List result = []
         list.each {
-            mockSql.rows(it, [entity]).each {
+            sqlCustom.rows(it, [entity]).each {
                 row ->
                     result.add(row)
             }
@@ -64,8 +67,8 @@ class DbGeneratorSpec extends Specification {
             transform([name: 'userlog', properties: rawDataOf('userlog')]) >> [name: 'userlog', properties: transformedData('userlog')]
             transform([name: 'country', properties: rawDataOf('country')]) >> [name: 'country', properties: transformedData('country')]
             transform([name: 'state', properties: rawDataOf('state')]) >> [name: 'state', properties: transformedData('state')]
-
         }
+
         Generator generator = Stub() {
             generate(templateLocation, [entities: [
                     [name: 'user', properties: transformedData('user')],
@@ -76,7 +79,8 @@ class DbGeneratorSpec extends Specification {
 
 
         }
-        dbGenerator = new DbGenerator(sqlMock, entityTransformer, generator, templateLocation)
+
+        dbGenerator = new DbGenerator(sqlCustom, entityTransformer, generator, templateLocation)
     }
 
 
