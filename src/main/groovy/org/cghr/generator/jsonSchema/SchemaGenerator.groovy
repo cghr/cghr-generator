@@ -31,22 +31,12 @@ class SchemaGenerator {
 
     List generate(String entitySchemaTable, String entitySchemaMasterPropertiesTable, String dataDictTable, String tableWithPropertyItemInfo) {
 
-        String sql1 = "SELECT DISTINCT entity FROM $entitySchemaTable WHERE  entity!=''".toString()
+        String sql1 = "SELECT DISTINCT entity FROM $entitySchemaTable WHERE  entity!=''"
         List rows = gSql.rows(sql1)
         entityList = rows.collect {
             row ->
-
-                def query = "select schemaName,onSave,condition,success,fail,crossEntity from $entitySchemaTable where entity=?".toString()
-                String onSave = gSql.firstRow(query, [row.entity]).onSave
-                String schemaName = gSql.firstRow(query, [row.entity]).schemaName
-
-                Map entitySchemaRow = gSql.firstRow(query, [row.entity])
-                String condition = entitySchemaRow.condition
-                String success = entitySchemaRow.success
-                String fail = entitySchemaRow.fail
-                String crossEntity = entitySchemaRow.crossEntity
-
-
+                String query = "select * from $entitySchemaTable where entity=?"
+                Map schema = gSql.firstRow(query, [row.entity])
 
                 List entityProperties = []
                 List multipleItemTypes = ['select', 'multiselect', 'select-inline', 'dropdown', 'suggest', 'select_text', 'select_singletext', 'text_select', 'ffq']
@@ -59,114 +49,85 @@ class SchemaGenerator {
                 gSql.rows(sql, [row.entity]).each {
 
 
-                    if (multipleItemTypes.contains(it.type)) {
-
-                        it.items = []
-
-                        //sql = "SELECT  clabel FROM  $dataDictTable WHERE entity=? and name=?".toString()
-
-                        String clabel = it.clabel
-                        //gSql.rows(sql, [row.entity, it.name])[0].clabel
-
-                        if (clabel.contains('relationship')) {
-                            println sql
-                            println row.entity + ' ' + it.name
-                            println clabel
-
-                        }
+                    if (multipleItemTypes.contains(it.type))
+                        it.items = getClabelItems(it.clabel)
 
 
-                        sql = "SELECT  text,value,valdn   FROM $tableWithPropertyItemInfo WHERE name=?".toString()
-                        it.items = gSql.rows(sql, [clabel])
-                        it.items = it.items.collect {
-                            sqlRow ->
-                                sqlRow.collectEntries {
-                                    k, v ->
-                                        [k.toLowerCase(), v]
-                                }
-                        }
-                    }
-                    if ('lookup' == it.type) {
-
-                        sql = "SELECT lookup from $dataDictTable where entity=? and name=?".toString()
-                        def lookupName = gSql.firstRow(sql, [row.entity, it.name]).lookup
+                    if ('lookup' == it.type)
+                        it.lookup = getLookupData(row.entity, it.name)
 
 
-                        sql = "SELECT entity,field,ref,condition from lookup where name=?".toString()
-                        it.lookup = gSql.firstRow(sql, [lookupName])
+                    if ('dynamic_dropdown' == it.type)
+                        it.metadata = getDynamicDropdownData(row.entity, it.name)
 
-                    }
-                    if ('dynamic_dropdown' == it.type) {
-
-                        sql = "SELECT dynamic_dropdown from $dataDictTable where entity=? and name=?".toString()
-                        def dynamicDropdownName = gSql.firstRow(sql, [row.entity, it.name]).dynamic_dropdown
-
-                        sql = "SELECT entity,field,ref,refValue from dynamicDropdown where name=?".toString()
-                        it.metadata = gSql.firstRow(sql, [dynamicDropdownName])
-                    }
-                    if (it.crosscheck != '') {
-
-                        sql = "SELECT crossCheck from $dataDictTable where entity=? and name=?".toString()
-                        def crossCheckName = gSql.firstRow(sql, [row.entity, it.name]).crossCheck
+                    if (it.crosscheck != '')
+                        it.crossCheck = getCrossCheckData(row.entity, it.name)
 
 
-                        sql = "SELECT entity,field,ref,condition from crossCheck where name=?".toString()
-                        it.crossCheck = gSql.firstRow(sql, [crossCheckName])
+                    if (it.crossflow != '')
+                        it.crossFlow = getCrossFlowData(it.crossflow)
 
 
-                    }
-                    if (it.crossflow != '') {
-
-                        def crossFlowName = it.crossflow
-                        sql = "select entity,field,ref,condition,whereCondition from crossFlow  where name=?".toString()
-
-                        //println gSql.rows("select * from crossFlow")
-                        it.crossFlow = gSql.rows(sql, [crossFlowName])
-
-                        it.crossFlow = it.crossFlow.collect {
-                            sqlRow ->
-                                sqlRow.collectEntries {
-                                    k, v ->
-                                        [k.toLowerCase(), v]
-                                }
-                        }
-                        // println it.crossFlow
-
-                    }
                     it.remove('crossflow');
                     it.remove('crosscheck');
                     entityProperties.add(it)
 
                 }
 
-
-                entityProperties = entityProperties.collect {
-                    sqlRow ->
-                        sqlRow.collectEntries {
-                            k, v ->
-                                if (k == 'crossFlow' || k == 'crossCheck')
-                                    return [k, v];
-                                else
-                                    [k.toLowerCase(), v]
-                        }
-                }
-
-                [schemaName: schemaName, condition: condition, success: success, fail: fail, crossEntity: crossEntity, onSave: onSave, properties: entityProperties]
+                [schemaName: schema.schemaName, condition: schema.condition, success: schema.success, fail: schema.fail, crossEntity: schema.crossEntity, onSave: schema.onSave, properties: entityProperties]
         }
 
-        entityList.each {
-            entity ->
-                transformedEntityList.add(entityTransformer.transform(entity))
-        }
-        println entityList
-
-        transformedEntityList.each {
-            generatedList.add(generator.generate(templateLocation, it))
-        }
-
+        entityList.each { transformedEntityList.add(entityTransformer.transform(it)) }
+        transformedEntityList.each { generatedList.add(generator.generate(templateLocation, it)) }
 
         generatedList
     }
+
+    List getClabelItems(String clabel) {
+
+        String sql = "SELECT  text,value,valdn   FROM clabel WHERE name=?"
+        gSql.rows(sql, [clabel])
+
+    }
+
+    List getCrossFlowData(String crossFlowName) {
+
+        String sql = "select entity,field,ref,condition,whereCondition from crossFlow  where name=?"
+        gSql.rows(sql, [crossFlowName])
+
+    }
+
+    Map getLookupData(String entity, String name) {
+
+        String sql = "SELECT lookup from dataDict where entity=? and name=?"
+        def lookupName = gSql.firstRow(sql, [entity, name]).lookup
+
+
+        sql = "SELECT entity,field,ref,condition from lookup where name=?"
+        gSql.firstRow(sql, [lookupName])
+    }
+
+    Map getDynamicDropdownData(String entity, String name) {
+
+        String sql = "SELECT dynamic_dropdown from dataDict where entity=? and name=?"
+        def dynamicDropdownName = gSql.firstRow(sql, [entity, name]).dynamic_dropdown
+
+        sql = "SELECT entity,field,ref,refValue from dynamicDropdown where name=?".toString()
+        gSql.firstRow(sql, [dynamicDropdownName])
+
+    }
+
+    Map getCrossCheckData(String entity, String name) {
+
+        String sql = "SELECT crossCheck from dataDict where entity=? and name=?"
+        def crossCheckName = gSql.firstRow(sql, [entity, name]).crossCheck
+
+
+        sql = "SELECT entity,field,ref,condition from crossCheck where name=?".toString()
+        gSql.firstRow(sql, [crossCheckName])
+
+    }
+
 
     void generateToAFolder(String entitySchemaTable, String entitySchemaMasterPropertiesTable, String dataDictTable, String tableWithPropertyItemInfo, String folderPath) {
 
@@ -174,12 +135,7 @@ class SchemaGenerator {
 
         List generatedList = generate(entitySchemaTable, entitySchemaMasterPropertiesTable, dataDictTable, tableWithPropertyItemInfo)
         int i = 0
-        entityList.each {
-            entity ->
-                //println entity.schemaName
-                new File(folderPath + '/' + entity.schemaName + '.json').setText(generatedList[i++])
-
-        }
+        entityList.each { new File(folderPath + '/' + it.schemaName + '.json').setText(generatedList[i++]) }
 
     }
 

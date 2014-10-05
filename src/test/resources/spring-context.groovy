@@ -74,10 +74,10 @@ beans {
     jsonTemplate(String, "templates/jsonSchema")
 
     dbGeneratorWithMock(DbGenerator, sqlCustom, dbEntityTransformer, generator, dbTemplate)
-    schemaGeneratorWithMock(SchemaGenerator, sqlMock, schemaEntityTransformer, generator, jsonTemplate)
+    schemaGeneratorWithMock(SchemaGenerator, sqlCustom, schemaEntityTransformer, generator, jsonTemplate)
     dataStoreInfoGeneratorWithMock(DataStoreInfoGenerator, sqlCustom, generator)
     dbGenerator(DbGenerator, sqlCustom, dbEntityTransformer, generator, dbTemplate)
-    schemaGenerator(SchemaGenerator, gSql, schemaEntityTransformer, generator, jsonTemplate)
+    schemaGenerator(SchemaGenerator, sqlCustom, schemaEntityTransformer, generator, jsonTemplate)
 
     dataStoreInfoGenerator(DataStoreInfoGenerator, sqlCustom, generator)
 
