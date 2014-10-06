@@ -23,7 +23,7 @@ class DbGenerator {
         def sql = "SELECT DISTINCT entity FROM $entityDesignTable  WHERE  entity!=''".toString()
 
         List entityList = getEntityList(sql, entityDesignTable, dataDictTable)
-        List transformedList = transform(entityList)
+        List transformedList = entityList.collect { entityTransformer.transform(it) }
         generator.generate(templateLocation, [entities: transformedList])
     }
 
@@ -39,9 +39,6 @@ class DbGenerator {
         }
     }
 
-    List transform(List entityList) {
-        entityList.collect { entityTransformer.transform(it) }
-    }
 
     List propertiesFrom(String table, String entity) {
         String sql = (table == 'entityDesign') ? "SELECT name,type,key,strategy FROM entityDesign WHERE entity=?" :
