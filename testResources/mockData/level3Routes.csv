@@ -1,0 +1,18 @@
+parent,name,url,tpl,title,msg,add_new
+areaDetail,house,/house,tpls/dataGrid.html,Houses,Add/Select a House,TRUE
+houseDetail,basicInf,/basicInf,tpls/surveyFormDirective.html,Basic Inf,,
+houseDetail,household,/household,tpls/dataGrid.html,Households,Add/Select a Household,TRUE
+householdDetail,visit,/visit,tpls/dataGrid.html,Visit,,
+householdDetail,basicInf,/basicInf,tpls/surveyForm.html,Basic Inf,,
+householdDetail,member,/member,enum/member/member.html,Members,,TRUE
+householdDetail,commonQs,/commonQs,tpls/surveyFormDirective.html,CommonQs,,
+householdDetail,foodItems,/foodItems,tpls/surveyFormDirective.html,Food Items,,
+householdDetail,hospInf,/hospInf,tpls/surveyFormDirective.html,Hospitalization Inf,,
+householdDetail,hosp,/hosp,enum/hosp/hosp.html,Hospitalization,,TRUE
+householdDetail,deathInf,/deathInf,tpls/surveyFormDirective.html,Death Inf,,
+householdDetail,death,/death,enum/death/death.html,Death,,TRUE
+householdDetail,contact,/contact,tpls/surveyFormDirective.html,Contact Inf,,
+visitDetail,basicInf,/basicInf,tpls/surveyFormDirective.html,Basic Inf,,
+memberDetail,basicInf,/basicInf,tpls/surveyFormDirective.html,Basic Inf,,
+hospDetail,basicInf,/basicInf,tpls/surveyFormDirective.html,Basic Inf,,
+deathDetail,basicInf,/basicInf,tpls/surveyFormDirective.html,Basic Inf,,

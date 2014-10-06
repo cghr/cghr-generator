@@ -24,7 +24,8 @@ class DataStoreInfoGeneratorSpec extends Specification {
 
         String sql = "select  entity name,name keyfield from entityDesign where key='primary key'"
         Generator generator = Stub() {
-            generate(templateLocation, [entities: sqlCustom.rows(sql)]) >> new File('testResources/dataStoreInfo.expected').text
+            generate(templateLocation, [entities: sqlCustom.rows(sql)]) >>
+                    new File('testResources/dataStoreInfo.expected').text
         }
         dataStoreInfoGenerator = new DataStoreInfoGenerator(sqlCustom, generator)
     }

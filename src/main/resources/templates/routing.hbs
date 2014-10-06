@@ -1,0 +1,36 @@
+angular.module('{{module}}', [])
+    .constant('{{module}}', {
+        name: '{{name}}',
+        url: '/{{name}}',
+        tpl: '{{tpl}}',
+        children: [
+        {{#each children}}
+            {
+                name: '{{name}}',
+                url: '{{url}}',
+                tpl: '{{tpl}}',
+                title: '{{title}}',
+                {{#if msg}}msg: '{{msg}}',{{/if}}
+                {{#if default_state}}default_state:'{{default_state}}',{{/if}}
+                {{#if prev_state}}prev_state:{{prev_state}},{{/if}}
+                children:[
+                {{#each children}}
+                {
+                  name: '{{name}}',
+                  url: '{{url}}',
+                  tpl: '{{tpl}}',
+                  title: '{{title}}',
+                  add_new: {{add_new}},
+                  msg: '{{msg}}'
+
+                }
+                {{~#unless @last ~}},{{~/unless ~}}
+                {{~/each ~}}
+                ]
+
+            }
+            {{~#unless @last ~}},{{~/unless ~}}
+            {{~/each ~}}
+            ]
+
+    })

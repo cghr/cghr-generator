@@ -1,0 +1,9 @@
+parent,name,url,tpl,title,msg,default_state,prev_state
+enum,area,/area,tpls/dataGrid.html,Areas,Select an Area,,
+enum,areaDetail,/area/:areaId,tpls/pageDetail.html,Houses,,,"{name: 'enum.area', title: 'Areas'}"
+enum,houseDetail,/area/:areaId/house/:houseId,tpls/pageDetail.html,Households,,,"{name: 'enum.areaDetail.house', title: 'Houses'}"
+enum,householdDetail,/area/:areaId/house/:houseId/household/:householdId,tpls/pageDetailNavDisabled.html',Members,,member,"{name: 'enum.houseDetail.household', title: 'Households'}"
+enum,visitDetail,/area/:areaId/house/:houseId/household/:householdId/visit/,tpls/pageDetail.html,,,,"{name: 'enum.householdDetail.visit', title: 'Visits'}"
+enum,memberDetail,/area/:areaId/house/:houseId/household/:householdId/member/:memberId,tpls/pageDetail.html,,,,"{name: 'enum.householdDetail.member', title: 'Members'}"
+enum,hospDetail,/area/:areaId/house/:houseId/household/:householdId/hosp/:memberId,tpls/pageDetail.html,,,,"{name: 'enum.householdDetail.hosp', title: 'Hospitalization'}"
+enum,deathDetail,/area/:areaId/house/:houseId/household/:householdId/death/:memberId,,,,,"{name: 'enum.householdDetail.death', title: 'Deaths'}"

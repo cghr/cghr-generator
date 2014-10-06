@@ -21,19 +21,11 @@ class SchemaGeneratorSpec extends Specification {
     @Autowired
     SqlCustom sqlCustom
 
-    SchemaGenerator schemaGenerator
-
     @Autowired
     ArrayList multipleItemTypes
-    @Shared
-    String entitySchemaTable = 'entitySchema'
-    @Shared
-    String entitySchemaMasterPropertiesTable = 'entitySchemaMasterProperties'
-    @Shared
-    String dataDictTable = 'dataDict'
 
-    @Shared
-    String tableWithPropertyItemInfo = 'clabel'
+    SchemaGenerator schemaGenerator
+
     @Shared
     String templateLocation = 'templates/jsonSchema.hbs'
     @Shared
@@ -43,7 +35,6 @@ class SchemaGeneratorSpec extends Specification {
     def rawDataOf(String entity) {
 
         List list = []
-        List multipleItems = ['select', 'multiselect', 'select-inline', 'dropdown', 'suggest', 'duration', 'ffq']
         def sql = "select * from entitySchemaMasterProperties where entity=?".toString()
         mockSql.rows(sql, [entity]).each {
             list.add(it)
@@ -53,7 +44,7 @@ class SchemaGeneratorSpec extends Specification {
 
             def property = it
 
-            if (multipleItems.contains(it.type)) {
+            if (multipleItemTypes.contains(it.type)) {
                 it.items = []
                 sql = "SELECT  clabel FROM  dataDict WHERE entity=? and name=?"
 

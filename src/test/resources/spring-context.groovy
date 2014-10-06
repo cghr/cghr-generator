@@ -74,6 +74,7 @@ beans {
     generator(Generator, handlebars)
     dbTemplate(String, "templates/db")
     jsonTemplate(String, "templates/jsonSchema")
+    routeTemplate(String, "templates/routing")
 
     dbGeneratorWithMock(DbGenerator, sqlCustom, dbEntityTransformer, generator, dbTemplate)
     schemaGeneratorWithMock(SchemaGenerator, sqlCustom, schemaEntityTransformer, generator, jsonTemplate, multipleItemTypes)

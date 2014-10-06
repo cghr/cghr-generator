@@ -3,7 +3,6 @@ package org.cghr.generator.db
 import groovy.sql.Sql
 import org.cghr.generator.Generator
 import org.cghr.generator.sqlUtil.SqlCustom
-import org.cghr.generator.test.db.MockSql
 import org.cghr.generator.transformer.EntityTransformer
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
@@ -19,8 +18,6 @@ import spock.lang.Specification
 class DbGeneratorSpec extends Specification {
 
 
-    @Autowired
-    MockSql mockSql
     @Autowired
     Sql sqlMock
     @Autowired
