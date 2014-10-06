@@ -43,7 +43,7 @@ class GenerateAll extends Specification {
         dbGenerator.generateToAFile(entityDesignTable, dataDictTable, dbFile)
 
         //Generate json Schemas
-        schemaGenerator.generateToAFolder(entitySchemaTable, entitySchemaMasterProperties, dataDictTable, tableWithPropertyItemInfo, schemaFolder)
+        schemaGenerator.generateToAFolder(schemaFolder)
 
         //Generate data store Info
         dataStoreInfoGenerator.generateToAFile(entityDesignTable, "/templates/dataStoreInfo", dataStoreInfoFile)

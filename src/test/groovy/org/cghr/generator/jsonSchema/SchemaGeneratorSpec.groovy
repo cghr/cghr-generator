@@ -22,6 +22,9 @@ class SchemaGeneratorSpec extends Specification {
     SqlCustom sqlCustom
 
     SchemaGenerator schemaGenerator
+
+    @Autowired
+    ArrayList multipleItemTypes
     @Shared
     String entitySchemaTable = 'entitySchema'
     @Shared
@@ -41,11 +44,11 @@ class SchemaGeneratorSpec extends Specification {
 
         List list = []
         List multipleItems = ['select', 'multiselect', 'select-inline', 'dropdown', 'suggest', 'duration', 'ffq']
-        def sql = "select name,value,type from entitySchemaMasterProperties where entity=?".toString()
+        def sql = "select * from entitySchemaMasterProperties where entity=?".toString()
         mockSql.rows(sql, [entity]).each {
             list.add(it)
         }
-        sql = "select name,type,valdn,label,flow,image,crossflow,crosscheck,help,clabel from dataDict where entity=?".toString()
+        sql = "select * from dataDict where entity=?".toString()
         mockSql.rows(sql, [entity]).each {
 
             def property = it
@@ -56,7 +59,7 @@ class SchemaGeneratorSpec extends Specification {
 
                 String clabel = mockSql.rows(sql, [entity, it.name])[0].clabel
 
-                sql = "select text,value,valdn from clabel where name=?".toString()
+                sql = "select * from clabel where name=?".toString()
                 it.items = mockSql.rows(sql, [clabel])
             }
             if ("lookup" == it.type) {
@@ -65,7 +68,7 @@ class SchemaGeneratorSpec extends Specification {
                 def lookupName = mockSql.firstRow(sql, [entity, it.name]).lookup
 
 
-                sql = "SELECT entity,field,ref,condition from lookup where name=?".toString()
+                sql = "SELECT * from lookup where name=?".toString()
                 it.lookup = mockSql.firstRow(sql, [lookupName])
 
             }
@@ -75,13 +78,13 @@ class SchemaGeneratorSpec extends Specification {
                 def crossCheckName = mockSql.firstRow(sql, [entity, it.name]).crosscheck
 
 
-                sql = "SELECT entity,field,ref,condition from crossCheck where name=?".toString()
+                sql = "SELECT * from crossCheck where name=?".toString()
                 it.crossCheck = mockSql.firstRow(sql, [crossCheckName])
             }
             if (it.crossflow != '') {
 
                 def crossFlowName = it.crossflow
-                sql = "select entity,field,ref,condition,whereCondition from crossFlow  where name=?".toString()
+                sql = "select * from crossFlow  where name=?".toString()
                 it.crossFlow = mockSql.rows(sql, [crossFlowName])
 
             }
@@ -110,7 +113,7 @@ class SchemaGeneratorSpec extends Specification {
 
                 String clabel = mockSql.rows(sql, [entity, it.name])[0].clabel
 
-                sql = "select text,value,valdn from clabel where name=?".toString()
+                sql = "select * from clabel where name=?".toString()
                 it.items = mockSql.rows(sql, [clabel])
 
             }
@@ -139,7 +142,7 @@ class SchemaGeneratorSpec extends Specification {
 
         }
 
-        schemaGenerator = new SchemaGenerator(sqlCustom, entityTransformer, generator, templateLocation)
+        schemaGenerator = new SchemaGenerator(sqlCustom, entityTransformer, generator, templateLocation, multipleItemTypes)
     }
 
 
@@ -147,7 +150,7 @@ class SchemaGeneratorSpec extends Specification {
 
         given:
         String expectedSchemaStruct = new File(expectedJsonStruct).text.replaceAll("\\s", "");
-        String generated = schemaGenerator.generate(entitySchemaTable, entitySchemaMasterPropertiesTable, dataDictTable, tableWithPropertyItemInfo)[0]
+        String generated = schemaGenerator.generate()[0]
 
 
         expect:

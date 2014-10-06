@@ -65,6 +65,8 @@ beans {
             fmhDisease: 'fmhDisease'
 
     ])
+    multipleItemTypes(ArrayList, ['select', 'multiselect', 'select-inline', 'dropdown', 'suggest', 'select_text', 'select_singletext', 'text_select', 'ffq'])
+
 
     dbEntityTransformer(EntityTransformer, dbTypeMapping)
     schemaEntityTransformer(EntityTransformer, schemaTypeMapping)
@@ -74,10 +76,10 @@ beans {
     jsonTemplate(String, "templates/jsonSchema")
 
     dbGeneratorWithMock(DbGenerator, sqlCustom, dbEntityTransformer, generator, dbTemplate)
-    schemaGeneratorWithMock(SchemaGenerator, sqlCustom, schemaEntityTransformer, generator, jsonTemplate)
+    schemaGeneratorWithMock(SchemaGenerator, sqlCustom, schemaEntityTransformer, generator, jsonTemplate, multipleItemTypes)
     dataStoreInfoGeneratorWithMock(DataStoreInfoGenerator, sqlCustom, generator)
     dbGenerator(DbGenerator, sqlCustom, dbEntityTransformer, generator, dbTemplate)
-    schemaGenerator(SchemaGenerator, sqlCustom, schemaEntityTransformer, generator, jsonTemplate)
+    schemaGenerator(SchemaGenerator, sqlCustom, schemaEntityTransformer, generator, jsonTemplate, multipleItemTypes)
 
     dataStoreInfoGenerator(DataStoreInfoGenerator, sqlCustom, generator)
 

@@ -19,7 +19,7 @@ class SchemaGeneratorIntegrationSpec extends Specification {
     def "should generate json schema for a given data set"() {
         given:
         String expectedJsonSchemaStruct = new File('testResources/jsonSchema.expected').text.replaceAll("\\s", "")
-        String generated = schemaGeneratorWithMock.generate('entitySchema', 'entitySchemaMasterProperties', 'dataDict', 'clabel')[0]
+        String generated = schemaGeneratorWithMock.generate()[0]
 
         expect:
         generated.replaceAll("\\s", "") == expectedJsonSchemaStruct
