@@ -3,6 +3,7 @@ package org.cghr.generator
 import org.cghr.generator.dataStoreInfo.DataStoreInfoGenerator
 import org.cghr.generator.db.DbGenerator
 import org.cghr.generator.jsonSchema.SchemaGenerator
+import org.junit.Ignore
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.support.GenericGroovyXmlContextLoader
@@ -36,6 +37,7 @@ class GenerateAll extends Specification {
     String schemaFolder = 'generated/schemas/'
 
 
+    @Ignore
     def "should generate dbStructure,json schemas and webservice "() {
 
         given:
