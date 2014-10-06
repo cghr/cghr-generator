@@ -7,15 +7,15 @@ import org.junit.Ignore
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.support.GenericGroovyXmlContextLoader
-import spock.lang.Specification
 
 /**
  * Created by ravitej on 1/4/14.
  */
 @ContextConfiguration(locations = "classpath:spring-context.groovy", loader = GenericGroovyXmlContextLoader)
-class GenerateAll extends Specification {
+class GenerateAll {
 
     @Autowired
+
     DbGenerator dbGenerator
 
     @Autowired
