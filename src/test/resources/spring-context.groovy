@@ -4,6 +4,7 @@ import org.cghr.generator.Generator
 import org.cghr.generator.dataStoreInfo.DataStoreInfoGenerator
 import org.cghr.generator.db.DbGenerator
 import org.cghr.generator.jsonSchema.SchemaGenerator
+import org.cghr.generator.routes.RouteGenerator
 import org.cghr.generator.sqlUtil.SqlCustom
 import org.cghr.generator.test.db.MockSql
 import org.cghr.generator.transformer.EntityTransformer
@@ -32,6 +33,7 @@ beans {
     sqlMock(Sql, dataSource = mockDataSource)
     mockSql(MockSql, sqlMock)
     sqlCustom(SqlCustom, sqlMock)
+    sqlProd(SqlCustom, gSql)
 
     dbTypeMapping(HashMap, [int: 'bigint(10)', text: 'varchar(100)', longtext: 'text', timestamp: 'timestamp default current_timestamp',
             select: 'varchar(100)', 'select-inline': 'varchar(100)', multiselect: 'varchar(100)', lookup: 'varchar(100)',
@@ -79,8 +81,9 @@ beans {
     dbGeneratorWithMock(DbGenerator, sqlCustom, dbEntityTransformer, generator, dbTemplate)
     schemaGeneratorWithMock(SchemaGenerator, sqlCustom, schemaEntityTransformer, generator, jsonTemplate, multipleItemTypes)
     dataStoreInfoGeneratorWithMock(DataStoreInfoGenerator, sqlCustom, generator)
-    dbGenerator(DbGenerator, sqlCustom, dbEntityTransformer, generator, dbTemplate)
-    schemaGenerator(SchemaGenerator, sqlCustom, schemaEntityTransformer, generator, jsonTemplate, multipleItemTypes)
+    dbGenerator(DbGenerator, sqlProd, dbEntityTransformer, generator, dbTemplate)
+    schemaGenerator(SchemaGenerator, sqlProd, schemaEntityTransformer, generator, jsonTemplate, multipleItemTypes)
+    routeGenerator(RouteGenerator, sqlProd, generator, routeTemplate)
 
     dataStoreInfoGenerator(DataStoreInfoGenerator, sqlCustom, generator)
 

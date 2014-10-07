@@ -3,6 +3,7 @@ package org.cghr.generator
 import org.cghr.generator.dataStoreInfo.DataStoreInfoGenerator
 import org.cghr.generator.db.DbGenerator
 import org.cghr.generator.jsonSchema.SchemaGenerator
+import org.cghr.generator.routes.RouteGenerator
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.support.GenericGroovyXmlContextLoader
@@ -15,15 +16,13 @@ import spock.lang.Specification
 class GenerateAll extends Specification {
 
     @Autowired
-
     DbGenerator dbGenerator
-
     @Autowired
     SchemaGenerator schemaGenerator
-
-
     @Autowired
     DataStoreInfoGenerator dataStoreInfoGenerator
+    @Autowired
+    RouteGenerator routeGenerator
 
 
     String entityDesignTable = 'entityDesign'
@@ -37,6 +36,7 @@ class GenerateAll extends Specification {
     String schemaFolder = 'generated/schemas/'
 
 
+    @spock.lang.Ignore
     def "should generate dbStructure,json schemas and webservice "() {
 
         given:
@@ -48,6 +48,10 @@ class GenerateAll extends Specification {
 
         //Generate data store Info
         dataStoreInfoGenerator.generateToAFile(entityDesignTable, "/templates/dataStoreInfo", dataStoreInfoFile)
+
+        //Generate Routes config
+        routeGenerator.generateRoutes('generated/routing/')
+
 
     }
 

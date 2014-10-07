@@ -9,7 +9,8 @@ angular.module('enumRoutes', [])
                 url: '/area',
                 tpl: 'tpls/dataGrid.html',
                 title: 'Areas',
-                msg: 'Select an Area'
+                msg: 'Select an Area',
+                children:[]
 
             },
             {
@@ -24,7 +25,7 @@ angular.module('enumRoutes', [])
                         url: '/house',
                         tpl: 'tpls/dataGrid.html',
                         title: 'Houses',
-                        add_new: true,
+                        add_new: TRUE,
                         msg: 'Add/Select a House'
                     }
                 ]
@@ -47,7 +48,7 @@ angular.module('enumRoutes', [])
                         url: '/household',
                         tpl: 'tpls/dataGrid.html',
                         title: 'Households',
-                        add_new: true,
+                        add_new: TRUE,
                         msg: 'Add/Select a Household'
                     }
                 ]
@@ -56,8 +57,8 @@ angular.module('enumRoutes', [])
                 name: 'householdDetail',
                 url: '/area/:areaId/house/:houseId/household/:householdId',
                 tpl: 'tpls/pageDetailNavDisabled.html',
-                default_state: 'member',
                 title: 'Members',
+                default_state: 'member',
                 prev_state: {name: 'enum.houseDetail.household', title: 'Households'},
                 children: [
                     {
@@ -65,21 +66,21 @@ angular.module('enumRoutes', [])
                         url: '/visit',
                         tpl: 'tpls/dataGrid.html',
                         title: 'Visits',
-                        add_new: true,
+                        add_new: TRUE,
                         msg: 'Add a new visit'
                     },
                     {
                         name: 'basicInf',
                         url: '/basicInf',
                         tpl: 'tpls/surveyFormDirective.html',
-                        title: 'Basic Information'
+                        title: 'Basic Inf'
                     },
                     {
                         name: 'member',
                         url: '/member',
                         tpl: 'enum/dataGrid/dataGridCustom.html',
                         title: 'Members',
-                        add_new: true
+                        add_new: TRUE
                     },
                     {
                         name: 'commonQs',
@@ -104,7 +105,7 @@ angular.module('enumRoutes', [])
                         url: '/hosp',
                         tpl: 'enum/dataGrid/dataGridCustom.html',
                         title: 'Hospitalization',
-                        add_new: true
+                        add_new: TRUE
                     },
                     {
                         name: 'deathInf',
@@ -117,14 +118,13 @@ angular.module('enumRoutes', [])
                         url: '/death',
                         tpl: 'enum/dataGrid/dataGridCustom.html',
                         title: 'Deaths',
-                        add_new: true
+                        add_new: TRUE
                     },
                     {
                         name: 'contact',
                         url: '/contact',
                         tpl: 'tpls/surveyFormDirective.html',
-                        title: 'Contact Inf',
-                        stateChangeStartMsg: 'Enumeration of the Household Completed'
+                        title: 'Contact Inf'
                     }
                 ]
             },
@@ -196,4 +196,4 @@ angular.module('enumRoutes', [])
         ]
 
 
-    });
+    })

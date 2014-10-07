@@ -19,9 +19,9 @@ angular.module('{{module}}', [])
                   name: '{{name}}',
                   url: '{{url}}',
                   tpl: '{{tpl}}',
-                  title: '{{title}}',
-                  add_new: {{add_new}},
-                  msg: '{{msg}}'
+                  title: '{{title}}'
+                  {{#if add_new}},add_new:{{add_new}}{{/if}}
+                  {{#if msg}},msg: '{{msg}}'{{/if}}
 
                 }
                 {{~#unless @last ~}},{{~/unless ~}}

@@ -22,9 +22,6 @@ class RouteGeneratorSpec extends Specification {
     @Autowired
     Generator generator
 
-    def setupSpec() {
-
-    }
 
     def setup() {
 

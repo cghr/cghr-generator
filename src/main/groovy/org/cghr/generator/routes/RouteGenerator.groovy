@@ -14,13 +14,12 @@ class RouteGenerator {
     Generator generator
     String templateLocation
 
-    Map generateRoutes() {
+    void generateRoutes(String folderPath) {
 
-        List modules = []
-        List routing = modules.collect { generateRoutesFor(it) }
-        Map routes = [:]
+        List modules = gSql.rows("select distinct module from mainRoutes")
+        List routing = modules.collect { generateRoutesFor(it.module) }
         int i = 0
-        modules.each { routes.put(it, routing[i++]) }
+        modules.each { new File(folderPath + it.module + '.json').setText(routing[i++]) }
     }
 
     String generateRoutesFor(String module) {
@@ -32,15 +31,13 @@ class RouteGenerator {
 
     Map buildRoutingInfo(String module) {
 
-        Map routingInfo = [:]
+
         String sql = "select * from mainRoutes where module=?"
-        routingInfo = gSql.firstRow(sql, [module])
+        Map routingInfo = gSql.firstRow(sql, [module])
 
         routingInfo.children = gSql.rows("select * from level2Routes where parent=?", [routingInfo.name]).collect {
-            println it
             String parent = it.name
             it.children = gSql.rows("select * from level3Routes where parent=?", [parent])
-            println it.children
             it
         }
         routingInfo
