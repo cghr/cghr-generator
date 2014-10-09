@@ -16,7 +16,7 @@ def projectName = projects.get(projectId)
 ["sh", "-c", "rm csvDatabase/*.csv"].execute()
 println "Cleaned up  all old csv files\n"
 
-String googleAuth = "DQAAAO0AAABCMwkMOhvmcuD1HYraevsdfKJgd-w9nWGDch4vhiSVndca5CMz7j3kvGWgQv9ose2zqxzVkteyOOQFeycyQdkIAAn5oplZsubxf23f_yvP8FhaPxdcwa0r2dc-ogqA7cccVhRRmKr3mXVB64moxAf6azF_fCpoopVO7-bBx5iwlrNQ2Pcz4XXSGvD3SAks2b2s4kpX7YAgyXYZ2NyervEPiKGg68dTHfJUOvTAnfTiEvY9lNWGOg7dgP0olxrEWZkuti-b7XwjjyEHkFKlPQajhYQE4PRbhx1AlPoCX5PBZSjzJyXysbL4AIzUQUxhKbQ"
+String encodedData = "DQAAAO0AAABCMwkMOhvmcuD1HYraevsdfKJgd-w9nWGDch4vhiSVndca5CMz7j3kvGWgQv9ose2zqxzVkteyOOQFeycyQdkIAAn5oplZsubxf23f_yvP8FhaPxdcwa0r2dc-ogqA7cccVhRRmKr3mXVB64moxAf6azF_fCpoopVO7-bBx5iwlrNQ2Pcz4XXSGvD3SAks2b2s4kpX7YAgyXYZ2NyervEPiKGg68dTHfJUOvTAnfTiEvY9lNWGOg7dgP0olxrEWZkuti-b7XwjjyEHkFKlPQajhYQE4PRbhx1AlPoCX5PBZSjzJyXysbL4AIzUQUxhKbQ"
 
 println "Starting to download csv files from google docs...."
 List repository = []
@@ -70,7 +70,7 @@ repository.add(logistics)
 
 repository[projectId].each {
     Map file ->
-        ["sh", "-c", """curl --silent --header \"Authorization: GoogleLogin auth=$googleAuth\" \"$file.url\"  >> "csvDatabase/"$file.name".csv" """].execute()
+        ["sh", "-c", """curl --silent --header \"Authorization: GoogleLogin auth=$encodedData\" \"$file.url\"  >> "csvDatabase/"$file.name".csv" """].execute()
 }
 println 'Download finished\n'
 

@@ -4,6 +4,7 @@ import org.cghr.generator.Generator
 import org.cghr.generator.dataStoreInfo.DataStoreInfoGenerator
 import org.cghr.generator.db.DbGenerator
 import org.cghr.generator.jsonSchema.SchemaGenerator
+import org.cghr.generator.jsonSchema.SchemaValidator
 import org.cghr.generator.routes.RouteGenerator
 import org.cghr.generator.sqlUtil.SqlCustom
 import org.cghr.generator.test.db.MockSql
@@ -85,6 +86,7 @@ beans {
     schemaGenerator(SchemaGenerator, sqlProd, schemaEntityTransformer, generator, jsonTemplate, multipleItemTypes)
     routeGenerator(RouteGenerator, sqlProd, generator, routeTemplate)
 
+    schemaValidator(SchemaValidator)
     dataStoreInfoGenerator(DataStoreInfoGenerator, sqlCustom, generator)
 
 

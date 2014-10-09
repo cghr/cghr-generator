@@ -3,6 +3,7 @@ package org.cghr.generator
 import org.cghr.generator.dataStoreInfo.DataStoreInfoGenerator
 import org.cghr.generator.db.DbGenerator
 import org.cghr.generator.jsonSchema.SchemaGenerator
+import org.cghr.generator.jsonSchema.SchemaValidator
 import org.cghr.generator.routes.RouteGenerator
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
@@ -19,6 +20,9 @@ class GenerateAll extends Specification {
     DbGenerator dbGenerator
     @Autowired
     SchemaGenerator schemaGenerator
+    @Autowired
+    SchemaValidator schemaValidator
+
     @Autowired
     DataStoreInfoGenerator dataStoreInfoGenerator
     @Autowired
@@ -45,6 +49,7 @@ class GenerateAll extends Specification {
 
         //Generate json Schemas
         schemaGenerator.generateToAFolder(schemaFolder)
+        schemaValidator.validateAllGeneratedSchemas(schemaFolder)
 
         //Generate data store Info
         dataStoreInfoGenerator.generateToAFile(entityDesignTable, "/templates/dataStoreInfo", dataStoreInfoFile)
