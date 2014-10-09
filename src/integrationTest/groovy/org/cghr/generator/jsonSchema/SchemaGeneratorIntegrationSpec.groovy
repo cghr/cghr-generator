@@ -1,5 +1,6 @@
-package org.cghr.generator.jsonSchema
+package groovy.org.cghr.generator.jsonSchema
 
+import org.cghr.generator.jsonSchema.SchemaGenerator
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.support.GenericGroovyXmlContextLoader

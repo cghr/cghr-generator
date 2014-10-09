@@ -1,5 +1,6 @@
-package org.cghr.generator.db
+package groovy.org.cghr.generator.db
 
+import org.cghr.generator.db.DbGenerator
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.support.GenericGroovyXmlContextLoader

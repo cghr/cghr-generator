@@ -76,16 +76,6 @@ task intTest(type: Test) {
     classpath = sourceSets.integrationTest.runtimeClasspath
 }
 
-//sourceSets {
-//    integrationTest
-//}
-//
-//
-//task intTest(type: Test) {
-//    testClassesDir = sourceSets.integrationTest.output.classesDir
-//    classpath = sourceSets.integrationTest.runtimeClasspath
-//
-//}
 
 String springVersion = '4.1.0.RELEASE'
 // In this section you declare the dependencies for your production and test code

@@ -1,5 +1,6 @@
-package org.cghr.generator.dataStoreInfo
+package groovy.org.cghr.generator.dataStoreInfo
 
+import org.cghr.generator.dataStoreInfo.DataStoreInfoGenerator
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.support.GenericGroovyXmlContextLoader

@@ -103,7 +103,7 @@ memberTobaccoAlcohol,18,What age did you first start smoking on most days? (In c
 memberTobaccoAlcohol,19,How long has it been since you stopped smoking?,,ageStopSmokingPast,,text,"between[10:{data.ageStartSmokingPast}],required",data.smokeTobacco=='Not at all' && data.smokeTobaccoPast=='Yes',,memberAge,,,,
 memberTobaccoAlcohol,20,What was your main reason for stopping? (Multiple response possible) Check all that apply,,reasonStopSmoking,clabel3,multiselect,required,data.smokeTobacco=='Not at all' && data.smokeTobaccoPast=='Yes',,,,,,
 memberTobaccoAlcohol,21,Passive Smoking,,,,heading,,data.smokeTobacco!='Daily' || data.smokeTobacco!='Less than daily',,,,,,
-memberTobaccoAlcohol,22,Have you ever lived with smoker in the same house for at least 6 months?,,livedSmokersHome,clabel23,select,required,,,,,,,
+memberTobaccoAlcohol,22,Have you ever lived with smoker in the same house for at least 6  months?,,livedSmokersHome,clabel23,select,required,,,,,,,
 memberTobaccoAlcohol,23,"How frequently are you exposed to other people’s tobacco smoke either at home, workplace or in public places? (i.e. a minimum of 5 consecutive minutes each time)",,exposeOtherSmoke,clabel24,select,required,,,,,,,
 memberTobaccoAlcohol,24,What is the usual duration of your exposure per week? (in hours),,durationExposure,,text,"between[1:99],required",data.exposeOtherSmoke!='Never or almost never',,,,,,
 memberTobaccoAlcohol,25,Current User of smokeless tobacco,,,,heading,,,,,,,,

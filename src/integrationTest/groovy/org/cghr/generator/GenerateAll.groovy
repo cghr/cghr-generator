@@ -1,4 +1,4 @@
-package org.cghr.generator
+package groovy.org.cghr.generator
 
 import org.cghr.generator.dataStoreInfo.DataStoreInfoGenerator
 import org.cghr.generator.db.DbGenerator
