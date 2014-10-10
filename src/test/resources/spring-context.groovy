@@ -89,5 +89,25 @@ beans {
     schemaValidator(SchemaValidator)
     dataStoreInfoGenerator(DataStoreInfoGenerator, sqlCustom, generator)
 
+    rules(ArrayList, [
+            [condition: { it.name == '' && it.type != 'heading' }, msg: "name can't be empty for type non-heading"],
+            [condition: { it.name.contains(' ') }, msg: "name can't white contain spaces"],
+            [condition: { it.type == '' }, msg: "type can't be empty"]
+    ])
+    dataList(ArrayList, [
+            [entity: 'country', qno: '1', name: 'id', type: 'text'],
+            [entity: 'country', qno: '2', name: 'name', type: ''],
+            [entity: 'country', qno: '3', name: '', type: 'text'],
+            [entity: 'country', qno: '4', name: 'captial city', type: ''],
+
+    ])
+    expectedReport(ArrayList, [
+            [qno: 3, entity: 'country'],
+            [qno: 4, entity: 'country'],
+            [qno: 2, entity: 'country'],
+            [qno: 4, entity: 'country']
+
+    ])
+
 
 }
