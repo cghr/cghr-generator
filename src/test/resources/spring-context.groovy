@@ -101,14 +101,16 @@ beans {
 
     ])
     dataList(ArrayList, [
-            [entity: 'country', qno: '1', name: 'id', type: 'text'],
-            [entity: 'country', qno: '2', name: 'name', type: ''],
-            [entity: 'country', qno: '3', name: '', type: 'text'],
-            [entity: 'country', qno: '4', name: 'captial city', type: ''],
+            [entity: 'country', qno: '1', name: 'id', type: 'text', flow: '', clabel: ''],
+            [entity: 'country', qno: '2', name: 'name', type: '', flow: '', clabel: ''],
+            [entity: 'country', qno: '3', name: '', type: 'text', flow: '', clabel: ''],
+            [entity: 'country', qno: '4', name: 'captial city', type: '', flow: '', clabel: ''],
 
     ])
     expectedReport(ArrayList, [
             [qno: 3, entity: 'country'],
+            [qno: 4, entity: 'country'],
+            [qno: 2, entity: 'country'],
             [qno: 4, entity: 'country'],
             [qno: 2, entity: 'country'],
             [qno: 4, entity: 'country']
