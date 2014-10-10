@@ -46,7 +46,7 @@ class GenerateAll extends Specification {
     File dbFile = new File('generated/dbStructure/db.sql')
     String schemaFolder = 'generated/schemas/'
 
-    //@spock.lang.Ignore
+    @spock.lang.Ignore
     def "should generate dbStructure,json schemas and webservice "() {
 
         given:
