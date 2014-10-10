@@ -1,5 +1,6 @@
 package org.cghr.validator.dataDict
 
+import org.cghr.generator.Generator
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.support.GenericGroovyXmlContextLoader
@@ -17,12 +18,14 @@ class DataDictValidatorSpec extends Specification {
     ArrayList dataList
     @Autowired
     ArrayList expectedReport
+    @Autowired
+    Generator generator
 
     DataDictValidator dataDictValidator
 
     def setup() {
 
-        dataDictValidator = new DataDictValidator(rules, dataList)
+        dataDictValidator = new DataDictValidator(rules, dataList, generator)
     }
 
     def "should generate an expected report from given rules and dataList"() {
@@ -31,6 +34,7 @@ class DataDictValidatorSpec extends Specification {
         def actualReport = result.collect {
             it.subMap(['qno', 'entity'])
         }
+
 
         expect:
         actualReport.toString() == expectedReport.toString()

@@ -1,10 +1,12 @@
-package groovy.org.cghr.generator
+package org.cghr.generator
 
+import groovy.sql.Sql
 import org.cghr.generator.dataStoreInfo.DataStoreInfoGenerator
 import org.cghr.generator.db.DbGenerator
 import org.cghr.generator.jsonSchema.SchemaGenerator
 import org.cghr.generator.jsonSchema.SchemaValidator
 import org.cghr.generator.routes.RouteGenerator
+import org.cghr.validator.dataDict.DataDictValidator
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.support.GenericGroovyXmlContextLoader
@@ -17,6 +19,8 @@ import spock.lang.Specification
 class GenerateAll extends Specification {
 
     @Autowired
+    Sql gSql
+    @Autowired
     DbGenerator dbGenerator
     @Autowired
     SchemaGenerator schemaGenerator
@@ -27,6 +31,9 @@ class GenerateAll extends Specification {
     DataStoreInfoGenerator dataStoreInfoGenerator
     @Autowired
     RouteGenerator routeGenerator
+
+    @Autowired
+    DataDictValidator dataDictValidator
 
 
     String entityDesignTable = 'entityDesign'
@@ -39,7 +46,7 @@ class GenerateAll extends Specification {
     File dbFile = new File('generated/dbStructure/db.sql')
     String schemaFolder = 'generated/schemas/'
 
-    //@spock.lang.Ignore
+    @spock.lang.Ignore
     def "should generate dbStructure,json schemas and webservice "() {
 
         given:
@@ -55,6 +62,11 @@ class GenerateAll extends Specification {
 
         //Generate Routes config
         routeGenerator.generateRoutes('generated/routing/')
+
+        List dataList = gSql.rows("select * from dataDict")
+        dataDictValidator.dataList = dataList
+
+        dataDictValidator.generateReport('templates/validationReport', 'generated/validation/report.txt')
 
 
     }
