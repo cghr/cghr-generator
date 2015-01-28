@@ -1,5 +1,4 @@
 package org.cghr.generator
-
 import groovy.sql.Sql
 import org.cghr.generator.dataStoreInfo.DataStoreInfoGenerator
 import org.cghr.generator.db.DbGenerator
@@ -10,13 +9,11 @@ import org.cghr.validator.dataDict.DataDictValidator
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.support.GenericGroovyXmlContextLoader
-import spock.lang.Specification
-
 /**
  * Created by ravitej on 1/4/14.
  */
 @ContextConfiguration(locations = "classpath:spring-context.groovy", loader = GenericGroovyXmlContextLoader)
-class GenerateAll extends Specification {
+class GenerateAll {
 
     @Autowired
     Sql gSql
