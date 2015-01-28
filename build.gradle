@@ -78,7 +78,7 @@ task copyTestResources(type: Copy) {
     from "${projectDir}/src/test/resources"
     into "${buildDir}/classes/test"
 }
-String springVersion = '4.1.0.RELEASE'
+String springVersion = '4.1.1.RELEASE'
 // In this section you declare the dependencies for your production and test code
 configurations {
     provided
