@@ -9,11 +9,13 @@ import org.cghr.validator.dataDict.DataDictValidator
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.support.GenericGroovyXmlContextLoader
+import spock.lang.Specification
+
 /**
  * Created by ravitej on 1/4/14.
  */
 @ContextConfiguration(locations = "classpath:spring-context.groovy", loader = GenericGroovyXmlContextLoader)
-class GenerateAll {
+class GenerateAll extends Specification {
 
     @Autowired
     Sql gSql
@@ -43,7 +45,7 @@ class GenerateAll {
     File dbFile = new File('generated/dbStructure/a.sql')
     String schemaFolder = 'generated/schemas/'
 
-    //@spock.lang.Ignore
+    @spock.lang.Ignore
     def "should generate dbStructure,json schemas and webservice "() {
 
         given:
