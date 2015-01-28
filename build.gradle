@@ -26,7 +26,6 @@ cobertura.coverageFormats = ['html', 'xml'] // coveralls plugin depends on xml f
 cobertura.coverageSourceDirs = sourceSets.main.groovy.srcDirs
 
 sourceCompatibility = 1.7
-targetCompatibility = 1.7
 
 version = '0.1-beta1'
 group = 'org.cghr'
@@ -75,8 +74,10 @@ task intTest(type: Test) {
     testClassesDir = sourceSets.integrationTest.output.classesDir
     classpath = sourceSets.integrationTest.runtimeClasspath
 }
-
-
+task copyTestResources(type: Copy) {
+    from "${projectDir}/src/test/resources"
+    into "${buildDir}/classes/test"
+}
 String springVersion = '4.1.0.RELEASE'
 // In this section you declare the dependencies for your production and test code
 configurations {
@@ -92,7 +93,7 @@ check.dependsOn intTest
 dependencies {
 
     // We use the latest groovy 2.x version for building this library
-    compile 'org.codehaus.groovy:groovy-all:2.2.0'
+    compile 'org.codehaus.groovy:groovy-all:2.4.0'
     compile "org.springframework:spring-context:$springVersion";
     compile 'com.google.code.gson:gson:2.2.4'
     compile group: 'commons-collections', name: 'commons-collections', version: '3.2';

@@ -133,7 +133,7 @@ class SchemaGeneratorSpec extends Specification {
 
         }
 
-        schemaGenerator = new SchemaGenerator(sqlCustom, entityTransformer, generator, templateLocation, multipleItemTypes)
+        schemaGenerator = new SchemaGenerator(sqlCustom, entityTransformer, generator, templateLocation, multipleItemTypes, "")
     }
 
 

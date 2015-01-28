@@ -1,4 +1,9 @@
-#!/usr/bin/groovy
+#!/usr/bin/env groovy
+
+//Configuration For language Code
+String languageCode = ""
+//languageCode="mr"
+
 println """ Project List
 1.HC
 2.Hcamp
@@ -16,7 +21,7 @@ def projectName = projects.get(projectId)
 ["sh", "-c", "rm csvDatabase/*.csv"].execute()
 println "Cleaned up  all old csv files\n"
 
-String encodedData = "DQAAAO0AAABCMwkMOhvmcuD1HYraevsdfKJgd-w9nWGDch4vhiSVndca5CMz7j3kvGWgQv9ose2zqxzVkteyOOQFeycyQdkIAAn5oplZsubxf23f_yvP8FhaPxdcwa0r2dc-ogqA7cccVhRRmKr3mXVB64moxAf6azF_fCpoopVO7-bBx5iwlrNQ2Pcz4XXSGvD3SAks2b2s4kpX7YAgyXYZ2NyervEPiKGg68dTHfJUOvTAnfTiEvY9lNWGOg7dgP0olxrEWZkuti-b7XwjjyEHkFKlPQajhYQE4PRbhx1AlPoCX5PBZSjzJyXysbL4AIzUQUxhKbQ"
+String encodedData = "DQAAAO0AAAAu1enVTHz5nYYb717Rcb66c7ygZ-SnU0NYxl2ZqZ_ePNp3n56mB3y85EnJ7vHQ7CEX0AuUts9wNxWWNUGUjPuFv4QnWkIW88JEsitOXtGa-y7Vw4m2Vt1GE3mi7tv_13aVvuDWsrRUcKuE5pA15R6AIuusLjZdZuLPGoR4CvYVsZgVJJEfkyuaOvro3ndRq1WFZKYC4fcB9UtWytAYKorWJC-S4hG4iQD1u7cNp5g38_JWkqiCb7MkzvFGWcJOsXHB8RO6edb03bJz0zGU_jJboBleSdLJpJlJkyuCVlR3KkWwEL_0sLOpi9LqB7j6dos"
 
 println "Starting to download csv files from google docs...."
 List repository = []
@@ -49,12 +54,13 @@ List hcServer = [
 
 ]
 List mvm = [
-        [name: 'dataDict', url: 'https://docs.google.com/spreadsheets/d/1PAkd1YLbBKH5VdTmxlm-f3tiTJocEGK0tCg5eyodtOs/export?format=csv&id=1PAkd1YLbBKH5VdTmxlm-f3tiTJocEGK0tCg5eyodtOs&gid=1430303457'],
-        [name: 'clabel', url: 'https://docs.google.com/spreadsheets/d/1qESqJ6Oje4raN2QDphYiu21-ReMCJYR8k2k-9D5IyZA/export?format=csv&id=1qESqJ6Oje4raN2QDphYiu21-ReMCJYR8k2k-9D5IyZA&gid=800096487'],
+        [name: 'dataDict', url: 'https://docs.google.com/spreadsheets/d/1q-UUaZCejBt3snPANIm-UmR_qoc_qGni2jRhrLCO7-0/export?format=csv&id=1q-UUaZCejBt3snPANIm-UmR_qoc_qGni2jRhrLCO7-0&gid=0'],
+        [name: 'clabel', url: 'https://docs.google.com/spreadsheets/d/1PT3TUS_HoZK8lJvu2Hx5qPfZrLwfPs-XVDmaQ_iHWg4/export?format=csv&id=1PT3TUS_HoZK8lJvu2Hx5qPfZrLwfPs-XVDmaQ_iHWg4&gid=800096487'],
         [name: 'crossFlow', url: 'https://docs.google.com/spreadsheets/d/1utyU-A1aq3yJutNiHuVtz6fPP9lYExNf-arWpqcc2_U/export?format=csv&id=1utyU-A1aq3yJutNiHuVtz6fPP9lYExNf-arWpqcc2_U&gid=1502380304'],
         [name: 'entityDesign', url: 'https://docs.google.com/spreadsheets/d/1DA0wMEYv1TW2-dJFuAZ1KO9iUiA63lMEK5Tq9zeQ7Tw/export?format=csv&id=1DA0wMEYv1TW2-dJFuAZ1KO9iUiA63lMEK5Tq9zeQ7Tw&gid=0'],
         [name: 'entitySchema', url: 'https://docs.google.com/spreadsheets/d/1fr5KvywbYI0kLpAmbnCfp_JGdDDsKJWTBsEQle8klpc/export?format=csv&id=1fr5KvywbYI0kLpAmbnCfp_JGdDDsKJWTBsEQle8klpc&gid=0'],
-        [name: 'entitySchemaMasterProperties', url: 'https://docs.google.com/spreadsheets/d/1KzXBygP3TAwszN1B3uDF23akp7-LWVBGR4LgtpZNzYU/export?format=csv&id=1KzXBygP3TAwszN1B3uDF23akp7-LWVBGR4LgtpZNzYU&gid=0']
+        [name: 'entitySchemaMasterProperties', url: 'https://docs.google.com/spreadsheets/d/1KzXBygP3TAwszN1B3uDF23akp7-LWVBGR4LgtpZNzYU/export?format=csv&id=1KzXBygP3TAwszN1B3uDF23akp7-LWVBGR4LgtpZNzYU&gid=0'],
+        [name: 'crossCheck', url: 'https://docs.google.com/spreadsheets/d/17gDdGEFkkGVnzLT1wXYdswgD6R6aniS-oGBhuH7B6Kk/export?format=csv&id=17gDdGEFkkGVnzLT1wXYdswgD6R6aniS-oGBhuH7B6Kk&gid=0']
 ]
 List logistics = [
 
@@ -78,6 +84,7 @@ println 'Download finished\n'
 println 'Generating schemas...Processing...'
 ["sh", "-c", "rm -rf build/"].execute()
 ["sh", "-c", "rm -rf generated/schemas/*.json"].execute()
+println "Cleaned up directories"
 def output = ["sh", "-c", "gradle check"].execute().text
 println output
 println 'Generated schemas and db structure\n'
@@ -86,11 +93,11 @@ def sqlImportPath = "~/apps/$projectName/services/src/main/webapp/sqlImport/".to
 
 println 'sql Import path'
 println sqlImportPath
+
 //Todo Copy
-["sh", "-c", "cp generated/schemas/* ~/apps/$projectName/ui/src/assets/jsonSchema"].execute()
-["sh", "-c", "cp generated/dbStructure/db.sql ~/apps/$projectName/services/src/main/webapp/sqlImport/"].execute()
-def cmd = ["sh", "-c", "mv $sqlImportPath/db.sql $sqlImportPath/a.sql "].execute()
-println cmd.text
-println 'copied to respective directories'
+String schemaPath = languageCode ?: ""
+println schemaPath
+["sh", "-c", "cp generated/schemas/* ~/apps/$projectName/ui/src/assets/jsonSchema/" + schemaPath].execute()
+["sh", "-c", "cp generated/dbStructure/a.sql ~/apps/$projectName/services/src/main/webapp/sqlImport/"].execute()
 
 

@@ -24,6 +24,7 @@ class DataDictValidator {
         return report
     }
 
+
     void generateReport(String templateLocation, String outputFile) {
         String report = generator.generate(templateLocation, [errors: validate()])
         new File(outputFile).setText(report)

@@ -18,6 +18,7 @@ class SchemaGenerator {
     Generator generator
     String templateLocation
     List multipleItemTypes
+    String languageCode
 
 
     List entityList = []
@@ -50,7 +51,7 @@ class SchemaGenerator {
 
     List propertiesFromDataDict(String entity) {
 
-        String sql = "select * from dataDict where entity=?"
+        String sql = "select entity,label$languageCode label,name,clabel,type,valdn,flow,crossFlow,crossCheck,lookup,image,help from dataDict where entity=?"
         gSql.rows(sql, [entity]).collect {
 
 
@@ -85,7 +86,8 @@ class SchemaGenerator {
     }
 
     List getClabelItems(String clabel) {
-        dataList('clabel', clabel)
+        String sql = "select name,text$languageCode text,value,valdn from clabel where name=?"
+        gSql.rows(sql, [clabel])
     }
 
     List getCrossFlowData(String crossFlowName) {

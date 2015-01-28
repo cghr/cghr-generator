@@ -1,15 +1,15 @@
 entity,name,type,key,strategy
-user,id,bigint(10),primary key,
+user,id,int,primary key,
 user,username,varchar(100),,
 user,password,varchar(100),,
-userlog,id,bigint(10),primary key,auto_increment
+userlog,id,int,primary key,auto_increment
 userlog,username,varchar(100),,
 userlog,status,varchar(100),,
-country,id,bigint(10),primary key,
-country,continentId,bigint(10),,
+country,id,int,primary key,
+country,continentId,int,,
 country,name,varchar(100),,
 country,language,varchar(100),,
 country,capital,varchar(100),,
-state,id,bigint(10),primary key,
-state,countryId,bigint(10),,
+state,id,int,primary key,
+state,countryId,int,,
 state,name,varchar(100),,

@@ -43,7 +43,7 @@ class GenerateAll extends Specification {
     String tableWithPropertyItemInfo = 'clabel'
     File dataStoreInfoFile = new File('generated/dataStoreInfo/dataStoreInfo.groovy')
 
-    File dbFile = new File('generated/dbStructure/db.sql')
+    File dbFile = new File('generated/dbStructure/a.sql')
     String schemaFolder = 'generated/schemas/'
 
     @spock.lang.Ignore
@@ -61,7 +61,7 @@ class GenerateAll extends Specification {
         dataStoreInfoGenerator.generateToAFile(entityDesignTable, "/templates/dataStoreInfo", dataStoreInfoFile)
 
         //Generate Routes config
-        routeGenerator.generateRoutes('generated/routing/')
+        //routeGenerator.generateRoutes('generated/routing/')
 
         List dataList = gSql.rows("select * from dataDict")
         dataDictValidator.dataList = dataList
