@@ -21,6 +21,7 @@ member,memberId,$stateParams.memberId,hidden
 member,householdId,$stateParams.householdId,hidden
 member,houseId,$stateParams.houseId,hidden
 member,areaId,$stateParams.areaId,hidden
+member,surveyor,user.id,hidden
 ,,,
 hcMember,datastore,hcMember,hidden
 hcMember,memberId,$stateParams.memberId,hidden
@@ -104,6 +105,9 @@ ffqSnacks,starttime,timestamp,hidden
 ffqSalt,datastore,ffqSalt,hidden
 ffqSalt,memberId,$stateParams.memberId,hidden
 ffqSalt,starttime,timestamp,hidden
+ffqOthers,datastore,ffqOthers,hidden
+ffqOthers,memberId,$stateParams.memberId,hidden
+ffqOthers,starttime,timestamp,hidden
 ffqFoodAdditives,datastore,ffqFoodAdditives,hidden
 ffqFoodAdditives,memberId,$stateParams.memberId,hidden
 ffqFoodAdditives,starttime,timestamp,hidden

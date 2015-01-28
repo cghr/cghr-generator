@@ -1,6 +1,7 @@
 package org.cghr.generator.cardinalSymptoms
 
 import groovy.sql.Sql
+import org.junit.Ignore
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.support.GenericGroovyXmlContextLoader
@@ -21,6 +22,7 @@ class SymptomGeneratorSpec extends Specification {
         symptomGenerator = new SymptomGenerator(vaSql)
     }
 
+    @Ignore
     def "should generate Symptom info"() {
         given:
         symptomGenerator.generateSymptoms()

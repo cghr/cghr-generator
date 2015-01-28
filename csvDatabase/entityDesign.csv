@@ -8,33 +8,33 @@ user,role,text,,
 team,id,text,primary key,
 team,name,text,,
 ,,,,
-teamuser,id,text,primary key,auto_increment
+teamuser,id,int,primary key,auto_increment
 teamuser,teamId,text,,
 teamuser,userId,text,,
 ,,,,
-assignment,id,text,primary key,auto_increment
+assignment,id,int,primary key,auto_increment
 assignment,areaId,text,,
 assignment,teamId,text,,
 assignment,assigntime,timestamp,,
 ,,,,
-userlog,id,text,primary key,auto_increment
+userlog,id,int,primary key,auto_increment
 userlog,username,text,,
 userlog,status,text,,
 userlog,time,text,,
 userlog,ipaddress,text,,
 ,,,,
-authtoken,id,text,primary key,auto_increment
+authtoken,id,int,primary key,auto_increment
 authtoken,token,text,,
 authtoken,time,text,,
 authtoken,expires,text,,
 authtoken,username,text,,
 authtoken,role,text,,
 ,,,,
-datachangelog,id,text,primary key,auto_increment
+datachangelog,id,int,primary key,auto_increment
 datachangelog,log,longtext,,
 datachangelog,status,text,,
 ,,,,
-filechangelog,id,text,primary key,auto_increment
+filechangelog,id,int,primary key,auto_increment
 filechangelog,filename,text,,
 filechangelog,filestore,text,,
 filechangelog,category,text,,
@@ -61,6 +61,7 @@ member,memberId,text,primary key,
 member,householdId,text,,
 member,houseId,text,,
 member,areaId,text,,
+member,surveyor,text,,
 member,timelog,timestamp,,
 ,,,,
 hcMember,memberId,text,primary key,
@@ -68,22 +69,20 @@ hcMember,householdId,text,,
 hcMember,surveyor,text,,
 hcMember,timelog,timestamp,,
 ,,,,
-enumVisit,id,text,primary key,auto_increment
+enumVisit,id,int,primary key,auto_increment
 enumVisit,householdId,text,,
-enumVisit,status,text,,
 enumVisit,surveyor,text,,
 enumVisit,timelog,timestamp,,
 ,,,,
-hcVisit,id,text,primary key,auto_increment
+hcVisit,id,int,primary key,auto_increment
 hcVisit,householdId,text,,
 hcVisit,surveyor,text,,
-hcVisit,status,text,,
 hcVisit,timelog,timestamp,,
 ,,,,
 state,stateId,text,primary key,
 state,name,text,,
 ,,,,
-district,districtId,text,primary key,auto_increment
+district,districtId,int,primary key,auto_increment
 district,name,text,,
 district,state,text,,
 ,,,,
@@ -91,9 +90,9 @@ householdCommonQs,householdId,text,primary key,
 householdFoodItems,householdId,text,primary key,
 hospInf,householdId,text,primary key,
 deathInf,householdId,text,primary key,
-householdHosp,id,text,primary key,auto_increment
+householdHosp,id,int,primary key,auto_increment
 householdHosp,householdId,text,,
-householdDeath,id,text,primary key,auto_increment
+householdDeath,id,int,primary key,auto_increment
 householdDeath,householdId,text,,
 memberPhoto,memberId,text,primary key,
 memberPhoto,starttime,text,,
@@ -167,6 +166,9 @@ ffqSpiceMix,endtime,timestamp,,
 ffqSnacks,memberId,text,primary key,
 ffqSnacks,starttime,text,,
 ffqSnacks,endtime,timestamp,,
+ffqOthers,memberId,text,primary key,
+ffqOthers,starttime,text,,
+ffqOthers,endtime,timestamp,,
 ffqSalt,memberId,text,primary key,
 ffqSalt,starttime,text,,
 ffqSalt,endtime,timestamp,,
@@ -177,7 +179,7 @@ resampling,memberId,text,primary key,
 resampling,starttime,text,,
 resampling,endtime,timestamp,,
 ,,,,
-outbox,id,text,primary key,auto_increment
+outbox,id,int,primary key,auto_increment
 outbox,datastore,text,,
 outbox,ref,text,,
 outbox,refId,text,,
@@ -185,7 +187,7 @@ outbox,recipient,text,,
 outbox,distList,text,,
 outbox,dwnStatus,text,,
 ,,,,
-inbox,id,text,primary key,auto_increment
+inbox,id,int,primary key,auto_increment
 inbox,datastore,text,,
 inbox,ref,text,,
 inbox,refId,text,,
@@ -201,5 +203,5 @@ resampAssign,timelog,timestamp,,
 ,,,,
 memberImage,memberId,text,primary key,
 memberImage,consent,text,,
-memberImage,photoId,text,,
 memberImage,photo,text,,
+memberImage,photoConsent,text,,

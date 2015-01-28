@@ -85,7 +85,7 @@ println 'Generating schemas...Processing...'
 ["sh", "-c", "rm -rf build/"].execute()
 ["sh", "-c", "rm -rf generated/schemas/*.json"].execute()
 println "Cleaned up directories"
-def output = ["sh", "-c", "gradle check"].execute().text
+def output = ["sh", "-c", "gradle -Dtest=org.cghr.generator.GenerateAll test"].execute().text
 println output
 println 'Generated schemas and db structure\n'
 
