@@ -7,7 +7,6 @@ import org.cghr.generator.jsonSchema.SchemaGenerator
 import org.cghr.generator.jsonSchema.SchemaValidator
 import org.cghr.generator.routes.RouteGenerator
 import org.cghr.generator.sqlUtil.SqlCustom
-import org.cghr.generator.test.db.MockSql
 import org.cghr.generator.transformer.EntityTransformer
 import org.cghr.validator.dataDict.DataDictValidator
 import org.springframework.jdbc.datasource.DriverManagerDataSource
@@ -17,12 +16,22 @@ def schemaMapping = [text: 'text', select: 'radio', 'select-inline': 'radio-inli
 def allowedTypesList = schemaMapping.keySet() as List
 
 beans {
+
     xmlns([context: 'http://www.springframework.org/schema/context'])
+    xmlns([mvc: 'http://www.springframework.org/schema/mvc'])
+
+    //Todo project specific controller packages
+    context.'component-scan'('base-package': 'org.cghr.generator.controller')
+
+    mvc.'annotation-driven'()
+
+    String basePath = System.getProperty("basePath")
 
     //Todo Database Config
-    dataSource(DriverManagerDataSource) {
+    dataSource(DriverManagerDataSource) { bean ->
+        bean.lazyInit = "true"
         driverClassName = 'org.relique.jdbc.csv.CsvDriver'
-        url = 'jdbc:relique:csv:csvDatabase'
+        url = "jdbc:relique:csv:$basePath" + "/csvDatabase"
         username = 'sa'
         password = ''
     }
@@ -42,7 +51,6 @@ beans {
     gSql(Sql, dataSource = dataSource)
     cardinalSymptoms(Sql, dataSource = vaDataSource)
     sqlMock(Sql, dataSource = mockDataSource)
-    mockSql(MockSql, sqlMock)
     sqlCustom(SqlCustom, sqlMock)
     sqlProd(SqlCustom, gSql)
     vaSql(SqlCustom, cardinalSymptoms)
@@ -147,7 +155,40 @@ beans {
     dataDictList(ArrayList, [])
     dataDictValidator(DataDictValidator, rules, dataDictList, generator)
 
-    languageCodes(ArrayList, [""])
+    languageCodes(ArrayList, ["", "mr"])
+
+    dbStructureFilePath(String, basePath + "/generated/dbStructure/a.sql")
+    schemaFolder(String, basePath + "/generated/schemas/")
+    validationReport(String, basePath + "/generated/validation/report.txt")
+
+    webAppsPath(String, "/opt/apache-tomcat-7.0.57/webapps/")
+
+    List hc = [
+            [name: 'dataDict', url: 'https://docs.google.com/spreadsheets/d/1vaNylr6RNHIuK9zgEzRMrssDsXKARY7s9XXTi1yL1JI/export?format=csv&id=1vaNylr6RNHIuK9zgEzRMrssDsXKARY7s9XXTi1yL1JI&gid=0'],
+            [name: 'clabel', url: 'https://docs.google.com/spreadsheets/d/11P-ncoAHXMXag0NXRRjXpwazYNvlUUmK3a5OdL-7CFc/export?format=csv&id=11P-ncoAHXMXag0NXRRjXpwazYNvlUUmK3a5OdL-7CFc&gid=0'],
+            [name: 'crossFlow', url: 'https://docs.google.com/spreadsheets/d/1FQOK-0DIlNVvrlMi83gjASfukvoGYDuIcHtZFdcFuik/export?format=csv&id=1FQOK-0DIlNVvrlMi83gjASfukvoGYDuIcHtZFdcFuik&gid=0'],
+            [name: 'entityDesign', url: 'https://docs.google.com/spreadsheets/d/1r2pGFwM9Rg3FnkHHZJKihVJZNm6atmynqL9AXiTDJ4w/export?format=csv&id=1r2pGFwM9Rg3FnkHHZJKihVJZNm6atmynqL9AXiTDJ4w&gid=0'],
+            [name: 'entitySchema', url: 'https://docs.google.com/spreadsheets/d/1pyK5sfFAIbP10896sBokZK93Hk7ZC-j4Uvdg8C94E8A/export?format=csv&id=1pyK5sfFAIbP10896sBokZK93Hk7ZC-j4Uvdg8C94E8A&gid=0'],
+            [name: 'entitySchemaMasterProperties', url: 'https://docs.google.com/spreadsheets/d/1YdUoPqdeghqRtr1_LdHGSkoadJpWx5ZhIiZjZ_a6W6Q/export?format=csv&id=1YdUoPqdeghqRtr1_LdHGSkoadJpWx5ZhIiZjZ_a6W6Q&gid=0'],
+            [name: 'lookup', url: 'https://docs.google.com/spreadsheets/d/1l3azCQh5BpA1WZOfT13p5u9OEj13rhTVYChpyklaUs4/export?format=csv&id=1l3azCQh5BpA1WZOfT13p5u9OEj13rhTVYChpyklaUs4&gid=0'],
+            [name: 'crossCheck', url: 'https://docs.google.com/spreadsheets/d/1xLvpA6q2IHM72ChhyqDVJzxXHSG1CeRumSC2gadpnYY/export?format=csv&id=1xLvpA6q2IHM72ChhyqDVJzxXHSG1CeRumSC2gadpnYY&gid=0'],
+            [name: 'dynamicDropdown', url: 'https://docs.google.com/spreadsheets/d/1cNYjz2sM6cQrLSTaTbKiYBvfputSq9v7Ba8SIm2zJ3Y/export?format=csv&id=1cNYjz2sM6cQrLSTaTbKiYBvfputSq9v7Ba8SIm2zJ3Y&gid=0'],
+            [name: 'mainRoutes', url: 'https://docs.google.com/spreadsheets/d/14EfxoPOPKP3LSSRtMh9koT9M7SiihaIixSA9JWXmdcg/export?format=csv&id=14EfxoPOPKP3LSSRtMh9koT9M7SiihaIixSA9JWXmdcg&gid=0'],
+            [name: 'level2Routes', url: 'https://docs.google.com/spreadsheets/d/1s4DgABBfD6pBxmDlXk6m8Z1f2k8lVTv3Psg862Z4s_s/export?format=csv&id=1s4DgABBfD6pBxmDlXk6m8Z1f2k8lVTv3Psg862Z4s_s&gid=0'],
+            [name: 'level3Routes', url: 'https://docs.google.com/spreadsheets/d/1m-0i2C3WS8hl_KHRgubOIH0CaKWokupKkkZ9CGdqPzQ/export?format=csv&id=1m-0i2C3WS8hl_KHRgubOIH0CaKWokupKkkZ9CGdqPzQ&gid=0']
+
+    ]
+    List mvm = [
+            [name: 'dataDict', url: 'https://docs.google.com/spreadsheets/d/1q-UUaZCejBt3snPANIm-UmR_qoc_qGni2jRhrLCO7-0/export?format=csv&id=1q-UUaZCejBt3snPANIm-UmR_qoc_qGni2jRhrLCO7-0&gid=0'],
+            [name: 'clabel', url: 'https://docs.google.com/spreadsheets/d/1PT3TUS_HoZK8lJvu2Hx5qPfZrLwfPs-XVDmaQ_iHWg4/export?format=csv&id=1PT3TUS_HoZK8lJvu2Hx5qPfZrLwfPs-XVDmaQ_iHWg4&gid=800096487'],
+            [name: 'crossFlow', url: 'https://docs.google.com/spreadsheets/d/1utyU-A1aq3yJutNiHuVtz6fPP9lYExNf-arWpqcc2_U/export?format=csv&id=1utyU-A1aq3yJutNiHuVtz6fPP9lYExNf-arWpqcc2_U&gid=1502380304'],
+            [name: 'entityDesign', url: 'https://docs.google.com/spreadsheets/d/1DA0wMEYv1TW2-dJFuAZ1KO9iUiA63lMEK5Tq9zeQ7Tw/export?format=csv&id=1DA0wMEYv1TW2-dJFuAZ1KO9iUiA63lMEK5Tq9zeQ7Tw&gid=0'],
+            [name: 'entitySchema', url: 'https://docs.google.com/spreadsheets/d/1fr5KvywbYI0kLpAmbnCfp_JGdDDsKJWTBsEQle8klpc/export?format=csv&id=1fr5KvywbYI0kLpAmbnCfp_JGdDDsKJWTBsEQle8klpc&gid=0'],
+            [name: 'entitySchemaMasterProperties', url: 'https://docs.google.com/spreadsheets/d/1KzXBygP3TAwszN1B3uDF23akp7-LWVBGR4LgtpZNzYU/export?format=csv&id=1KzXBygP3TAwszN1B3uDF23akp7-LWVBGR4LgtpZNzYU&gid=0'],
+            [name: 'crossCheck', url: 'https://docs.google.com/spreadsheets/d/17gDdGEFkkGVnzLT1wXYdswgD6R6aniS-oGBhuH7B6Kk/export?format=csv&id=17gDdGEFkkGVnzLT1wXYdswgD6R6aniS-oGBhuH7B6Kk&gid=0']
+    ]
+
+    onlineDocs(HashMap, [hc: hc, mvm: mvm])
 
 
 }

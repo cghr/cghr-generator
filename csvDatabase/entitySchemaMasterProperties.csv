@@ -2,11 +2,13 @@ entity,name,value,type
 house,datastore,house,hidden
 house,houseId,$stateParams.houseId,hidden
 house,areaId,$stateParams.areaId,hidden
+house,surveyor,user.id,hidden
 ,,,
 household,datastore,household,hidden
 household,householdId,$stateParams.householdId,hidden
 household,houseId,$stateParams.houseId,hidden
 household,areaId,$stateParams.areaId,hidden
+household,surveyor,user.id,hidden
 ,,,
 enumVisit,datastore,enumVisit,hidden
 enumVisit,householdId,$stateParams.householdId,hidden
@@ -45,6 +47,7 @@ householdDeath,datastore,householdDeath,hidden
 householdDeath,householdId,$stateParams.householdId,hidden
 hhContact,datastore,hhContact,hidden
 hhContact,householdId,$stateParams.householdId,hidden
+hhContact,surveyor,user.id,hidden
 memberBp1,datastore,memberBp1,hidden
 memberBp1,memberId,$stateParams.memberId,hidden
 memberBp1,starttime,timestamp,hidden
@@ -116,6 +119,7 @@ resampling,memberId,$stateParams.memberId,hidden
 resampling,starttime,timestamp,hidden
 invitationCard,datastore,invitationCard,hidden
 invitationCard,memberId,$stateParams.memberId,hidden
+invitationCard,surveyor,user.id,hidden
 memberPhoto,datastore,memberPhoto,hidden
 memberPhoto,memberId,$stateParams.memberId,hidden
 memberPhoto,starttime,timestamp,hidden

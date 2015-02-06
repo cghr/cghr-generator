@@ -1,0 +1,57 @@
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+	      http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+
+    <display-name>hc</display-name>
+
+    <display-name>hc</display-name>
+    <listener>
+        <listener-class>org.cghr.contextStartup.AppStartupListener</listener-class>
+    </listener>
+
+    <!-- Dispatcher Servlet -->
+    <servlet>
+        <servlet-name>spring</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextClass</param-name>
+            <param-value>org.springframework.web.context.support.GroovyWebApplicationContext</param-value>
+        </init-param>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/appContext.groovy</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+        <async-supported>true</async-supported>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>spring</servlet-name>
+        <url-pattern>/api/*</url-pattern>
+    </servlet-mapping>
+    <!--Ends -->
+
+    <!-- Awake File Manager -->
+    <!--<servlet>-->
+    <!--<servlet-name>AwakeFileManager</servlet-name>-->
+    <!--<servlet-class>org.awakefw.file.servlet.AwakeFileManager</servlet-class>-->
+    <!--<load-on-startup>2</load-on-startup>-->
+
+    <!--<init-param>-->
+    <!--<param-name>awakeFileConfiguratorClassName</param-name>-->
+    <!--<param-value>org.cghr.awakeFile.CghrAwakeFileConfigurator</param-value>-->
+    <!--</init-param>-->
+
+    <!--</servlet>-->
+
+    <!--<servlet-mapping>-->
+    <!--<servlet-name>AwakeFileManager</servlet-name>-->
+    <!--<url-pattern>/AwakeFileManager</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+</web-app>

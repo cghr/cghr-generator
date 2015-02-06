@@ -1,8 +1,7 @@
 #!/usr/bin/env groovy
 
 //Configuration For language Code
-String languageCode = ""
-//languageCode="mr"
+List languageCodes = [""]
 
 println """ Project List
 1.HC
@@ -24,7 +23,7 @@ println "Cleaned up  all old csv files\n"
 String encodedData = "DQAAAO0AAAAu1enVTHz5nYYb717Rcb66c7ygZ-SnU0NYxl2ZqZ_ePNp3n56mB3y85EnJ7vHQ7CEX0AuUts9wNxWWNUGUjPuFv4QnWkIW88JEsitOXtGa-y7Vw4m2Vt1GE3mi7tv_13aVvuDWsrRUcKuE5pA15R6AIuusLjZdZuLPGoR4CvYVsZgVJJEfkyuaOvro3ndRq1WFZKYC4fcB9UtWytAYKorWJC-S4hG4iQD1u7cNp5g38_JWkqiCb7MkzvFGWcJOsXHB8RO6edb03bJz0zGU_jJboBleSdLJpJlJkyuCVlR3KkWwEL_0sLOpi9LqB7j6dos"
 
 println "Starting to download csv files from google docs...."
-List repository = []
+
 List hc = [
         [name: 'dataDict', url: 'https://docs.google.com/spreadsheets/d/1vaNylr6RNHIuK9zgEzRMrssDsXKARY7s9XXTi1yL1JI/export?format=csv&id=1vaNylr6RNHIuK9zgEzRMrssDsXKARY7s9XXTi1yL1JI&gid=0'],
         [name: 'clabel', url: 'https://docs.google.com/spreadsheets/d/11P-ncoAHXMXag0NXRRjXpwazYNvlUUmK3a5OdL-7CFc/export?format=csv&id=11P-ncoAHXMXag0NXRRjXpwazYNvlUUmK3a5OdL-7CFc&gid=0'],
@@ -66,12 +65,7 @@ List logistics = [
 
 ]
 
-repository.add([])
-repository.add(hc)
-repository.add(hcamp)
-repository.add(hcServer)
-repository.add(mvm)
-repository.add(logistics)
+List repository = [[], hc, hcamp, hcServer, mvm, logistics]
 
 
 repository[projectId].each {
@@ -85,7 +79,7 @@ println 'Generating schemas...Processing...'
 ["sh", "-c", "rm -rf build/"].execute()
 ["sh", "-c", "rm -rf generated/schemas/*.json"].execute()
 println "Cleaned up directories"
-def output = ["sh", "-c", "gradle -Dtest=org.cghr.generator.GenerateAll test"].execute().text
+def output = ["sh", "-c", "gradle check"].execute().text
 println output
 println 'Generated schemas and db structure\n'
 
@@ -95,9 +89,16 @@ println 'sql Import path'
 println sqlImportPath
 
 //Todo Copy
-String schemaPath = languageCode ?: ""
-println schemaPath
-["sh", "-c", "cp generated/schemas/* ~/apps/$projectName/ui/src/assets/jsonSchema/" + schemaPath].execute()
-["sh", "-c", "cp generated/dbStructure/a.sql ~/apps/$projectName/services/src/main/webapp/sqlImport/"].execute()
+
+["sh", "-c", "cp generated/dbStructure/a.sql ~/ngApps/$projectName/services/src/main/webapp/sqlImport/"].execute()
+languageCodes.each { String languageCode ->
+
+    println "Language code " + languageCode
+    String schemaPath = languageCode ?: ""
+    println "generated/schemas/$languageCode/*.json"
+    ["sh", "-c", "cp generated/schemas/$languageCode/*.json ~/ngApps/$projectName/ui/src/assets/jsonSchema/" + schemaPath].execute()
+
+}
+
 
 

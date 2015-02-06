@@ -1,4 +1,5 @@
 package org.cghr.generator
+
 import groovy.sql.Sql
 import org.cghr.generator.dataStoreInfo.DataStoreInfoGenerator
 import org.cghr.generator.db.DbGenerator
@@ -7,6 +8,7 @@ import org.cghr.generator.jsonSchema.SchemaValidator
 import org.cghr.generator.routes.RouteGenerator
 import org.cghr.validator.dataDict.DataDictValidator
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.support.GenericGroovyXmlContextLoader
 import spock.lang.Specification
@@ -31,6 +33,10 @@ class GenerateAll extends Specification {
     @Autowired
     RouteGenerator routeGenerator
 
+    @Qualifier("languageCodes")
+    @Autowired
+    ArrayList languageCodes
+
     @Autowired
     DataDictValidator dataDictValidator
 
@@ -45,7 +51,7 @@ class GenerateAll extends Specification {
     File dbFile = new File('generated/dbStructure/a.sql')
     String schemaFolder = 'generated/schemas/'
 
-    @spock.lang.Ignore
+    //@spock.lang.Ignore
     def "should generate dbStructure,json schemas and webservice "() {
 
         given:
@@ -53,7 +59,7 @@ class GenerateAll extends Specification {
         dbGenerator.generateToAFile(entityDesignTable, dataDictTable, dbFile)
 
         //Generate json Schemas
-        schemaGenerator.generateToAFolder(schemaFolder)
+        schemaGenerator.generateToAFolder(schemaFolder, languageCodes)
         schemaValidator.validateAllGeneratedSchemas(schemaFolder)
 
         //Generate data store Info

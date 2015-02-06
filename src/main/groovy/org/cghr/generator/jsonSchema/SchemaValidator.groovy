@@ -16,7 +16,8 @@ class SchemaValidator {
         print 'validating  ' + file.name
 
         //Can't load a malformed json,throws JsonParseException
-        JsonNode schema = JsonLoader.fromFile(file)
+        if (!file.isDirectory())
+            JsonNode schema = JsonLoader.fromFile(file)
         print ' --success\n'
         return true
 

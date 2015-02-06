@@ -18,7 +18,6 @@ class SchemaGenerator {
     Generator generator
     String templateLocation
     List multipleItemTypes
-    String languageCode
 
 
     List entityList = []
@@ -26,17 +25,19 @@ class SchemaGenerator {
     List generatedList = []
 
 
-    List generate() {
+    List generate(String languageCode) {
 
         String sql1 = "SELECT DISTINCT entity FROM entitySchema WHERE  entity!=''"
+
         entityList = gSql.rows(sql1).collect {
 
             Map schema = gSql.firstRow("select * from entitySchema where entity=?", [it.entity])
 
-            List entityProperties = []
+            List entityProperties = [
+                    propertiesFromSchemaMasterProperties(it.entity),
+                    propertiesFromDataDict(it.entity, languageCode)
+            ].flatten()
 
-            entityProperties.addAll(propertiesFromSchemaMasterProperties(it.entity))
-            entityProperties.addAll(propertiesFromDataDict(it.entity))
 
             [schemaName: schema.schemaName, condition: schema.condition, success: schema.success, fail: schema.fail, crossEntity: schema.crossEntity, onSave: schema.onSave, properties: entityProperties]
         }
@@ -49,14 +50,14 @@ class SchemaGenerator {
         gSql.rows("select * from entitySchemaMasterProperties where entity=?", [entity])
     }
 
-    List propertiesFromDataDict(String entity) {
+    List propertiesFromDataDict(String entity, String languageCode) {
 
         String sql = "select entity,label$languageCode label,name,clabel,type,valdn,flow,crossFlow,crossCheck,lookup,image,help from dataDict where entity=?"
         gSql.rows(sql, [entity]).collect {
 
 
             if (multipleItemTypes.contains(it.type))
-                it.items = (multipleItemTypes.contains(it.type)) ? getClabelItems(it.clabel) : []
+                it.items = (multipleItemTypes.contains(it.type)) ? getClabelItems(it.clabel, languageCode) : []
 
 
             if ('lookup' == it.type)
@@ -85,7 +86,7 @@ class SchemaGenerator {
         gSql.rows("select * from $table where name=?".toString(), [name])
     }
 
-    List getClabelItems(String clabel) {
+    List getClabelItems(String clabel, String languageCode) {
         String sql = "select name,text$languageCode text,value,valdn from clabel where name=?"
         gSql.rows(sql, [clabel])
     }
@@ -117,13 +118,26 @@ class SchemaGenerator {
     }
 
 
-    void generateToAFolder(String folderPath) {
+    void generateToAFolder(String folderPath, List languageCodes) {
 
-        FileUtils.cleanDirectory(new File(folderPath))
 
-        List generatedList = generate()
-        int i = 0
-        entityList.each { new File(folderPath + '/' + it.schemaName + '.json').setText(generatedList[i++]) }
+        languageCodes.each { String languageCode ->
+
+            println "Language code " + languageCode
+
+            String dirPath = new File(folderPath + "/" + languageCode)
+            File dir = new File(dirPath)
+
+            if (!dir.exists())
+                dir.mkdirs()
+            else
+                FileUtils.cleanDirectory(new File(dirPath))
+
+            List generatedList = generate(languageCode == "" ? "" : "_" + languageCode)
+            int i = 0
+            entityList.each { new File(dirPath + '/' + it.schemaName + '.json').setText(generatedList[i++]) }
+        }
+
 
     }
 

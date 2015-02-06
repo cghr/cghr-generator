@@ -9,8 +9,8 @@ import org.apache.commons.lang3.StringEscapeUtils
  */
 class Generator {
 
-    Handlebars handlebars
 
+    Handlebars handlebars
 
     Generator(Handlebars handlebars) {
         this.handlebars = handlebars

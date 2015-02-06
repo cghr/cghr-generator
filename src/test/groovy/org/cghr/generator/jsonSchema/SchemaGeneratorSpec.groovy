@@ -132,16 +132,16 @@ class SchemaGeneratorSpec extends Specification {
                     new File(expectedJsonStruct).text
 
         }
-
-        schemaGenerator = new SchemaGenerator(sqlCustom, entityTransformer, generator, templateLocation, multipleItemTypes, "")
+        schemaGenerator = new SchemaGenerator(sqlCustom, entityTransformer, generator, templateLocation, multipleItemTypes)
     }
 
 
     def "should generate schema structure from a given list of entities"() {
 
         given:
+        List languageCodes = [""]
         String expectedSchemaStruct = new File(expectedJsonStruct).text.replaceAll("\\s", "");
-        String generated = schemaGenerator.generate()[0]
+        String generated = schemaGenerator.generate("")[0]
 
 
         expect:
